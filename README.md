@@ -80,6 +80,10 @@ The site runs on Cloudflare Workers in the wcgill.com account:
 
 `npm run deploy` publishes from your Mac. New database migrations go in `migrations/`; apply them with `npm run db:migrate` before deploying.
 
+**Code:** https://github.com/ClainBill/sinkalike (private). A GitHub Action checks the RSS feed daily and commits new episodes.
+
+**Auto-deploy on push (one-time, about 2 minutes):** in the Cloudflare dashboard, open *Workers & Pages → sinkalike → Settings → Build → Connect*, pick the `ClainBill/sinkalike` repo and branch `main`, and set build command `npm run build` and deploy command `npx wrangler deploy`. After that, every push (including the daily RSS commits) goes live automatically. Secrets stay on the Worker, so the build doesn't need them.
+
 **Sign-in isn't switched on in production yet.** Anonymous comments and votes work, but hosts can't log in to moderate or remove movies until at least one provider is set up. Google is the quickest (see [Sign-in](#sign-in)).
 
 ### Moving to sinkalike.com
