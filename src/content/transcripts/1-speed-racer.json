@@ -1,0 +1,3416 @@
+{
+ "episode": "1-speed-racer",
+ "source": "diarized",
+ "model": "mlx-community/whisper-large-v3-turbo",
+ "generated": "2026-09-27T06:17:55+00:00",
+ "segments": [
+  {
+   "s": 0.0,
+   "e": 7.5,
+   "sp": "adam",
+   "t": "Welcome to Sink Alike, a movie review and discussion podcast where opinions differ, but we all love to sink into our favorite movies and fandoms."
+  },
+  {
+   "s": 7.86,
+   "e": 13.62,
+   "sp": "adam",
+   "t": "I'm your host, Adam Estock, and I'm joined by the harbinger of boom himself, William Gill."
+  },
+  {
+   "s": 14.04,
+   "e": 15.22,
+   "sp": "adam",
+   "t": "William, how are you doing today?"
+  },
+  {
+   "s": 15.22,
+   "e": 16.22,
+   "sp": "william",
+   "t": "Wait, I thought that was your title."
+  },
+  {
+   "s": 16.48,
+   "e": 18.34,
+   "sp": "adam",
+   "t": "No, no. Oh, you want it to be my title?"
+  },
+  {
+   "s": 18.42,
+   "e": 20.58,
+   "sp": "adam",
+   "t": "I can be the harbinger of boom."
+  },
+  {
+   "s": 20.68,
+   "e": 22.4,
+   "sp": "adam",
+   "t": "You will be Inspector Detector."
+  },
+  {
+   "s": 22.4,
+   "e": 24.24,
+   "sp": "william",
+   "t": "Inspector Detector, William Charles Gill."
+  },
+  {
+   "s": 24.36,
+   "e": 26.2,
+   "sp": "william",
+   "t": "That's me. Welcome. I mean, hello everyone."
+  },
+  {
+   "s": 26.22,
+   "e": 26.94,
+   "sp": "william",
+   "t": "It's good to be here."
+  },
+  {
+   "s": 26.94,
+   "e": 28.12,
+   "sp": "adam",
+   "t": "And how are you doing today, William?"
+  },
+  {
+   "s": 28.34,
+   "e": 29.36,
+   "sp": "william",
+   "t": "I'm actually doing really good."
+  },
+  {
+   "s": 29.5,
+   "e": 35.96,
+   "sp": "william",
+   "t": "I woke up at a solid 9.30, which is a lot better than usual because I have the morning shift now and I felt on top of clouds."
+  },
+  {
+   "s": 36.28,
+   "e": 37.34,
+   "sp": "adam",
+   "t": "Well, I'm glad. Yeah."
+  },
+  {
+   "s": 38.1,
+   "e": 39.98,
+   "sp": "adam",
+   "t": "Well, how about you ask me how I'm doing today?"
+  },
+  {
+   "s": 40.12,
+   "e": 40.98,
+   "sp": "william",
+   "t": "Okay, I can do that."
+  },
+  {
+   "s": 41.1,
+   "e": 42.06,
+   "sp": "william",
+   "t": "Adam, how are you doing today?"
+  },
+  {
+   "s": 42.2,
+   "e": 47.96,
+   "sp": "adam",
+   "t": "I'm doing great. I definitely woke up in the morning and I didn't know what time it was in the day."
+  },
+  {
+   "s": 48.12,
+   "e": 49.92,
+   "sp": "adam",
+   "t": "I was a little bit disoriented at first."
+  },
+  {
+   "s": 50.02,
+   "e": 58.64,
+   "sp": "adam",
+   "t": "I don't know why it's a Saturday when we're recording this, but I feel great now and I'm excited to record our first episode of the podcast."
+  },
+  {
+   "s": 59.04,
+   "e": 60.26,
+   "sp": "adam",
+   "t": "Yeah, no, but like the third time as well."
+  },
+  {
+   "s": 60.7,
+   "e": 61.46,
+   "sp": "adam",
+   "t": "Oh yes, of course."
+  },
+  {
+   "s": 61.62,
+   "e": 62.4,
+   "sp": "adam",
+   "t": "Still the first episode though."
+  },
+  {
+   "s": 62.9,
+   "e": 66.12,
+   "sp": "adam",
+   "t": "Yes, we're not very good at recording podcasts yet."
+  },
+  {
+   "s": 66.3,
+   "e": 69.58,
+   "sp": "adam",
+   "t": "So this is actually the third take, the third try."
+  },
+  {
+   "s": 69.82,
+   "e": 73.46,
+   "sp": "adam",
+   "t": "We've tried to set this up with some other people and they couldn't make it today."
+  },
+  {
+   "s": 74.6,
+   "e": 80.88,
+   "sp": "adam",
+   "t": "And we've tried to record a couple of different times, but it didn't feel completely natural and we went too long the second time."
+  },
+  {
+   "s": 81.0,
+   "e": 90.98,
+   "sp": "adam",
+   "t": "So we're going to try to keep it to a brief 30 to 40 minute episode this time anyone who's watching or listening you can of course see the time code as you click on the"
+  },
+  {
+   "s": 90.98,
+   "e": 92.44,
+   "sp": "william",
+   "t": "episode we have to disclaim that"
+  },
+  {
+   "s": 92.44,
+   "e": 100.04,
+   "sp": "adam",
+   "t": "um i guess you'll you'll see how accurate we are to our um promise of uh 30 to 40 minute episode well we"
+  },
+  {
+   "s": 100.04,
+   "e": 103.1,
+   "sp": "william",
+   "t": "should be pretty close because we're gonna get kicked out in about 40 minutes of the most so"
+  },
+  {
+   "s": 103.1,
+   "e": 107.86,
+   "sp": "adam",
+   "t": "well today we're going to talk about speed racer from 2008 so"
+  },
+  {
+   "s": 107.86,
+   "e": 114.12,
+   "sp": "william",
+   "t": "excited i love this movie and this is this whole thing is completely my idea because I don't think you'd ever heard of Speed Racer."
+  },
+  {
+   "s": 114.26,
+   "e": 114.8,
+   "sp": "william",
+   "t": "Had you before I mentioned it?"
+  },
+  {
+   "s": 115.18,
+   "e": 120.86,
+   "sp": "adam",
+   "t": "I think I'd heard of Speed Racer a couple of times, but I didn't know what it was about."
+  },
+  {
+   "s": 121.4,
+   "e": 125.18,
+   "sp": "adam",
+   "t": "I thought, I think I was confusing it with a different racing movie."
+  },
+  {
+   "s": 125.36,
+   "e": 133.58,
+   "sp": "adam",
+   "t": "I didn't remember who it was, but like, I think there was a different racing movie that I was like, I thought that was Speed Racer, but I don't remember what it was."
+  },
+  {
+   "s": 133.76,
+   "e": 135.54,
+   "sp": "william",
+   "t": "To be fair, it is kind of a generic name, Speed Racer."
+  },
+  {
+   "s": 135.7,
+   "e": 137.54,
+   "sp": "william",
+   "t": "It could be interpreted to a lot of different movies."
+  },
+  {
+   "s": 137.98,
+   "e": 139.48,
+   "sp": "william",
+   "t": "But no, this movie is very iconic."
+  },
+  {
+   "s": 139.72,
+   "e": 141.16,
+   "sp": "william",
+   "t": "I hold it very close to my heart."
+  },
+  {
+   "s": 142.44,
+   "e": 149.8,
+   "sp": "william",
+   "t": "um but before we get into that i guess because this is the first episode we also wanted to do a little bit of a kind of introduction to who we are so that you can get to know us"
+  },
+  {
+   "s": 149.8,
+   "e": 153.44,
+   "sp": "william",
+   "t": "better and the context of a movie because that's what we're going to be discussing yeah yeah"
+  },
+  {
+   "s": 153.44,
+   "e": 166.0,
+   "sp": "adam",
+   "t": "so i will do a brief introduction of ourselves and then we thought we could do two cold takes and a hot take which is uh the cold takes which is a highly movie rated a highly rated movie there"
+  },
+  {
+   "s": 166.0,
+   "e": 169.36,
+   "sp": "adam",
+   "t": "you go that you like, a lowly rated movie that you dislike."
+  },
+  {
+   "s": 170.0,
+   "e": 176.32,
+   "sp": "adam",
+   "t": "And then the hot take is a movie that you see a highly rated or lowly rated that you disagree with a public sentiment on."
+  },
+  {
+   "s": 176.48,
+   "e": 177.76,
+   "sp": "adam",
+   "t": "I like that. So I can start."
+  },
+  {
+   "s": 177.92,
+   "e": 179.02,
+   "sp": "adam",
+   "t": "I am Adam Estock."
+  },
+  {
+   "s": 179.32,
+   "e": 180.66,
+   "sp": "adam",
+   "t": "I grew up in Washington."
+  },
+  {
+   "s": 181.4,
+   "e": 188.56,
+   "sp": "adam",
+   "t": "And William and I, we both were raised and served to the same mission together in Japan."
+  },
+  {
+   "s": 188.56,
+   "e": 190.8,
+   "sp": "adam",
+   "t": "But then we came back and now we're college students."
+  },
+  {
+   "s": 191.24,
+   "e": 193.52,
+   "sp": "adam",
+   "t": "And we both love movies."
+  },
+  {
+   "s": 193.68,
+   "e": 194.4,
+   "sp": "adam",
+   "t": "We both love TV."
+  },
+  {
+   "s": 194.84,
+   "e": 199.42,
+   "sp": "adam",
+   "t": "and we thought this would be a fun thing just get our opinions out there you know yeah no"
+  },
+  {
+   "s": 199.42,
+   "e": 207.42,
+   "sp": "william",
+   "t": "I mean so we both met in Japan in the same apartment and we just had a lot of fun talking about the most random crap poop shack the poop shack as we call it or the Shibuya shack is"
+  },
+  {
+   "s": 207.42,
+   "e": 210.96,
+   "sp": "william",
+   "t": "it's officially known also unofficially by us we've"
+  },
+  {
+   "s": 210.96,
+   "e": 212.46,
+   "sp": "adam",
+   "t": "been torn down since no"
+  },
+  {
+   "s": 212.46,
+   "e": 222.0,
+   "sp": "william",
+   "t": "it's still there is what's on oh really apparently they still own actually the mission still owns it they just don't do anything with it sadly but um yeah no we decided hey this is pretty fun people always liked"
+  },
+  {
+   "s": 222.0,
+   "e": 226.1,
+   "sp": "william",
+   "t": "you know we always liked discussing these things and so we're going to get started with well"
+  },
+  {
+   "s": 226.1,
+   "e": 239.52,
+   "sp": "adam",
+   "t": "my my hot my two cold takes yeah go for it a highly rated movie that i like i'll put in another racing movie i really like ford versus ferrari i know you haven't seen it but i a lot"
+  },
+  {
+   "s": 239.52,
+   "e": 252.6,
+   "sp": "adam",
+   "t": "of maybe listeners have seen it it is a racing movie with i believe it's matt damon and christian bale and it's based on a true story of like a i think it's a grand prix race or india 500"
+  },
+  {
+   "s": 252.6,
+   "e": 265.46,
+   "sp": "adam",
+   "t": "or something it's like the ford versus ferrari story and it's this crazy underdog story and it's it's really good i love it a movie that i dislike i guess we might talk about it in a future episode but"
+  },
+  {
+   "s": 265.46,
+   "e": 277.42,
+   "sp": "adam",
+   "t": "one of my least favorite movies and i know this might be a hot take maybe it's not the box trolls the box trolls uh we have talked about this earlier this is a like animation movie and i don't"
+  },
+  {
+   "s": 277.42,
+   "e": 293.78,
+   "sp": "adam",
+   "t": "want to poo poo on like animation because there are a lot of there are a lot of bad movies made cheaply by big companies that feel very inauthentic the buckstrolls feels like an authentic vision but it's not the"
+  },
+  {
+   "s": 293.78,
+   "e": 305.98,
+   "sp": "adam",
+   "t": "authentic it's it was just a bad vision it just is completely not for me and okay it's it's hard to be like oh you people you stop motion animators who took so much effort and time into your movie"
+  },
+  {
+   "s": 305.98,
+   "e": 314.72,
+   "sp": "adam",
+   "t": "i don't like it just it's just gross to me i just shouldn't like the plot and the characters and the animation creeped me out when i was a kid and so it wasn't for me"
+  },
+  {
+   "s": 314.72,
+   "e": 323.46,
+   "sp": "william",
+   "t": "that's usually that's like a that's unacceptable to me is when the animation or whatever about it turns it off like as a kid those things those movies always creep me out until you grow up and then you realize"
+  },
+  {
+   "s": 323.46,
+   "e": 325.36,
+   "sp": "william",
+   "t": "a good movie is like monster house is one of them oh"
+  },
+  {
+   "s": 325.36,
+   "e": 338.28,
+   "sp": "adam",
+   "t": "yeah i love monster house i'm gonna be starting on that a movie that i disagree with the public take my hot take i really enjoy cars three okay i think a lot most people love Cars and I think"
+  },
+  {
+   "s": 338.28,
+   "e": 350.5,
+   "sp": "adam",
+   "t": "it's pretty divided but a lot of people enjoy Cars 2 even if they don't think it's the best movie ever I genuinely enjoy Cars 3 I think it's a really good sequel to Cars 1 I think that"
+  },
+  {
+   "s": 351.7,
+   "e": 365.4,
+   "sp": "adam",
+   "t": "I think it's a really good arc for Lightning McQueen character and I love what they did with Doc Hudson and they moved the characters forward and maybe it's not the best sequel that we could have gotten but I"
+  },
+  {
+   "s": 365.4,
+   "e": 367.36,
+   "sp": "adam",
+   "t": "think it's genuinely a good movie."
+  },
+  {
+   "s": 367.94,
+   "e": 372.24,
+   "sp": "william",
+   "t": "Interesting. Okay, well, I don't have any strong opinions on it, so I'll let you..."
+  },
+  {
+   "s": 372.82,
+   "e": 375.02,
+   "sp": "william",
+   "t": "I'll let you like Cars 3."
+  },
+  {
+   "s": 375.08,
+   "e": 375.92,
+   "sp": "william",
+   "t": "I won't shoot you down there."
+  },
+  {
+   "s": 376.18,
+   "e": 378.12,
+   "sp": "william",
+   "t": "Okay. Well, I'm going to introduce myself."
+  },
+  {
+   "s": 378.24,
+   "e": 379.84,
+   "sp": "william",
+   "t": "I'm William Gill. I'm from the UK."
+  },
+  {
+   "s": 380.46,
+   "e": 383.12,
+   "sp": "william",
+   "t": "I was raised in North Wales in this little loony town."
+  },
+  {
+   "s": 383.74,
+   "e": 385.36,
+   "sp": "william",
+   "t": "And now I'm living here in the States."
+  },
+  {
+   "s": 387.08,
+   "e": 388.44,
+   "sp": "william",
+   "t": "We've already explained how we met each other."
+  },
+  {
+   "s": 388.66,
+   "e": 392.88,
+   "sp": "william",
+   "t": "I guess just to jump into it, my cold takes are not super interesting."
+  },
+  {
+   "s": 393.32,
+   "e": 403.42,
+   "sp": "william",
+   "t": "Frozen 2. that was a movie that I was not looking forward to I didn't anticipate it very much and when it came out I watched it and I kind of forgot about it the next day it was just"
+  },
+  {
+   "s": 403.42,
+   "e": 412.52,
+   "sp": "william",
+   "t": "kind of a nothing movie to me and I'm not super excited that Frozen 3 is coming out but also they could turn into something good so we'll see what happens there Toy Story 1,"
+  },
+  {
+   "s": 412.66,
+   "e": 417.26,
+   "sp": "william",
+   "t": "fantastic movie I love Toy Story 1 and I feel like most people would agree with that"
+  },
+  {
+   "s": 418.28,
+   "e": 430.38,
+   "sp": "adam",
+   "t": "I think it has that 100% on Rotten Tomatoes which just means doesn't mean it's everyone thinks it's 100 but 100 of people think it's above a 50 percent yeah is that what rotten tomatoes means yeah it's it's"
+  },
+  {
+   "s": 430.38,
+   "e": 439.84,
+   "sp": "adam",
+   "t": "how it's not the it's not what people think it's percentage wise it's how what percentage of people think this is a good movie or a bad movie i did not fun fact yeah wow"
+  },
+  {
+   "s": 439.84,
+   "e": 449.02,
+   "sp": "william",
+   "t": "okay well well i don't i don't trust rotten tomatoes because of its score for speed racer but in any case my hot take my hot take and this is like the the one i always go to was just"
+  },
+  {
+   "s": 449.02,
+   "e": 451.92,
+   "sp": "william",
+   "t": "that interstellar for me was a very forgettable movie"
+  },
+  {
+   "s": 451.92,
+   "e": 466.36,
+   "sp": "adam",
+   "t": "hot tickler okay it was yes william and i disagree on this uh if anyone just heard his opinion and was like how dare you i feel the same way i love interstellar i i will defend christopher nolan until"
+  },
+  {
+   "s": 466.36,
+   "e": 470.98,
+   "sp": "adam",
+   "t": "he makes a bad movie and i don't anticipate that happening in the next 50 years"
+  },
+  {
+   "s": 470.98,
+   "e": 475.52,
+   "sp": "william",
+   "t": "uh okay i we're gonna have to move on because I will rant about it."
+  },
+  {
+   "s": 475.72,
+   "e": 476.3,
+   "sp": "william",
+   "t": "Of course, of course."
+  },
+  {
+   "s": 476.56,
+   "e": 477.42,
+   "sp": "adam",
+   "t": "But that's my all take."
+  },
+  {
+   "s": 477.98,
+   "e": 483.88,
+   "sp": "adam",
+   "t": "So I guess if you think the Interstellar is a good movie, then stick around for my opinions."
+  },
+  {
+   "s": 484.18,
+   "e": 486.92,
+   "sp": "adam",
+   "t": "And if you think it's a bad movie, then stick around for William's opinions."
+  },
+  {
+   "s": 486.92,
+   "e": 487.48,
+   "sp": "adam",
+   "t": "Thumbs up this episode."
+  },
+  {
+   "s": 487.86,
+   "e": 489.9,
+   "sp": "william",
+   "t": "You know, like and share. Subscribe."
+  },
+  {
+   "s": 490.48,
+   "e": 492.5,
+   "sp": "adam",
+   "t": "Okay, well, let's get into..."
+  },
+  {
+   "s": 492.5,
+   "e": 493.58,
+   "sp": "adam",
+   "t": "Speed Racer. Speed Racer."
+  },
+  {
+   "s": 493.68,
+   "e": 496.76,
+   "sp": "adam",
+   "t": "We're going to start with a little bit of spoiler-free reviews."
+  },
+  {
+   "s": 497.42,
+   "e": 500.56,
+   "sp": "adam",
+   "t": "Spoiler-free, yeah. Of course, it's a movie from 2008."
+  },
+  {
+   "s": 500.98,
+   "e": 503.42,
+   "sp": "adam",
+   "t": "So if you haven't seen it, it's kind of on you."
+  },
+  {
+   "s": 503.42,
+   "e": 514.98,
+   "sp": "adam",
+   "t": "like it's it's been a while but we'll spoiler free we'll just talk about the plot very surface level and we'll kind of let you figure out your own opinions if after that we're going to talk about spoilers a"
+  },
+  {
+   "s": 514.98,
+   "e": 521.26,
+   "sp": "adam",
+   "t": "little bit if you want to stick around for that part of the episode you're like it came on in 2008 i had my chance i don't disclaimers i've seen"
+  },
+  {
+   "s": 521.26,
+   "e": 529.1,
+   "sp": "william",
+   "t": "it i don't think this is a sort of movie where if you understand the plot it will in any case decrease the value of watching the movie like even if you already knew the entire movie going into it"
+  },
+  {
+   "s": 529.1,
+   "e": 529.86,
+   "sp": "william",
+   "t": "i feel like you'd you'd"
+  },
+  {
+   "s": 529.86,
+   "e": 539.76,
+   "sp": "adam",
+   "t": "really and that's essentially what you gave me um for for context speed racer is william gill's favorite movie would you say that it's at least one of your"
+  },
+  {
+   "s": 539.76,
+   "e": 544.74,
+   "sp": "william",
+   "t": "favorites yeah i don't have a one favorite movie it's on my list of like five seven favorite movies yeah"
+  },
+  {
+   "s": 544.74,
+   "e": 556.26,
+   "sp": "adam",
+   "t": "yeah and so he was like you need to see speed racer i'd never heard of it and so he described to me the plot of speed racer um and i was like okay that sounds interesting enough and i"
+  },
+  {
+   "s": 556.26,
+   "e": 569.22,
+   "sp": "adam",
+   "t": "watched it when uh i watched it like a month or two ago and i thought it was all right i thought it was pretty good but not amazing and then i thought about it some more and i talked"
+  },
+  {
+   "s": 569.22,
+   "e": 583.9,
+   "sp": "adam",
+   "t": "to william some more and then i watched it with william about a week ago we watched it together in preparation for this podcast we can have some fresh and original fresh and like new perspectives new perspectives and it"
+  },
+  {
+   "s": 583.9,
+   "e": 596.82,
+   "sp": "adam",
+   "t": "was a lot better than i gave it credit for i think the the visuals and the effects were very jarring for me as a start they're very over the top i would say they're very like so speed racers"
+  },
+  {
+   "s": 596.82,
+   "e": 598.08,
+   "sp": "adam",
+   "t": "based on an anime and"
+  },
+  {
+   "s": 599.6,
+   "e": 610.52,
+   "sp": "adam",
+   "t": "the the effects reflect that if i can say that if you've seen like i don't know the live action one piece like it's kind of a little bit goofy a little bit corny but in that universe when you're"
+  },
+  {
+   "s": 610.52,
+   "e": 611.68,
+   "sp": "adam",
+   "t": "ready for it fits"
+  },
+  {
+   "s": 611.68,
+   "e": 620.28,
+   "sp": "william",
+   "t": "yeah i was gonna say like the wachowski brothers did a fantastic job of catch capturing just the magic of anime, the whimsical nature of it in a live action movie,"
+  },
+  {
+   "s": 620.38,
+   "e": 622.28,
+   "sp": "william",
+   "t": "which I feel like is a very difficult thing to do, period."
+  },
+  {
+   "s": 622.46,
+   "e": 623.68,
+   "sp": "william",
+   "t": "But they did it in 2008."
+  },
+  {
+   "s": 624.08,
+   "e": 626.2,
+   "sp": "adam",
+   "t": "This movie is directed by the Wachowskis."
+  },
+  {
+   "s": 626.42,
+   "e": 631.88,
+   "sp": "adam",
+   "t": "And they also made The Matrix, The Matrix 2, a couple other movies."
+  },
+  {
+   "s": 632.38,
+   "e": 634.22,
+   "sp": "adam",
+   "t": "I've only seen Speed Racer."
+  },
+  {
+   "s": 634.4,
+   "e": 637.22,
+   "sp": "adam",
+   "t": "And I think it's a pretty good entry in their lineup."
+  },
+  {
+   "s": 637.86,
+   "e": 639.14,
+   "sp": "adam",
+   "t": "I'm very glad for that."
+  },
+  {
+   "s": 640.82,
+   "e": 642.9,
+   "sp": "adam",
+   "t": "But what do you think about Speed Racer?"
+  },
+  {
+   "s": 643.04,
+   "e": 643.8,
+   "sp": "adam",
+   "t": "Top level thoughts."
+  },
+  {
+   "s": 644.42,
+   "e": 655.66,
+   "sp": "william",
+   "t": "top level thoughts i love it because of the visuals i love it because of the over-the-top story and the execution on it and its creativity the plot itself isn't anything that i'm like i would you know"
+  },
+  {
+   "s": 655.66,
+   "e": 663.84,
+   "sp": "william",
+   "t": "i wouldn't rave for this whole podcast about the plot the majority of it will probably be talking about other aspects of the movie that i like but what also turns it from a like a good movie to a"
+  },
+  {
+   "s": 663.84,
+   "e": 673.62,
+   "sp": "william",
+   "t": "great movie is the fact that i think it does still have a very good plot like i enjoy the moral that it teaches and i think it does have a moral but it's just like coated in so many"
+  },
+  {
+   "s": 673.62,
+   "e": 679.5,
+   "sp": "william",
+   "t": "layers of just delicious enjoyment oh it's so fun this movie is just really fun to watch yes"
+  },
+  {
+   "s": 679.5,
+   "e": 683.3,
+   "sp": "adam",
+   "t": "of course um top level plot why don't you give that okay so the plot"
+  },
+  {
+   "s": 683.3,
+   "e": 687.62,
+   "sp": "william",
+   "t": "so basically it's based off to pitch it like actually I wrote this down Netflix's"
+  },
+  {
+   "s": 687.62,
+   "e": 689.92,
+   "sp": "adam",
+   "t": "speed racer did Netflix make no they should"
+  },
+  {
+   "s": 689.92,
+   "e": 695.38,
+   "sp": "william",
+   "t": "not they're not involved we had to rent it it's not on any streaming service it's not"
+  },
+  {
+   "s": 695.38,
+   "e": 706.14,
+   "sp": "adam",
+   "t": "not anything I watched it the first time I watched it was for free it showed up on youtube for free for just a tiny bit and i watched it and it was great but then we watched it on"
+  },
+  {
+   "s": 706.14,
+   "e": 710.44,
+   "sp": "adam",
+   "t": "not youtube and i discovered that youtube does make the visuals look worse yeah"
+  },
+  {
+   "s": 710.44,
+   "e": 724.4,
+   "sp": "william",
+   "t": "youtube's compression is actually terrible in any case so this is my 10 second kind of plot line so the famous racer family's middle son speed yes his name is speed racer first name speed last name racer and the"
+  },
+  {
+   "s": 724.4,
+   "e": 737.06,
+   "sp": "william",
+   "t": "racer family are also in the racing business of course he wants to be the greatest racer of all time and he's supported by his family but big corporate baddies and corruption get in the way of his innocent talent yeah"
+  },
+  {
+   "s": 737.06,
+   "e": 748.0,
+   "sp": "adam",
+   "t": "that oh that's very good did you did you get that off of google no i wrote that oh wow that was all stretched off my head corporate baddies yeah i didn't interesting mr oylton i didn't i didn't know"
+  },
+  {
+   "s": 748.0,
+   "e": 749.9,
+   "sp": "adam",
+   "t": "i didn't know that's how you felt about him he's"
+  },
+  {
+   "s": 749.9,
+   "e": 753.64,
+   "sp": "william",
+   "t": "a baddie he's a baddie for sure sorry that's a british term you wouldn't get it"
+  },
+  {
+   "s": 753.64,
+   "e": 760.42,
+   "sp": "adam",
+   "t": "oh really in america it means something a little bit you know what it means in america okay great that's amazing uh"
+  },
+  {
+   "s": 760.42,
+   "e": 762.66,
+   "sp": "william",
+   "t": "but it's still in my mind batty just means bad guy"
+  },
+  {
+   "s": 762.66,
+   "e": 764.08,
+   "sp": "adam",
+   "t": "okay that's awesome"
+  },
+  {
+   "s": 764.08,
+   "e": 770.92,
+   "sp": "william",
+   "t": "okay so that's that's like the 10 second full line but basically so speed racer his older brother rex racer and"
+  },
+  {
+   "s": 770.92,
+   "e": 785.06,
+   "sp": "adam",
+   "t": "if you're thinking these names sound a little bit corny the harbinger of boom inspector detector those are also names from a speed racer his father what's his name pops his name is his mom Mom Racer."
+  },
+  {
+   "s": 785.28,
+   "e": 786.8,
+   "sp": "william",
+   "t": "Other characters call her Mom Racer."
+  },
+  {
+   "s": 786.94,
+   "e": 788.56,
+   "sp": "william",
+   "t": "So that I can only assume it's her first name."
+  },
+  {
+   "s": 789.2,
+   "e": 790.7,
+   "sp": "adam",
+   "t": "His younger brother is Spritell?"
+  },
+  {
+   "s": 791.12,
+   "e": 793.28,
+   "sp": "adam",
+   "t": "Spritell Racer. And then Chimp Chimp."
+  },
+  {
+   "s": 793.74,
+   "e": 794.76,
+   "sp": "william",
+   "t": "Chimp Chimp is a monkey."
+  },
+  {
+   "s": 794.98,
+   "e": 796.5,
+   "sp": "william",
+   "t": "So the racer family goes like this."
+  },
+  {
+   "s": 796.6,
+   "e": 797.36,
+   "sp": "william",
+   "t": "You have Pops and Mom."
+  },
+  {
+   "s": 797.74,
+   "e": 799.3,
+   "sp": "william",
+   "t": "Then you have Rex Racer, the oldest brother."
+  },
+  {
+   "s": 799.76,
+   "e": 800.68,
+   "sp": "william",
+   "t": "Speed Racer the middle."
+  },
+  {
+   "s": 801.18,
+   "e": 803.14,
+   "sp": "william",
+   "t": "Spritell. It's completely random."
+  },
+  {
+   "s": 803.6,
+   "e": 806.48,
+   "sp": "william",
+   "t": "Then you have Chimp Chimp who is Spritell's kind of like brother but he's actually a monkey."
+  },
+  {
+   "s": 806.7,
+   "e": 807.5,
+   "sp": "william",
+   "t": "A chimpanzee or something."
+  },
+  {
+   "s": 807.72,
+   "e": 809.48,
+   "sp": "adam",
+   "t": "Because this was based off of an animation."
+  },
+  {
+   "s": 809.48,
+   "e": 810.34,
+   "sp": "william",
+   "t": "Because it's based off an anime."
+  },
+  {
+   "s": 810.52,
+   "e": 815.3,
+   "sp": "william",
+   "t": "And they also have two other characters that are just completely always present with the family."
+  },
+  {
+   "s": 815.54,
+   "e": 816.68,
+   "sp": "william",
+   "t": "Do you want to introduce those two?"
+  },
+  {
+   "s": 817.42,
+   "e": 820.04,
+   "sp": "adam",
+   "t": "Yes, those two are, is it Sparky?"
+  },
+  {
+   "s": 820.28,
+   "e": 822.18,
+   "sp": "william",
+   "t": "Yeah, Sparky is the mechanic."
+  },
+  {
+   "s": 823.08,
+   "e": 824.4,
+   "sp": "adam",
+   "t": "Yes, and oh, Trix."
+  },
+  {
+   "s": 824.58,
+   "e": 831.64,
+   "sp": "adam",
+   "t": "Trixie, of course. Trixie is Speed Racer's girlfriend, and she, I guess she became his girlfriend as a kid."
+  },
+  {
+   "s": 832.2,
+   "e": 840.58,
+   "sp": "adam",
+   "t": "Speed Racer, it shows a lot of his flashbacks throughout the movie, and he's just like some doofus kid who's always thinking about racing, nothing but racing, 100% of the time."
+  },
+  {
+   "s": 840.82,
+   "e": 848.88,
+   "sp": "adam",
+   "t": "He's in class, and the teacher's like, oh what's two plus two he's like racing something like that"
+  },
+  {
+   "s": 848.88,
+   "e": 854.18,
+   "sp": "william",
+   "t": "he's like using his all the paper the pages in his notebook to draw out like a race oh yeah animation"
+  },
+  {
+   "s": 854.18,
+   "e": 863.74,
+   "sp": "adam",
+   "t": "but trixie is infatuated with him and they become like they start dating and so trixie is his girlfriend and she later becomes part of his pit crew but"
+  },
+  {
+   "s": 863.74,
+   "e": 873.44,
+   "sp": "william",
+   "t": "yeah she has the most egregious haircut as well it's actually ridiculous and i was watching it the girl was watching this she was like what is that is i never realized because I just,"
+  },
+  {
+   "s": 873.46,
+   "e": 874.44,
+   "sp": "william",
+   "t": "I thought she was hot"
+  },
+  {
+   "s": 874.44,
+   "e": 874.68,
+   "sp": "adam",
+   "t": "when I was little."
+  },
+  {
+   "s": 874.68,
+   "e": 875.58,
+   "sp": "adam",
+   "t": "As a kid, you're like, oh yeah."
+  },
+  {
+   "s": 875.86,
+   "e": 876.76,
+   "sp": "william",
+   "t": "I was like, oh, she's beautiful."
+  },
+  {
+   "s": 877.02,
+   "e": 880.7,
+   "sp": "william",
+   "t": "But I'm like, actually, if my girlfriend had hair like that, I would not allow that."
+  },
+  {
+   "s": 880.78,
+   "e": 882.2,
+   "sp": "adam",
+   "t": "Well, thank goodness you don't have a girlfriend."
+  },
+  {
+   "s": 882.62,
+   "e": 883.46,
+   "sp": "adam",
+   "t": "Thank you for that, Adam."
+  },
+  {
+   "s": 884.52,
+   "e": 886.08,
+   "sp": "adam",
+   "t": "You've been blessed by being single."
+  },
+  {
+   "s": 886.08,
+   "e": 886.92,
+   "sp": "adam",
+   "t": "I know, I've been freed."
+  },
+  {
+   "s": 887.16,
+   "e": 890.3,
+   "sp": "adam",
+   "t": "You now have more time to do some racing on your own."
+  },
+  {
+   "s": 892.26,
+   "e": 895.98,
+   "sp": "adam",
+   "t": "What? Well, you can race now."
+  },
+  {
+   "s": 896.3,
+   "e": 897.06,
+   "sp": "adam",
+   "t": "I don't have a car."
+  },
+  {
+   "s": 897.44,
+   "e": 898.56,
+   "sp": "adam",
+   "t": "Oh, you don't have a car."
+  },
+  {
+   "s": 898.72,
+   "e": 899.94,
+   "sp": "adam",
+   "t": "Well, you can race in your little,"
+  },
+  {
+   "s": 900.86,
+   "e": 902.38,
+   "sp": "adam",
+   "t": "so context for listeners."
+  },
+  {
+   "s": 902.38,
+   "e": 906.88,
+   "sp": "adam",
+   "t": "i'm crippled william gill is crippled not well i mean not permanently you broke your leg i"
+  },
+  {
+   "s": 906.88,
+   "e": 908.32,
+   "sp": "william",
+   "t": "yeah i broke my leg the first day and so"
+  },
+  {
+   "s": 908.32,
+   "e": 911.9,
+   "sp": "adam",
+   "t": "you have this little boot scooter sort of thing i have three"
+  },
+  {
+   "s": 912.68,
+   "e": 916.78,
+   "sp": "william",
+   "t": "modes of mobility i have a scooter a peg leg and crutches"
+  },
+  {
+   "s": 916.78,
+   "e": 919.2,
+   "sp": "adam",
+   "t": "and if he's going down a hill that scooter goes crazy it's"
+  },
+  {
+   "s": 919.2,
+   "e": 925.68,
+   "sp": "william",
+   "t": "actually really fast it's also terrifying because the whole thing does rattle and shake oh and randomly veers to the left or the right there is no control"
+  },
+  {
+   "s": 925.68,
+   "e": 927.32,
+   "sp": "adam",
+   "t": "over it yeah it's uh it's pretty intense"
+  },
+  {
+   "s": 927.32,
+   "e": 934.22,
+   "sp": "william",
+   "t": "sorry okay let's get back on on the actual on track here of course So his older brother, so Speed is the main character."
+  },
+  {
+   "s": 934.32,
+   "e": 937.82,
+   "sp": "william",
+   "t": "His older brother, when Speed was young, was one of the best racers."
+  },
+  {
+   "s": 938.3,
+   "e": 946.54,
+   "sp": "william",
+   "t": "And he unfortunately strays from his family's advice and joins a rally, which are in this world really dangerous."
+  },
+  {
+   "s": 947.1,
+   "e": 949.38,
+   "sp": "william",
+   "t": "And so his dad kind of disowns him."
+  },
+  {
+   "s": 949.58,
+   "e": 952.54,
+   "sp": "adam",
+   "t": "The clean-cut cross-country race."
+  },
+  {
+   "s": 952.64,
+   "e": 956.34,
+   "sp": "adam",
+   "t": "No, the clean-cut road races, the Grand Prix."
+  },
+  {
+   "s": 956.34,
+   "e": 968.22,
+   "sp": "adam",
+   "t": "the grand prix all those races are kind of the i guess the kosher races they're the everyone participates in them and it's like it's it's rough but it's fine and then there's like the cross-country races and the"
+  },
+  {
+   "s": 968.22,
+   "e": 970.96,
+   "sp": "adam",
+   "t": "rally races which are cheap yeah literally"
+  },
+  {
+   "s": 970.96,
+   "e": 979.52,
+   "sp": "william",
+   "t": "like they'll throw beehives at each other they're well okay also more context for this racing this is not like normal racing whatsoever it's actually like fever dream yeah"
+  },
+  {
+   "s": 979.52,
+   "e": 991.06,
+   "sp": "adam",
+   "t": "imagine it's it's very it's more similar to mario cart than oh that's good any other rate like everyone's slamming into each other and they have all these gadgets and gizmos on their car that cars can jump they can"
+  },
+  {
+   "s": 991.06,
+   "e": 1006.34,
+   "sp": "adam",
+   "t": "oh yeah they have springs on the bottom of the cars so they can launch themselves upwards into the air they have uh catapults with beehives in them beehives bricks spikes and whatever whatever anything you can imagine oil that"
+  },
+  {
+   "s": 1006.34,
+   "e": 1007.38,
+   "sp": "william",
+   "t": "can throw fish at people"
+  },
+  {
+   "s": 1007.38,
+   "e": 1016.14,
+   "sp": "adam",
+   "t": "yes anything you can imagine that could be attached onto a go-kart that wouldn't make sense but would be really cool to like a seven-year-old that's in this movie"
+  },
+  {
+   "s": 1016.14,
+   "e": 1024.34,
+   "sp": "william",
+   "t": "and they'll actually like drive up walls that have spikes like coming out of the wall oh yes and again so these rallies are freaking insane and so rex he's like i wants to go on the rally race and"
+  },
+  {
+   "s": 1024.34,
+   "e": 1032.72,
+   "sp": "william",
+   "t": "his family disowns him and he ends up unfortunately crashing and his car is in an absolute inferno and his body can't be found yes"
+  },
+  {
+   "s": 1032.72,
+   "e": 1045.04,
+   "sp": "adam",
+   "t": "and it is very tragic he must be dead everyone's like oh no rex racer has died and so speed racer he has to grow up and he wants to race because he loves his brother and he loves racing"
+  },
+  {
+   "s": 1045.04,
+   "e": 1052.58,
+   "sp": "adam",
+   "t": "ever since he's little and so he has to grow up and he wants to race but he also doesn't want to put rex racer in his shadow"
+  },
+  {
+   "s": 1052.58,
+   "e": 1054.62,
+   "sp": "william",
+   "t": "he doesn't want to diminish his brother's legacy and"
+  },
+  {
+   "s": 1054.62,
+   "e": 1059.18,
+   "sp": "adam",
+   "t": "at the same time his brother um he got into a lot of trouble because"
+  },
+  {
+   "s": 1060.02,
+   "e": 1074.24,
+   "sp": "adam",
+   "t": "one thing about how he got into rally racing is he started signing on with these bigger companies these people that were forcing him to be more more aggressive with his racing and more um wild and so his family"
+  },
+  {
+   "s": 1074.24,
+   "e": 1082.22,
+   "sp": "adam",
+   "t": "is like speed racer says later in the movie like uh racing is like a religion and big companies are like the devil"
+  },
+  {
+   "s": 1082.22,
+   "e": 1092.0,
+   "sp": "william",
+   "t": "he does say that's one of my favorite bars especially who he says it too we'll introduce mr rollton in a minute but yeah rex racer dies speed racer grows up and his legacy is to like become the greatest"
+  },
+  {
+   "s": 1092.0,
+   "e": 1095.74,
+   "sp": "william",
+   "t": "racer but then i love the intro scene to the movie um"
+  },
+  {
+   "s": 1097.1,
+   "e": 1107.16,
+   "sp": "william",
+   "t": "because it it shows how speed like he wants to race so bad and he's kind of doing the same racetrack that his brother was famous for and he had the world record for and he's about to beat the"
+  },
+  {
+   "s": 1107.16,
+   "e": 1114.9,
+   "sp": "william",
+   "t": "record you see all the commentators and everyone watching and this is a huge event every country is tuned in online and they're like oh crazy he's gonna he's gonna win he's gonna be his brother's record and he can"
+  },
+  {
+   "s": 1114.9,
+   "e": 1122.84,
+   "sp": "william",
+   "t": "see rex's ghost it's kind of like mario kart when you're racing you see the yeah racing with him and he's like just in front of him he's going to beat the record and then last second he pulls off"
+  },
+  {
+   "s": 1122.84,
+   "e": 1126.0,
+   "sp": "william",
+   "t": "the accelerator and lets his brother zoom past so that he doesn't"
+  },
+  {
+   "s": 1127.16,
+   "e": 1129.06,
+   "sp": "william",
+   "t": "beat his record and everyone just forgets about right yeah"
+  },
+  {
+   "s": 1129.06,
+   "e": 1140.98,
+   "sp": "adam",
+   "t": "and that's that's the part that we disagree on the movie personally i think you should have just no i i it's i mean it's respectful to let rex keep the record but it's also respectful to be like yeah"
+  },
+  {
+   "s": 1140.98,
+   "e": 1143.66,
+   "sp": "adam",
+   "t": "i'm your younger brother like i'm gonna beat the record if you're good if you can"
+  },
+  {
+   "s": 1143.66,
+   "e": 1144.78,
+   "sp": "william",
+   "t": "be alive you're not"
+  },
+  {
+   "s": 1144.78,
+   "e": 1155.62,
+   "sp": "adam",
+   "t": "it worked better in the cars with lightning mcqueen stopped before the finish line like that was really good this one was like okay like you can you didn't you're not going to take away from your brother's legacy by"
+  },
+  {
+   "s": 1155.62,
+   "e": 1161.18,
+   "sp": "adam",
+   "t": "beating him in a race because then your fame will start putting more eyes on his fame i just"
+  },
+  {
+   "s": 1161.18,
+   "e": 1167.08,
+   "sp": "william",
+   "t": "in my opinion i don't think that's true okay let's talk about mr royalson so the the main villain in this movie i guess twist"
+  },
+  {
+   "s": 1167.08,
+   "e": 1171.7,
+   "sp": "adam",
+   "t": "villain not really a twist villain let's move into the spoiler let's move into the spoilers for now."
+  },
+  {
+   "s": 1172.06,
+   "e": 1173.36,
+   "sp": "adam",
+   "t": "Yeah. Okay. Let's just do it."
+  },
+  {
+   "s": 1173.46,
+   "e": 1175.7,
+   "sp": "adam",
+   "t": "From now on, we're going to talk spoilers in the movie."
+  },
+  {
+   "s": 1175.86,
+   "e": 1177.38,
+   "sp": "adam",
+   "t": "It came out in 2008."
+  },
+  {
+   "s": 1177.78,
+   "e": 1183.52,
+   "sp": "adam",
+   "t": "Also, if you're watching this episode, you clicked on an episode called Speed Racer, you've probably seen the movie."
+  },
+  {
+   "s": 1183.66,
+   "e": 1184.62,
+   "sp": "adam",
+   "t": "But if you haven't,"
+  },
+  {
+   "s": 1185.76,
+   "e": 1188.6,
+   "sp": "adam",
+   "t": "then hopefully we can convince you to see the movie through these spoilers."
+  },
+  {
+   "s": 1188.86,
+   "e": 1193.18,
+   "sp": "william",
+   "t": "And all of the spoilers we talk about as well are extremely foreshadowed and obvious."
+  },
+  {
+   "s": 1193.22,
+   "e": 1194.0,
+   "sp": "william",
+   "t": "I'm not going to lie."
+  },
+  {
+   "s": 1194.1,
+   "e": 1195.38,
+   "sp": "adam",
+   "t": "Oh, yes. This plot is..."
+  },
+  {
+   "s": 1195.38,
+   "e": 1196.68,
+   "sp": "adam",
+   "t": "You figure it out immediately."
+  },
+  {
+   "s": 1197.26,
+   "e": 1198.46,
+   "sp": "adam",
+   "t": "It's a kid's movie."
+  },
+  {
+   "s": 1198.64,
+   "e": 1202.98,
+   "sp": "adam",
+   "t": "So everything is very foreshadowed you'll know so"
+  },
+  {
+   "s": 1202.98,
+   "e": 1214.12,
+   "sp": "william",
+   "t": "speed racer and his family um after this this race the introduction they get a knock on the door one day actually that's not even it they're having dinner breakfast they're having pancakes and then all of a sudden all"
+  },
+  {
+   "s": 1214.12,
+   "e": 1217.68,
+   "sp": "william",
+   "t": "of a sudden that's very important an earthquake occurs but"
+  },
+  {
+   "s": 1217.68,
+   "e": 1234.28,
+   "sp": "adam",
+   "t": "it's not an earthquake it is a jet landing in their yard and mr royleton a basically he's this very british villain sort of stereotype big business racer guy who's like i want to put you on my team and"
+  },
+  {
+   "s": 1234.28,
+   "e": 1248.1,
+   "sp": "adam",
+   "t": "i want you to race for me speed racer and then he eats the family's pancakes and raves about how good they are and he gave speed racer and the family a tour of um a tour of royalton streets"
+  },
+  {
+   "s": 1248.1,
+   "e": 1250.76,
+   "sp": "adam",
+   "t": "royalton motors royalton industries whatever it's called"
+  },
+  {
+   "s": 1250.76,
+   "e": 1259.0,
+   "sp": "william",
+   "t": "yeah and he says okay speed i'm going to fund you because i love you i love what you do and your family like you guys are just doing this on your own so i'm going to give you all"
+  },
+  {
+   "s": 1259.0,
+   "e": 1260.6,
+   "sp": "william",
+   "t": "the money you want no strings attached"
+  },
+  {
+   "s": 1260.6,
+   "e": 1271.28,
+   "sp": "adam",
+   "t": "yeah and he's like do you take the deal we were just like uh can i think about it and he's like maybe maybe wait till tomorrow to think about it well no it's funny"
+  },
+  {
+   "s": 1271.28,
+   "e": 1281.84,
+   "sp": "william",
+   "t": "because mr roland's like speed this isn't the sort of deal we i just give left right you know nilly um this is the sort of deal you either say yes now walk away and speed goes well in that"
+  },
+  {
+   "s": 1281.84,
+   "e": 1288.82,
+   "sp": "william",
+   "t": "case mr roilton i'm afraid i'm gonna have to say wait let's sleep on it it's like all right mr roilton he just he"
+  },
+  {
+   "s": 1288.82,
+   "e": 1291.64,
+   "sp": "adam",
+   "t": "trying to do any method he can get to get speed racer to sign"
+  },
+  {
+   "s": 1291.64,
+   "e": 1293.28,
+   "sp": "william",
+   "t": "this deal no strings attached but"
+  },
+  {
+   "s": 1293.28,
+   "e": 1307.22,
+   "sp": "adam",
+   "t": "eventually speed racer goes back and says sorry like my family has our own little racing little race your motors sort of thing and then mr roilton is like you idiot like i'm the villain"
+  },
+  {
+   "s": 1307.22,
+   "e": 1315.88,
+   "sp": "william",
+   "t": "uh biggest plot twist ever this is my favorite one of my favorite scenes in the movie um i think you could probably explain it better than i can but this whole time it's like in his big big office"
+  },
+  {
+   "s": 1316.34,
+   "e": 1325.5,
+   "sp": "william",
+   "t": "and the camera starts spinning around mr roilton when he just flips he's like okay you blithering idiots you're going to listen to me and at the end of this if you have any like inkling of sense in you're"
+  },
+  {
+   "s": 1325.5,
+   "e": 1328.56,
+   "sp": "william",
+   "t": "going to sign this paper and you're going to admit that everything I say is true."
+  },
+  {
+   "s": 1328.72,
+   "e": 1329.68,
+   "sp": "william",
+   "t": "And he starts talking."
+  },
+  {
+   "s": 1329.8,
+   "e": 1333.68,
+   "sp": "william",
+   "t": "He's like, I'm going to give you another history lesson because he talked before then about how the Grand Prix is all rigged."
+  },
+  {
+   "s": 1333.86,
+   "e": 1336.14,
+   "sp": "william",
+   "t": "But this history lesson is going to happen."
+  },
+  {
+   "s": 1336.16,
+   "e": 1339.34,
+   "sp": "william",
+   "t": "And he starts like describing what's going to happen to Speed Racer after this point."
+  },
+  {
+   "s": 1339.5,
+   "e": 1343.64,
+   "sp": "adam",
+   "t": "And as he starts describing this, we actually see it happen."
+  },
+  {
+   "s": 1343.78,
+   "e": 1345.86,
+   "sp": "adam",
+   "t": "This is something that's very interestingly done."
+  },
+  {
+   "s": 1346.24,
+   "e": 1348.16,
+   "sp": "adam",
+   "t": "Speed Racer plays a lot with time."
+  },
+  {
+   "s": 1348.48,
+   "e": 1351.2,
+   "sp": "adam",
+   "t": "In the beginning scene, we see the flashbacks as he's racing."
+  },
+  {
+   "s": 1351.2,
+   "e": 1353.94,
+   "sp": "adam",
+   "t": "in this scene it's as Mr."
+  },
+  {
+   "s": 1354.06,
+   "e": 1367.06,
+   "sp": "adam",
+   "t": "Royalton's saying the things they start happening in reality which is a little bit disorienting if you're watching it for the first time but later it's like oh I'm glad we didn't have him say all the things and then"
+  },
+  {
+   "s": 1367.06,
+   "e": 1379.34,
+   "sp": "adam",
+   "t": "have all the things happen that would have made the it would have ruined the pacing of this movie so he's like you're gonna lose terribly in Fuji yeah he's in Fuji you're gonna lose terribly in Fuji you're"
+  },
+  {
+   "s": 1379.34,
+   "e": 1380.54,
+   "sp": "william",
+   "t": "not even gonna finish the race"
+  },
+  {
+   "s": 1380.54,
+   "e": 1394.0,
+   "sp": "adam",
+   "t": "everyone's gonna everyone's gonna bump you around and you get thrashed around by the other racers because they'll play dirty and he does and then your family's gonna get hit with a lawsuit and even if it's not true your"
+  },
+  {
+   "s": 1394.0,
+   "e": 1407.58,
+   "sp": "adam",
+   "t": "family's gonna name is gonna be tainted you're like oh now racer and just now racer motors whatever their yeah name is they're gonna be uh publicly shamed and defamed and it's gonna be horrible"
+  },
+  {
+   "s": 1407.58,
+   "e": 1417.82,
+   "sp": "william",
+   "t": "yeah and we're watching we're watching all of this happen and then he's still ranting and then the camera's like spinning around him as um as it fades into these flash forwards and then it flashes back and speed is"
+  },
+  {
+   "s": 1417.82,
+   "e": 1422.28,
+   "sp": "william",
+   "t": "looking at him and he picks up his his bag and everything and he leaves yeah he doesn't accept the deal and"
+  },
+  {
+   "s": 1422.28,
+   "e": 1437.2,
+   "sp": "adam",
+   "t": "so all of this happens and it's very tragic now there's a shift after that because speed racer feels very disheartened after he's like oh turns out that the big businesses can just do whatever they want and And the"
+  },
+  {
+   "s": 1437.2,
+   "e": 1439.7,
+   "sp": "adam",
+   "t": "Grand Prix is fixed, and it's all terrible."
+  },
+  {
+   "s": 1441.24,
+   "e": 1444.88,
+   "sp": "adam",
+   "t": "And I guess before we should transition, we should talk about his talk with his mom."
+  },
+  {
+   "s": 1445.16,
+   "e": 1446.22,
+   "sp": "adam",
+   "t": "I love this scene."
+  },
+  {
+   "s": 1446.78,
+   "e": 1452.72,
+   "sp": "adam",
+   "t": "Okay, so his mom gives him a peck talk, and she says, like, speed, this isn't all about winning."
+  },
+  {
+   "s": 1452.88,
+   "e": 1455.96,
+   "sp": "adam",
+   "t": "Like, I'm worried, but she compares him to an artist."
+  },
+  {
+   "s": 1456.24,
+   "e": 1459.7,
+   "sp": "adam",
+   "t": "She says, like, I go to the races to watch you make art."
+  },
+  {
+   "s": 1460.38,
+   "e": 1468.96,
+   "sp": "adam",
+   "t": "It's sort of like you love to watch, like, a painter paint, or you love to watch an actor act on screen."
+  },
+  {
+   "s": 1469.24,
+   "e": 1479.02,
+   "sp": "adam",
+   "t": "And Speed Racer, his racing, he's so passionate about it and he's so intricate and wonderful with it that it's like art watching him race."
+  },
+  {
+   "s": 1479.24,
+   "e": 1482.16,
+   "sp": "adam",
+   "t": "And that was a very, oh, it's just such a good monologue."
+  },
+  {
+   "s": 1482.32,
+   "e": 1482.98,
+   "sp": "adam",
+   "t": "It's such a good speech."
+  },
+  {
+   "s": 1483.0,
+   "e": 1484.58,
+   "sp": "william",
+   "t": "It's such a good mother talk as well."
+  },
+  {
+   "s": 1484.72,
+   "e": 1486.4,
+   "sp": "william",
+   "t": "It hits home so hard."
+  },
+  {
+   "s": 1486.56,
+   "e": 1491.84,
+   "sp": "adam",
+   "t": "And that's sort of like, that's hinting on the themes of the movie where it's not all about racing."
+  },
+  {
+   "s": 1491.84,
+   "e": 1504.62,
+   "sp": "adam",
+   "t": "sometimes it's about the friends we made along the way you know like yeah it's very much like the the spirit of racing and just pushing yourself to be the best you you can be is more important than winning"
+  },
+  {
+   "s": 1504.62,
+   "e": 1505.6,
+   "sp": "adam",
+   "t": "the race itself"
+  },
+  {
+   "s": 1505.6,
+   "e": 1516.5,
+   "sp": "william",
+   "t": "and it's also really cool because that's one of the themes that i love about this movie is it's not just about racing but it's about family like speed his most important thing is his family actually then it's racing"
+  },
+  {
+   "s": 1516.5,
+   "e": 1523.56,
+   "sp": "william",
+   "t": "yeah but the thing that you it's like easy to see someone's drive to be a good racer, it's not as easy to show how much you love your family."
+  },
+  {
+   "s": 1523.74,
+   "e": 1525.88,
+   "sp": "william",
+   "t": "So it comes out in these different scenes throughout the movie."
+  },
+  {
+   "s": 1526.04,
+   "e": 1526.76,
+   "sp": "william",
+   "t": "I love it."
+  },
+  {
+   "s": 1526.84,
+   "e": 1529.68,
+   "sp": "adam",
+   "t": "And speaking of family, he's about to betray his family."
+  },
+  {
+   "s": 1530.12,
+   "e": 1536.14,
+   "sp": "adam",
+   "t": "Because if you thought this movie was pretty cookie cutter, pretty straightforward, you have no idea what's about to happen."
+  },
+  {
+   "s": 1536.32,
+   "e": 1542.66,
+   "sp": "adam",
+   "t": "Because there's a subplot with the harbinger of boom, Racer X, and also what, Taijo"
+  },
+  {
+   "s": 1543.64,
+   "e": 1545.76,
+   "sp": "william",
+   "t": "Shogokan. You said, wait, Racer X?"
+  },
+  {
+   "s": 1545.86,
+   "e": 1547.38,
+   "sp": "adam",
+   "t": "Racer X? No, no, it's X."
+  },
+  {
+   "s": 1547.84,
+   "e": 1562.06,
+   "sp": "adam",
+   "t": "Racer X, not not race racer racer no it's it's racer oh is it yeah oh crap so there's his remember i think you're getting confused because there's a different character named rex racer rex racer that's his older brother"
+  },
+  {
+   "s": 1562.06,
+   "e": 1574.76,
+   "sp": "adam",
+   "t": "who died and his body wasn't found this is not that this is a completely different guy named racer x racer x um and they they uh they're not racer x he has a he has a mask on so"
+  },
+  {
+   "s": 1574.76,
+   "e": 1576.5,
+   "sp": "adam",
+   "t": "you can't see his face but we"
+  },
+  {
+   "s": 1576.5,
+   "e": 1577.86,
+   "sp": "william",
+   "t": "don't know like batman we don't know who"
+  },
+  {
+   "s": 1577.86,
+   "e": 1580.62,
+   "sp": "adam",
+   "t": "he is we're like we have no idea he could be anyone"
+  },
+  {
+   "s": 1580.62,
+   "e": 1583.76,
+   "sp": "william",
+   "t": "so this person racer x appears"
+  },
+  {
+   "s": 1583.76,
+   "e": 1592.9,
+   "sp": "adam",
+   "t": "it's like a racer mixed with like this um i guess he's like a action hero because he there was an earlier scene he's"
+  },
+  {
+   "s": 1592.9,
+   "e": 1594.74,
+   "sp": "william",
+   "t": "kind of like batman he's like a vigilante he's"
+  },
+  {
+   "s": 1594.74,
+   "e": 1599.34,
+   "sp": "adam",
+   "t": "a vigilante he he's trying to fight all the big racers yeah"
+  },
+  {
+   "s": 1599.34,
+   "e": 1607.18,
+   "sp": "william",
+   "t": "like oh yeah for example the way he's introduced so like early in the movie it just randomly cuts to a scene where is a bunch of mob guys interrogating this Asian-looking guy."
+  },
+  {
+   "s": 1607.32,
+   "e": 1609.84,
+   "sp": "william",
+   "t": "And this is one of my favorite parts about the movie is their portrayal of Asians."
+  },
+  {
+   "s": 1610.08,
+   "e": 1612.12,
+   "sp": "adam",
+   "t": "Oh, no, that's not a good part of the movie."
+  },
+  {
+   "s": 1612.42,
+   "e": 1615.24,
+   "sp": "adam",
+   "t": "They're very bad. Their poor way of portraying Asians."
+  },
+  {
+   "s": 1615.36,
+   "e": 1617.74,
+   "sp": "adam",
+   "t": "They're like, this guy is a little..."
+  },
+  {
+   "s": 1618.2,
+   "e": 1620.96,
+   "sp": "adam",
+   "t": "He's going to be our Asian guy. Is he..."
+  },
+  {
+   "s": 1620.96,
+   "e": 1622.2,
+   "sp": "william",
+   "t": "Is he Japanese? Yeah."
+  },
+  {
+   "s": 1622.42,
+   "e": 1622.88,
+   "sp": "william",
+   "t": "Is he Korean?"
+  },
+  {
+   "s": 1623.1,
+   "e": 1627.56,
+   "sp": "adam",
+   "t": "So he's played by a Korean actor, but his sister, canonically in the movie, is played by a Chinese actor."
+  },
+  {
+   "s": 1627.82,
+   "e": 1629.06,
+   "sp": "adam",
+   "t": "And then his..."
+  },
+  {
+   "s": 1629.06,
+   "e": 1630.0,
+   "sp": "william",
+   "t": "His dad is Japanese."
+  },
+  {
+   "s": 1630.28,
+   "e": 1630.7,
+   "sp": "william",
+   "t": "His dad is..."
+  },
+  {
+   "s": 1630.7,
+   "e": 1631.4,
+   "sp": "adam",
+   "t": "Is a Japanese actor."
+  },
+  {
+   "s": 1631.5,
+   "e": 1632.34,
+   "sp": "adam",
+   "t": "I think he's played by a Japanese actor."
+  },
+  {
+   "s": 1632.68,
+   "e": 1638.46,
+   "sp": "adam",
+   "t": "and the movie is very vague about like which Asian he is and they're like, well, he's going to be one of them."
+  },
+  {
+   "s": 1638.48,
+   "e": 1640.06,
+   "sp": "william",
+   "t": "Because their name just sounds like it could be any of them."
+  },
+  {
+   "s": 1640.52,
+   "e": 1641.02,
+   "sp": "william",
+   "t": "The name of the family."
+  },
+  {
+   "s": 1641.12,
+   "e": 1644.78,
+   "sp": "william",
+   "t": "But anyway, so this Asian guy is being interrogated by a bunch of mob guys and it's in like this really fancy room."
+  },
+  {
+   "s": 1645.1,
+   "e": 1650.6,
+   "sp": "william",
+   "t": "And they're like, well, if you're not going to like win, oh, like lose the race for us, we're going to have to take some payment."
+  },
+  {
+   "s": 1650.96,
+   "e": 1653.38,
+   "sp": "adam",
+   "t": "We're going to put your hand in this piranha tank."
+  },
+  {
+   "s": 1653.52,
+   "e": 1654.86,
+   "sp": "william",
+   "t": "Yeah, we're going to put your hand in this fish tank."
+  },
+  {
+   "s": 1654.96,
+   "e": 1656.56,
+   "sp": "william",
+   "t": "But it's not fish, it's piranhas."
+  },
+  {
+   "s": 1657.32,
+   "e": 1663.44,
+   "sp": "william",
+   "t": "And they show like a bone being like, or a big old chunk of meat being devoured by piranhas in seconds."
+  },
+  {
+   "s": 1663.56,
+   "e": 1664.08,
+   "sp": "william",
+   "t": "I'm like, oh no."
+  },
+  {
+   "s": 1664.16,
+   "e": 1664.98,
+   "sp": "william",
+   "t": "So they're about to put his hands in."
+  },
+  {
+   "s": 1665.08,
+   "e": 1667.42,
+   "sp": "william",
+   "t": "And all of a sudden there's like, alarms start playing."
+  },
+  {
+   "s": 1667.58,
+   "e": 1672.18,
+   "sp": "william",
+   "t": "And then it cuts to this lady who's driving a van or a semi-truck, as you guys call it."
+  },
+  {
+   "s": 1672.58,
+   "e": 1673.22,
+   "sp": "william",
+   "t": "And it's like, what?"
+  },
+  {
+   "s": 1673.34,
+   "e": 1673.78,
+   "sp": "william",
+   "t": "And then it cuts."
+  },
+  {
+   "s": 1673.9,
+   "e": 1676.14,
+   "sp": "william",
+   "t": "And it turns out they're actually in the back of a semi-truck."
+  },
+  {
+   "s": 1676.24,
+   "e": 1677.7,
+   "sp": "william",
+   "t": "It's just decorated to look super fancy."
+  },
+  {
+   "s": 1677.94,
+   "e": 1679.14,
+   "sp": "william",
+   "t": "And there's a race car behind them."
+  },
+  {
+   "s": 1679.22,
+   "e": 1680.44,
+   "sp": "william",
+   "t": "Who is it? Who could it possibly be?"
+  },
+  {
+   "s": 1680.58,
+   "e": 1681.34,
+   "sp": "william",
+   "t": "Adam, who do you think it is?"
+  },
+  {
+   "s": 1682.16,
+   "e": 1683.9,
+   "sp": "william",
+   "t": "It's Racer X. Racer X."
+  },
+  {
+   "s": 1683.96,
+   "e": 1685.7,
+   "sp": "william",
+   "t": "The Harbinger of Boom."
+  },
+  {
+   "s": 1686.04,
+   "e": 1686.68,
+   "sp": "william",
+   "t": "As he is well known."
+  },
+  {
+   "s": 1686.68,
+   "e": 1689.9,
+   "sp": "adam",
+   "t": "Which is, I think, the best nickname you can have."
+  },
+  {
+   "s": 1690.16,
+   "e": 1697.66,
+   "sp": "adam",
+   "t": "It's pretty creative. There's a lot of great nicknames throughout fiction, but the Harbinger of Boom could definitely stand among the other greats."
+  },
+  {
+   "s": 1697.66,
+   "e": 1698.76,
+   "sp": "adam",
+   "t": "It's one of the top ones."
+  },
+  {
+   "s": 1698.9,
+   "e": 1699.92,
+   "sp": "adam",
+   "t": "Maybe it's not your favorite."
+  },
+  {
+   "s": 1700.2,
+   "e": 1703.74,
+   "sp": "adam",
+   "t": "I guess your favorite is the guy he's working for in the CIA."
+  },
+  {
+   "s": 1703.96,
+   "e": 1705.54,
+   "sp": "adam",
+   "t": "Not the CIA, but the CIB."
+  },
+  {
+   "s": 1706.34,
+   "e": 1708.6,
+   "sp": "adam",
+   "t": "And that is Inspector Detector."
+  },
+  {
+   "s": 1708.76,
+   "e": 1711.0,
+   "sp": "adam",
+   "t": "My favorite character. Which is his real name, I believe."
+  },
+  {
+   "s": 1711.22,
+   "e": 1712.62,
+   "sp": "william",
+   "t": "Yeah, his real name is Inspector Detector."
+  },
+  {
+   "s": 1712.74,
+   "e": 1715.36,
+   "sp": "william",
+   "t": "So Inspector Detector, let's flash forward in time."
+  },
+  {
+   "s": 1715.36,
+   "e": 1721.32,
+   "sp": "william",
+   "t": "So after mom has this conversation, mom racer, with Speed Racer, they get a knock on the doll, and it's the harbinger of boom."
+  },
+  {
+   "s": 1721.42,
+   "e": 1726.16,
+   "sp": "william",
+   "t": "So Sprysle freaks out and inspect the detect, and they come in, and they have a request to make of the racer family."
+  },
+  {
+   "s": 1726.3,
+   "e": 1732.7,
+   "sp": "adam",
+   "t": "Yes. Taijo Tokokan, who is the vaguely Asian racer, is like being threatened."
+  },
+  {
+   "s": 1732.98,
+   "e": 1738.54,
+   "sp": "adam",
+   "t": "He has evidence on this racer fixer, this mob boss named Cruncher Block."
+  },
+  {
+   "s": 1739.06,
+   "e": 1741.42,
+   "sp": "adam",
+   "t": "Great names. This movie is just so good with names."
+  },
+  {
+   "s": 1741.42,
+   "e": 1743.76,
+   "sp": "adam",
+   "t": "I'll just say. It is pretty memorable."
+  },
+  {
+   "s": 1743.76,
+   "e": 1754.62,
+   "sp": "adam",
+   "t": "And Taijo Togakhan is like, I will give the information to the CIB if you join me in this rally race, this cross-country race."
+  },
+  {
+   "s": 1754.78,
+   "e": 1758.5,
+   "sp": "adam",
+   "t": "Super dangerous. But it's a three-player."
+  },
+  {
+   "s": 1758.5,
+   "e": 1759.74,
+   "sp": "adam",
+   "t": "It's a team race."
+  },
+  {
+   "s": 1759.8,
+   "e": 1760.78,
+   "sp": "adam",
+   "t": "So you have to race with a team."
+  },
+  {
+   "s": 1761.2,
+   "e": 1766.38,
+   "sp": "adam",
+   "t": "And Taijo is like, I want Racer X and I want Speed Racer."
+  },
+  {
+   "s": 1766.6,
+   "e": 1768.82,
+   "sp": "adam",
+   "t": "The greatest racer is basically in his mind."
+  },
+  {
+   "s": 1768.82,
+   "e": 1775.12,
+   "sp": "adam",
+   "t": "The problem is that, what is special about this race course?"
+  },
+  {
+   "s": 1775.32,
+   "e": 1776.9,
+   "sp": "william",
+   "t": "This is not just any race course."
+  },
+  {
+   "s": 1777.08,
+   "e": 1782.82,
+   "sp": "william",
+   "t": "It happens to be the exact same rally race where Racer Rex was tragically died."
+  },
+  {
+   "s": 1783.76,
+   "e": 1786.14,
+   "sp": "william",
+   "t": "Died. He was tragically died."
+  },
+  {
+   "s": 1786.18,
+   "e": 1787.4,
+   "sp": "william",
+   "t": "He was tragically died years ago."
+  },
+  {
+   "s": 1787.54,
+   "e": 1789.04,
+   "sp": "adam",
+   "t": "He tragically died of exploding."
+  },
+  {
+   "s": 1789.22,
+   "e": 1790.52,
+   "sp": "william",
+   "t": "Of explosion and fire."
+  },
+  {
+   "s": 1790.76,
+   "e": 1795.32,
+   "sp": "william",
+   "t": "And so his dad, Pops Racer, is like, how dare you come here and ask this of us?"
+  },
+  {
+   "s": 1795.32,
+   "e": 1803.08,
+   "sp": "william",
+   "t": "and inspector's like i'm sorry i understand the toll i must like be putting on your family i'm sorry and then he gets up and he's ready to leave and the family's like don't you ever like request something like"
+  },
+  {
+   "s": 1803.08,
+   "e": 1806.58,
+   "sp": "william",
+   "t": "this of us again and they leave and speed is silent the whole time he doesn't"
+  },
+  {
+   "s": 1806.58,
+   "e": 1820.5,
+   "sp": "adam",
+   "t": "say anything and then speed racer talks to his girlfriend tricks afterward and he's like i i have to race this race like i have to prove to the world that big companies big businesses don't own everything i have"
+  },
+  {
+   "s": 1820.5,
+   "e": 1827.28,
+   "sp": "adam",
+   "t": "to prove that the little guy can win and we can show everything And so Speed Racer joins without his family's permission."
+  },
+  {
+   "s": 1827.4,
+   "e": 1832.14,
+   "sp": "adam",
+   "t": "And he and Trix pretend that they're going skiing and they leave to go on this tour."
+  },
+  {
+   "s": 1832.14,
+   "e": 1834.92,
+   "sp": "adam",
+   "t": "And that's when Trix becomes his pit crew."
+  },
+  {
+   "s": 1835.68,
+   "e": 1839.22,
+   "sp": "william",
+   "t": "And yeah. Yeah, so she's now the spots from the helicopter because it's a rally race."
+  },
+  {
+   "s": 1839.42,
+   "e": 1846.02,
+   "sp": "william",
+   "t": "And they're racing. And then Spreitle finds out that he, through a series of kind of funny interactions. Yeah."
+  },
+  {
+   "s": 1846.18,
+   "e": 1851.56,
+   "sp": "adam",
+   "t": "He's watching TV and he's like, I want to secretly watch the race, this race."
+  },
+  {
+   "s": 1851.72,
+   "e": 1853.7,
+   "sp": "adam",
+   "t": "But then he sees Speed Racer on the television."
+  },
+  {
+   "s": 1853.7,
+   "e": 1854.7,
+   "sp": "adam",
+   "t": "He's like, oh no."
+  },
+  {
+   "s": 1854.9,
+   "e": 1867.54,
+   "sp": "adam",
+   "t": "and then pop sees speed race on the television and it's like oh no like this is terrible so they show up to his race and like how dare you race without our permission but in the end he he"
+  },
+  {
+   "s": 1867.54,
+   "e": 1869.54,
+   "sp": "adam",
+   "t": "keeps racing it's like no i'm an adult i'm gonna race"
+  },
+  {
+   "s": 1869.54,
+   "e": 1876.14,
+   "sp": "william",
+   "t": "yeah so we got some pretty epic scenes um one of my favorite scenes in the movie actually is the ninja scene the ninja"
+  },
+  {
+   "s": 1876.14,
+   "e": 1879.88,
+   "sp": "adam",
+   "t": "scene that ninja more like a ninja yeah exactly i"
+  },
+  {
+   "s": 1879.88,
+   "e": 1882.18,
+   "sp": "william",
+   "t": "caught this movie's just full iconic quotes"
+  },
+  {
+   "s": 1882.18,
+   "e": 1889.52,
+   "sp": "adam",
+   "t": "crazy line live forever like why watching that tv it's in german well not the monkey parts because there's a monkey in the tv"
+  },
+  {
+   "s": 1890.6,
+   "e": 1897.52,
+   "sp": "william",
+   "t": "great so in any case so the family all like meet up with speed and they confront him but then they decide actually they're all going to stick with him because speed's like i'm not backing down they're like well"
+  },
+  {
+   "s": 1897.52,
+   "e": 1906.72,
+   "sp": "william",
+   "t": "we can't let you do this alone so they all stay in like this fancy hotel room but of course and they're with um racer x and what's your time taijo and then some ninjas come in and try and"
+  },
+  {
+   "s": 1906.72,
+   "e": 1910.24,
+   "sp": "william",
+   "t": "attack them and the whole family is like this epic scene where the like spritle"
+  },
+  {
+   "s": 1911.2,
+   "e": 1914.08,
+   "sp": "william",
+   "t": "the mechanic and then of course Pops who is like a pro"
+  },
+  {
+   "s": 1914.08,
+   "e": 1927.38,
+   "sp": "adam",
+   "t": "wrestler Pops is played by John Goodman and it plays up the fact that John Goodman is like this big huge mechanic beefy guy that like just tears through the ninja and he's like you beat that ninja so easily"
+  },
+  {
+   "s": 1927.38,
+   "e": 1931.04,
+   "sp": "adam",
+   "t": "ninja more like a non-jump terrible what passes for a ninja these days"
+  },
+  {
+   "s": 1932.1,
+   "e": 1938.66,
+   "sp": "adam",
+   "t": "so true so true the ninjas actually do affect the race because that's after the first leg is that night"
+  },
+  {
+   "s": 1939.78,
+   "e": 1943.96,
+   "sp": "adam",
+   "t": "and that night Taijo, he gets paralyzed by the ninja."
+  },
+  {
+   "s": 1944.3,
+   "e": 1950.9,
+   "sp": "adam",
+   "t": "He gets paralyzed for just long enough for them to secretly switch out Taijo with Trix."
+  },
+  {
+   "s": 1951.6,
+   "e": 1953.54,
+   "sp": "adam",
+   "t": "Wait, oh you're right yeah, sorry."
+  },
+  {
+   "s": 1953.74,
+   "e": 1964.84,
+   "sp": "adam",
+   "t": "So Trix races on behalf of Taijo and that's actually a really cool scene and there's a lot of action in that scene and they do the switch back and there's a little bit of gunfight and they take out"
+  },
+  {
+   "s": 1964.84,
+   "e": 1966.68,
+   "sp": "adam",
+   "t": "Cruncher Block and his ninjas"
+  },
+  {
+   "s": 1967.84,
+   "e": 1980.4,
+   "sp": "adam",
+   "t": "and then they win the race congratulations there was a lot of crazy things Speed Racer gets thrown off a cliff at one point he's about to die he's like oh no just like my brother did but then he"
+  },
+  {
+   "s": 1981.18,
+   "e": 1983.18,
+   "sp": "adam",
+   "t": "spikes come out of his wheels"
+  },
+  {
+   "s": 1983.18,
+   "e": 1985.3,
+   "sp": "william",
+   "t": "he uses the power of ridiculous engineering"
+  },
+  {
+   "s": 1986.0,
+   "e": 1988.46,
+   "sp": "adam",
+   "t": "it's crazy he falls into a ravine and"
+  },
+  {
+   "s": 1988.46,
+   "e": 1989.96,
+   "sp": "william",
+   "t": "this ravine is endless spikes"
+  },
+  {
+   "s": 1989.96,
+   "e": 2004.94,
+   "sp": "adam",
+   "t": "come out of his wheels and so he starts doing this crazy like spike chain four-wheel drive like down still going down down the hill right side of the ravine and then he does the launching thing so the"
+  },
+  {
+   "s": 2004.94,
+   "e": 2017.66,
+   "sp": "adam",
+   "t": "springs launch him launch his car directly vertical up but because he's a ravine it just launches him to the other side of the ravine he hits it with his wheels and then starts driving up the other side of"
+  },
+  {
+   "s": 2017.66,
+   "e": 2018.46,
+   "sp": "adam",
+   "t": "the ravine and it's"
+  },
+  {
+   "s": 2018.46,
+   "e": 2019.76,
+   "sp": "william",
+   "t": "like a literally straight"
+  },
+  {
+   "s": 2019.76,
+   "e": 2021.16,
+   "sp": "adam",
+   "t": "lands on the race course."
+  },
+  {
+   "s": 2021.5,
+   "e": 2023.66,
+   "sp": "adam",
+   "t": "It's crazy. It's awesome to watch."
+  },
+  {
+   "s": 2023.68,
+   "e": 2025.98,
+   "sp": "adam",
+   "t": "But it is really exhilarating to watch."
+  },
+  {
+   "s": 2026.54,
+   "e": 2030.38,
+   "sp": "william",
+   "t": "So this happens, they win the race, and then he qualifies."
+  },
+  {
+   "s": 2030.84,
+   "e": 2038.82,
+   "sp": "adam",
+   "t": "Well, technically... There's one of the winners of the race gets like a pass to the Grand Prix, which is like the big tournament."
+  },
+  {
+   "s": 2039.1,
+   "e": 2040.1,
+   "sp": "adam",
+   "t": "That's the one there is."
+  },
+  {
+   "s": 2040.3,
+   "e": 2042.48,
+   "sp": "adam",
+   "t": "They say it's all fixed, but it's like amazing."
+  },
+  {
+   "s": 2042.98,
+   "e": 2047.38,
+   "sp": "adam",
+   "t": "And Taijo, as the leader of the relay race, he gets the certificate."
+  },
+  {
+   "s": 2047.38,
+   "e": 2050.22,
+   "sp": "adam",
+   "t": "but then the betrayal so"
+  },
+  {
+   "s": 2050.22,
+   "e": 2055.5,
+   "sp": "william",
+   "t": "they were racing for this tai joe family and it turns out that mr tai joe his dad"
+  },
+  {
+   "s": 2055.5,
+   "e": 2056.88,
+   "sp": "adam",
+   "t": "mr togur con mr"
+  },
+  {
+   "s": 2056.88,
+   "e": 2066.2,
+   "sp": "william",
+   "t": "togur con my bad you're fine he actually betrays them on uses this like exactly as mr alton said earlier it's all about stocks and like when you win a race then stock prices go up and down so he"
+  },
+  {
+   "s": 2066.2,
+   "e": 2072.9,
+   "sp": "william",
+   "t": "he sells a bunch of stock to mr walton and it was all just part of corruption so speed and his family are livid they're not happy that they got done dirty"
+  },
+  {
+   "s": 2072.9,
+   "e": 2074.32,
+   "sp": "adam",
+   "t": "and And Speed is so angry."
+  },
+  {
+   "s": 2074.5,
+   "e": 2075.36,
+   "sp": "adam",
+   "t": "He's driving on the race course."
+  },
+  {
+   "s": 2075.48,
+   "e": 2077.46,
+   "sp": "adam",
+   "t": "He's like, nothing matters anymore."
+  },
+  {
+   "s": 2077.48,
+   "e": 2082.5,
+   "sp": "adam",
+   "t": "This is terrible. And then he gets a pep talk from Racer X."
+  },
+  {
+   "s": 2082.78,
+   "e": 2090.04,
+   "sp": "adam",
+   "t": "Speed's like, Racer X, I know this is crazy, but I think you're my brother, Rex Racer."
+  },
+  {
+   "s": 2090.52,
+   "e": 2094.76,
+   "sp": "adam",
+   "t": "Do you think that Racer X is Rex Racer?"
+  },
+  {
+   "s": 2095.36,
+   "e": 2096.0,
+   "sp": "adam",
+   "t": "Could it be?"
+  },
+  {
+   "s": 2097.04,
+   "e": 2099.32,
+   "sp": "adam",
+   "t": "No, it's not. He pulls off his mask."
+  },
+  {
+   "s": 2099.32,
+   "e": 2100.0,
+   "sp": "adam",
+   "t": "It's just a guy."
+  },
+  {
+   "s": 2100.0,
+   "e": 2101.08,
+   "sp": "adam",
+   "t": "It's just some random other dude."
+  },
+  {
+   "s": 2101.08,
+   "e": 2103.26,
+   "sp": "adam",
+   "t": "Just some guy who's like, yeah, I'm not your brother."
+  },
+  {
+   "s": 2103.64,
+   "e": 2108.18,
+   "sp": "adam",
+   "t": "But like, race is good and keep racing."
+  },
+  {
+   "s": 2108.48,
+   "e": 2109.82,
+   "sp": "william",
+   "t": "Don't get dishawn, boy."
+  },
+  {
+   "s": 2110.32,
+   "e": 2112.46,
+   "sp": "william",
+   "t": "Yeah. And then it turns out that..."
+  },
+  {
+   "s": 2112.46,
+   "e": 2113.06,
+   "sp": "william",
+   "t": "Oh, what is..."
+  },
+  {
+   "s": 2113.06,
+   "e": 2114.3,
+   "sp": "adam",
+   "t": "He says this crazy line."
+  },
+  {
+   "s": 2114.5,
+   "e": 2115.98,
+   "sp": "adam",
+   "t": "Let me see if I can find it."
+  },
+  {
+   "s": 2116.02,
+   "e": 2117.34,
+   "sp": "adam",
+   "t": "I wrote down some notes for this."
+  },
+  {
+   "s": 2118.92,
+   "e": 2120.12,
+   "sp": "adam",
+   "t": "Racer X, what does it say?"
+  },
+  {
+   "s": 2120.22,
+   "e": 2122.2,
+   "sp": "adam",
+   "t": "You can continue the plot while I'm looking for this line."
+  },
+  {
+   "s": 2122.4,
+   "e": 2124.5,
+   "sp": "william",
+   "t": "Well, okay. So basically, Mr."
+  },
+  {
+   "s": 2124.98,
+   "e": 2129.22,
+   "sp": "william",
+   "t": "Tokugan, or Taijo's sister, feels pity for speed."
+  },
+  {
+   "s": 2129.22,
+   "e": 2133.2,
+   "sp": "william",
+   "t": "And so she gives him the certificate or like the entry to the Grand Prix."
+  },
+  {
+   "s": 2133.34,
+   "e": 2134.84,
+   "sp": "william",
+   "t": "Cause she's like, he wasn't going to go to it anyways."
+  },
+  {
+   "s": 2135.08,
+   "e": 2136.96,
+   "sp": "william",
+   "t": "And Speed Racer was like, this is it."
+  },
+  {
+   "s": 2137.02,
+   "e": 2141.0,
+   "sp": "william",
+   "t": "Like if I can win the Grand Prix, then I can prove that, you know, the little guys can win."
+  },
+  {
+   "s": 2141.14,
+   "e": 2143.1,
+   "sp": "william",
+   "t": "And that's, that's like the climax of the movie."
+  },
+  {
+   "s": 2143.24,
+   "e": 2147.1,
+   "sp": "adam",
+   "t": "The line is you don't climb into a T180 to be a driver."
+  },
+  {
+   "s": 2147.42,
+   "e": 2149.3,
+   "sp": "adam",
+   "t": "You do it because you're driven."
+  },
+  {
+   "s": 2150.74,
+   "e": 2154.96,
+   "sp": "adam",
+   "t": "And yes. So he gets into the race and everyone's so surprised."
+  },
+  {
+   "s": 2155.2,
+   "e": 2158.36,
+   "sp": "adam",
+   "t": "Mr. Royalton's like, no, this is terrible."
+  },
+  {
+   "s": 2158.78,
+   "e": 2160.22,
+   "sp": "adam",
+   "t": "in his British voice."
+  },
+  {
+   "s": 2160.78,
+   "e": 2164.74,
+   "sp": "adam",
+   "t": "By the way, every character who's British in this movie is a bad guy."
+  },
+  {
+   "s": 2164.96,
+   "e": 2167.52,
+   "sp": "adam",
+   "t": "Like, canonically. Which is like most movies, I feel like."
+  },
+  {
+   "s": 2167.52,
+   "e": 2169.96,
+   "sp": "adam",
+   "t": "How did you feel about that, being British yourself?"
+  },
+  {
+   "s": 2169.98,
+   "e": 2172.9,
+   "sp": "william",
+   "t": "Well, the fact that the villains in this movie were so cool, I accepted."
+  },
+  {
+   "s": 2173.12,
+   "e": 2174.2,
+   "sp": "adam",
+   "t": "Oh, I don't know if they were cool."
+  },
+  {
+   "s": 2174.34,
+   "e": 2174.72,
+   "sp": "adam",
+   "t": "I think Mr."
+  },
+  {
+   "s": 2174.84,
+   "e": 2175.32,
+   "sp": "william",
+   "t": "Royalton's kind of a good one."
+  },
+  {
+   "s": 2175.34,
+   "e": 2177.12,
+   "sp": "william",
+   "t": "When I say cool, I mean they have iconic lines."
+  },
+  {
+   "s": 2177.34,
+   "e": 2178.02,
+   "sp": "william",
+   "t": "Okay, that's fair."
+  },
+  {
+   "s": 2179.08,
+   "e": 2183.9,
+   "sp": "adam",
+   "t": "So Mr. Royalton's like, a million dollars and whoever kills Speed Racer stops"
+  },
+  {
+   "s": 2183.9,
+   "e": 2186.26,
+   "sp": "william",
+   "t": "him from finishing the line."
+  },
+  {
+   "s": 2186.3,
+   "e": 2190.9,
+   "sp": "adam",
+   "t": "And so this crazy, it's not a race, It's a showdown and they're fighting, they're fighting."
+  },
+  {
+   "s": 2191.78,
+   "e": 2196.22,
+   "sp": "adam",
+   "t": "And then it's just, it's Speed versus Cannonball Taylor, the favorite to win the race."
+  },
+  {
+   "s": 2196.22,
+   "e": 2198.1,
+   "sp": "adam",
+   "t": "And who's won a lot of races in the past."
+  },
+  {
+   "s": 2198.24,
+   "e": 2199.7,
+   "sp": "adam",
+   "t": "Who's won a lot of Grand Prix's in the past."
+  },
+  {
+   "s": 2200.28,
+   "e": 2202.98,
+   "sp": "adam",
+   "t": "Cannonball Taylor does this illegal cheating method because Mr."
+  },
+  {
+   "s": 2203.04,
+   "e": 2204.1,
+   "sp": "adam",
+   "t": "Royalton forces him to."
+  },
+  {
+   "s": 2204.34,
+   "e": 2208.68,
+   "sp": "adam",
+   "t": "And then Speed Racer does a launch up, shows the bottom of their cars."
+  },
+  {
+   "s": 2208.74,
+   "e": 2212.98,
+   "sp": "william",
+   "t": "Yeah, so it's called a spear hook where basically like you spear onto the car next to you and join them together."
+  },
+  {
+   "s": 2213.12,
+   "e": 2214.88,
+   "sp": "william",
+   "t": "It's a super illegal move, but it's underneath the car."
+  },
+  {
+   "s": 2214.94,
+   "e": 2215.82,
+   "sp": "william",
+   "t": "So you can't really detect it."
+  },
+  {
+   "s": 2215.82,
+   "e": 2219.5,
+   "sp": "william",
+   "t": "and then speed racer finds out how to like show everyone that he's cheating"
+  },
+  {
+   "s": 2219.5,
+   "e": 2233.44,
+   "sp": "adam",
+   "t": "and so they're like this is going to cost him his medals in the past yeah there's this crazy finale it's neck and neck and finally this honestly i say i've said a lot to describe this finish this is"
+  },
+  {
+   "s": 2233.44,
+   "e": 2249.0,
+   "sp": "adam",
+   "t": "electrifying like it legitimately like everything builds up there's you start speed racer starts driving faster and faster toward the finish like nothing can stop him and as he's doing it you hear all these voices from before the movie"
+  },
+  {
+   "s": 2249.0,
+   "e": 2262.92,
+   "sp": "adam",
+   "t": "where his mom is giving him pep talk his dad is giving him pep talk racer x's like everyone is cheering him on and he finishes and the finish goes into this like this spiraling animation and he finishes and"
+  },
+  {
+   "s": 2262.92,
+   "e": 2268.82,
+   "sp": "adam",
+   "t": "there's just silence for a second and then the audience roar shows up and it's..."
+  },
+  {
+   "s": 2268.82,
+   "e": 2273.3,
+   "sp": "william",
+   "t": "You see the sweat dripping off his face as everyone rushes to jump on his car and lift him up."
+  },
+  {
+   "s": 2273.46,
+   "e": 2274.62,
+   "sp": "adam",
+   "t": "Oh, it's a beautiful finish."
+  },
+  {
+   "s": 2274.9,
+   "e": 2278.28,
+   "sp": "adam",
+   "t": "Amazing. Then at the end, Royalton is indicted."
+  },
+  {
+   "s": 2278.64,
+   "e": 2284.58,
+   "sp": "adam",
+   "t": "Maximum sentence. He goes to prison for life because, quote, the newspaper's called cheaters never prosper."
+  },
+  {
+   "s": 2284.76,
+   "e": 2286.34,
+   "sp": "adam",
+   "t": "So it's like, yeah, he cheated on the race."
+  },
+  {
+   "s": 2286.54,
+   "e": 2288.78,
+   "sp": "adam",
+   "t": "So we're going to send him to prison for life."
+  },
+  {
+   "s": 2288.98,
+   "e": 2291.28,
+   "sp": "adam",
+   "t": "Which is, honestly, for this movie, that's fair."
+  },
+  {
+   "s": 2291.38,
+   "e": 2292.58,
+   "sp": "adam",
+   "t": "Like, that's the worst thing you can do."
+  },
+  {
+   "s": 2294.36,
+   "e": 2296.62,
+   "sp": "adam",
+   "t": "And that's the movie Speed Racer. Yep."
+  },
+  {
+   "s": 2297.4,
+   "e": 2306.98,
+   "sp": "william",
+   "t": "there's there's a lot extra which you need to watch the movie to experience yourself the one thing that we cannot do justice over a podcast because obviously it's audio form is just the visuals the visuals of this movie"
+  },
+  {
+   "s": 2306.98,
+   "e": 2314.22,
+   "sp": "william",
+   "t": "so good stunning absolutely fantastic there is no other movie like it even remotely i cannot think of anything i yeah honestly it genuinely is so unique"
+  },
+  {
+   "s": 2314.22,
+   "e": 2320.78,
+   "sp": "adam",
+   "t": "it's live action it almost feels like there's like animated visuals in it a little bit but it is really good it's"
+  },
+  {
+   "s": 2320.78,
+   "e": 2328.4,
+   "sp": "william",
+   "t": "just like the rotoscoping in it is like they don't even try to hide it it's not like the sort movie where they try to like hide the fact no editing stuff like they use it"
+  },
+  {
+   "s": 2328.4,
+   "e": 2337.98,
+   "sp": "adam",
+   "t": "yeah it's very like the first time i watched i was a little bit jarred because so obviously green screen yeah there's so much green screen and it's very obvious that it's green screen the second time i realized oh"
+  },
+  {
+   "s": 2337.98,
+   "e": 2338.94,
+   "sp": "adam",
+   "t": "that's like it's intentional"
+  },
+  {
+   "s": 2338.94,
+   "e": 2340.88,
+   "sp": "william",
+   "t": "it's like the charm they're it's"
+  },
+  {
+   "s": 2340.88,
+   "e": 2347.26,
+   "sp": "adam",
+   "t": "they're they're not based in a world of reality like this is a world where racing is like everything you know"
+  },
+  {
+   "s": 2347.26,
+   "e": 2357.06,
+   "sp": "william",
+   "t": "and the choice of colors as well are just fabulous like that's why i don't think you physically can watch this movie and be sad or just like at the same like level of emotion as you were before going"
+  },
+  {
+   "s": 2357.06,
+   "e": 2365.88,
+   "sp": "william",
+   "t": "into it it just lifts whatever emotion you were feeling because everything is so over the top the colors the music the the voice lines the names this is the movie to watch if you're having a bad day or"
+  },
+  {
+   "s": 2365.88,
+   "e": 2366.7,
+   "sp": "william",
+   "t": "if you just want to feel better"
+  },
+  {
+   "s": 2366.7,
+   "e": 2379.06,
+   "sp": "adam",
+   "t": "exactly um so final thoughts i guess it's surprising how few people have seen this movie i hadn't even heard of it i guess it's i've heard more and more like Maybe it's the,"
+  },
+  {
+   "s": 2379.08,
+   "e": 2388.08,
+   "sp": "adam",
+   "t": "what, is it Bader-Meinhof, where it's like you hear something and then you hear it, hear something once for the first time, and then you suddenly start hearing it everywhere."
+  },
+  {
+   "s": 2388.46,
+   "e": 2389.84,
+   "sp": "adam",
+   "t": "That's sort of how this was."
+  },
+  {
+   "s": 2390.04,
+   "e": 2393.14,
+   "sp": "adam",
+   "t": "I don't know if that's how it really is."
+  },
+  {
+   "s": 2393.3,
+   "e": 2398.18,
+   "sp": "adam",
+   "t": "Maybe it really is coming more in, but I hear more people talking about Speed Racer nowadays."
+  },
+  {
+   "s": 2398.46,
+   "e": 2401.18,
+   "sp": "william",
+   "t": "It kind of gained a new, in the public eye,"
+  },
+  {
+   "s": 2402.26,
+   "e": 2407.82,
+   "sp": "william",
+   "t": "it just appeared out of nowhere, and then everyone started TikTok and everything, people posting about some of the scenes and dissecting it."
+  },
+  {
+   "s": 2407.82,
+   "e": 2412.36,
+   "sp": "adam",
+   "t": "This random podcast about Speed Racer will become the most trending podcast."
+  },
+  {
+   "s": 2412.36,
+   "e": 2414.36,
+   "sp": "william",
+   "t": "I hope so. Well, that's not why we're talking about it."
+  },
+  {
+   "s": 2414.74,
+   "e": 2418.18,
+   "sp": "william",
+   "t": "We've been planning this for literally two years before anyone started talking about Speed Racer."
+  },
+  {
+   "s": 2418.32,
+   "e": 2419.28,
+   "sp": "william",
+   "t": "It's always been my favorite movie."
+  },
+  {
+   "s": 2419.4,
+   "e": 2420.02,
+   "sp": "william",
+   "t": "Of course, we liked it."
+  },
+  {
+   "s": 2420.46,
+   "e": 2422.82,
+   "sp": "adam",
+   "t": "Well, William liked it before it was cool."
+  },
+  {
+   "s": 2423.0,
+   "e": 2424.76,
+   "sp": "william",
+   "t": "I liked it since I was five years old."
+  },
+  {
+   "s": 2425.04,
+   "e": 2426.68,
+   "sp": "william",
+   "t": "I liked it since two weeks ago."
+  },
+  {
+   "s": 2428.42,
+   "e": 2430.6,
+   "sp": "william",
+   "t": "But yeah, this movie is absolutely fantastic."
+  },
+  {
+   "s": 2430.88,
+   "e": 2432.04,
+   "sp": "william",
+   "t": "You need to watch it."
+  },
+  {
+   "s": 2432.1,
+   "e": 2433.08,
+   "sp": "william",
+   "t": "Go ahead and rent it."
+  },
+  {
+   "s": 2433.18,
+   "e": 2435.78,
+   "sp": "adam",
+   "t": "Let's give our final review for Speed Racer."
+  },
+  {
+   "s": 2436.58,
+   "e": 2439.58,
+   "sp": "adam",
+   "t": "William, how many speed racers would you give this out of 10?"
+  },
+  {
+   "s": 2439.76,
+   "e": 2442.76,
+   "sp": "william",
+   "t": "This movie actually genuinely gets four speed racers out of 10."
+  },
+  {
+   "s": 2443.0,
+   "e": 2444.28,
+   "sp": "adam",
+   "t": "Four speed racers out of 10."
+  },
+  {
+   "s": 2444.66,
+   "e": 2448.22,
+   "sp": "adam",
+   "t": "That's so high. That's maybe the highest that any movie has ever gotten."
+  },
+  {
+   "s": 2448.24,
+   "e": 2451.4,
+   "sp": "william",
+   "t": "I believe so. That's why I'm like, well, my heart's racing."
+  },
+  {
+   "s": 2451.7,
+   "e": 2454.94,
+   "sp": "adam",
+   "t": "And you think audience, you think, oh, four speed racers out of 10."
+  },
+  {
+   "s": 2455.06,
+   "e": 2456.18,
+   "sp": "adam",
+   "t": "Like what, that's four to 10."
+  },
+  {
+   "s": 2456.42,
+   "e": 2458.34,
+   "sp": "william",
+   "t": "No, the rating goes up to three. Yeah."
+  },
+  {
+   "s": 2459.56,
+   "e": 2465.32,
+   "sp": "adam",
+   "t": "So, so one speed racer out of 10 is worth three normal out of 10."
+  },
+  {
+   "s": 2465.32,
+   "e": 2472.46,
+   "sp": "adam",
+   "t": "so four speed racers out of 10 is actually a 12 out of 10 in normal ratings that's insane yeah"
+  },
+  {
+   "s": 2472.46,
+   "e": 2474.02,
+   "sp": "william",
+   "t": "it's a highly rated movie please"
+  },
+  {
+   "s": 2474.02,
+   "e": 2478.1,
+   "sp": "adam",
+   "t": "watch it i think personally i will give this probably"
+  },
+  {
+   "s": 2479.16,
+   "e": 2490.48,
+   "sp": "adam",
+   "t": "two and a half speed racers out of 10 all right i liked it i don't think i'm as high as you i don't have the nostalgia factor i think it's a really good movie that's uh for for listeners"
+  },
+  {
+   "s": 2490.48,
+   "e": 2495.84,
+   "sp": "adam",
+   "t": "who don't who don't use speed race or conversion in their day-to-day life, that's like an eight out of 10."
+  },
+  {
+   "s": 2496.12,
+   "e": 2497.04,
+   "sp": "adam",
+   "t": "I would say it's pretty good."
+  },
+  {
+   "s": 2497.42,
+   "e": 2500.06,
+   "sp": "adam",
+   "t": "I think I give it a six out of 10 the first time I watched it."
+  },
+  {
+   "s": 2500.08,
+   "e": 2502.16,
+   "sp": "adam",
+   "t": "I was like, it's good, but something's holding it back."
+  },
+  {
+   "s": 2502.42,
+   "e": 2504.5,
+   "sp": "adam",
+   "t": "I think it's just an eight out of 10 because it really..."
+  },
+  {
+   "s": 2505.32,
+   "e": 2509.52,
+   "sp": "adam",
+   "t": "The more you watch the movie, the more the movie just pulls you in."
+  },
+  {
+   "s": 2509.56,
+   "e": 2510.62,
+   "sp": "adam",
+   "t": "It's very immersive."
+  },
+  {
+   "s": 2511.54,
+   "e": 2513.5,
+   "sp": "adam",
+   "t": "It brings you into the world with it."
+  },
+  {
+   "s": 2513.64,
+   "e": 2515.84,
+   "sp": "adam",
+   "t": "And so I love that world. It's great."
+  },
+  {
+   "s": 2516.02,
+   "e": 2517.0,
+   "sp": "william",
+   "t": "It's a fantastic world."
+  },
+  {
+   "s": 2517.14,
+   "e": 2518.02,
+   "sp": "william",
+   "t": "I wish it was this world."
+  },
+  {
+   "s": 2518.34,
+   "e": 2519.72,
+   "sp": "adam",
+   "t": "Well, we're about out of time."
+  },
+  {
+   "s": 2519.72,
+   "e": 2524.0,
+   "sp": "adam",
+   "t": "We're going to stick to our 30 to 40 minute block as we said we would."
+  },
+  {
+   "s": 2525.52,
+   "e": 2527.88,
+   "sp": "adam",
+   "t": "But, well, thank you everyone for listening to this episode."
+  },
+  {
+   "s": 2527.88,
+   "e": 2528.7,
+   "sp": "adam",
+   "t": "I hope this was enjoyable."
+  },
+  {
+   "s": 2528.96,
+   "e": 2530.9,
+   "sp": "william",
+   "t": "I hope that you have been inspired to watch Speed Racer."
+  },
+  {
+   "s": 2531.22,
+   "e": 2531.56,
+   "sp": "adam",
+   "t": "I hope so too."
+  },
+  {
+   "s": 2531.56,
+   "e": 2538.84,
+   "sp": "adam",
+   "t": "And I hope that everyone will go and watch Speed Racer and they will be inspired to race themselves."
+  },
+  {
+   "s": 2540.16,
+   "e": 2542.44,
+   "sp": "adam",
+   "t": "But next episode, we don't know what we'll talk about."
+  },
+  {
+   "s": 2542.58,
+   "e": 2543.82,
+   "sp": "adam",
+   "t": "We might talk about Interstellar."
+  },
+  {
+   "s": 2543.92,
+   "e": 2544.98,
+   "sp": "adam",
+   "t": "We might talk about a different movie."
+  },
+  {
+   "s": 2545.12,
+   "e": 2546.5,
+   "sp": "adam",
+   "t": "We'll see. Tron Legacy is what I'm thinking."
+  },
+  {
+   "s": 2547.02,
+   "e": 2550.1,
+   "sp": "adam",
+   "t": "But we'll finish off with an interesting or enlightening question."
+  },
+  {
+   "s": 2550.22,
+   "e": 2552.6,
+   "sp": "adam",
+   "t": "We want to start doing that at the end of our episodes."
+  },
+  {
+   "s": 2553.02,
+   "e": 2560.24,
+   "sp": "adam",
+   "t": "So your interesting or enlightening question for today is, what is your favorite fictional movie car?"
+  },
+  {
+   "s": 2560.44,
+   "e": 2563.18,
+   "sp": "adam",
+   "t": "You can also choose a TV show if you want to do like Night Raider or something."
+  },
+  {
+   "s": 2563.36,
+   "e": 2565.22,
+   "sp": "adam",
+   "t": "But like, what's your favorite fictional car?"
+  },
+  {
+   "s": 2566.28,
+   "e": 2567.4,
+   "sp": "adam",
+   "t": "But we'll finish that off."
+  },
+  {
+   "s": 2567.56,
+   "e": 2570.68,
+   "sp": "adam",
+   "t": "Remember, we live our lives."
+  },
+  {
+   "s": 2571.02,
+   "e": 2572.28,
+   "sp": "adam",
+   "t": "We have a great time."
+  },
+  {
+   "s": 2572.58,
+   "e": 2573.94,
+   "sp": "adam",
+   "t": "Thank you for watching this podcast."
+  },
+  {
+   "s": 2574.26,
+   "e": 2575.82,
+   "sp": "adam",
+   "t": "Or thank you for listening to this podcast."
+  },
+  {
+   "s": 2575.82,
+   "e": 2579.4,
+   "sp": "adam",
+   "t": "I remember we may not think alike, but we can always sync alike."
+  },
+  {
+   "s": 2579.6,
+   "e": 2580.54,
+   "sp": "adam",
+   "t": "We'll see you next episode."
+  },
+  {
+   "s": 2580.72,
+   "e": 2581.26,
+   "sp": "adam",
+   "t": "Have a great day"
+  }
+ ]
+}

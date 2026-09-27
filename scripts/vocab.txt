@@ -1,0 +1,7 @@
+# One word or phrase per line. Fed to Whisper as a hint so names and titles are spelled right.
+Adam Estock
+William Gill
+Speed Racer
+Wachowskis
+Word Wizard
+Taejo Togokahn

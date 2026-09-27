@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuoteSearch from '../../components/islands/QuoteSearch';
+import { getEpisodes, getPeople } from '../../lib/content';
+
+const episodes = (await getEpisodes()).filter((episode) => episode.transcript);
+const people = await getPeople();
+---
+
+<Base title="Quote search" description="Search everything we’ve ever said on Sink Alike, and jump straight to the moment.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Quote search</h1>
+      <p>Everything we’ve said on the show, searchable. Find a line and jump straight to that moment in the episode.</p>
+    </header>
+    <QuoteSearch
+      client:load
+      people={people.map((p) => ({ id: p.id, name: p.data.short }))}
+      episodes={episodes.map((e) => ({ slug: e.slug, number: e.number, title: e.title }))}
+    />
+  </div>
+</Base>

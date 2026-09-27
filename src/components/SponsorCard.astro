@@ -1,0 +1,54 @@
+---
+import { sponsor } from '../site.config';
+import CopyCode from './islands/CopyCode';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<aside class:list={['sponsor-card', { compact }]} aria-label="Sponsor">
+  <p class="kicker">Supported by</p>
+  <p class="sponsor-name">{sponsor.name}</p>
+  <p class="sponsor-pitch">{compact ? sponsor.short : sponsor.pitch}</p>
+  <p class="meta">{sponsor.platforms} · No accounts, no ads</p>
+  <div class="sponsor-actions">
+    <a class="btn btn-primary" href={sponsor.url} target="_blank" rel="sponsored noopener">
+      Get {sponsor.name} <span aria-hidden="true">↗</span>
+    </a>
+    {sponsor.code && <CopyCode code={sponsor.code} client:visible />}
+  </div>
+  {sponsor.code && sponsor.codeDetails && <p class="meta">{sponsor.codeDetails}</p>}
+</aside>
+
+<style>
+  .sponsor-card {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 24px;
+    background: var(--surface);
+  }
+  .sponsor-name {
+    font-family: var(--display);
+    font-size: 34px;
+    line-height: 1;
+    margin: 6px 0 10px;
+  }
+  .sponsor-pitch {
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .compact .sponsor-name {
+    font-size: 28px;
+  }
+  .compact .sponsor-pitch {
+    font-size: 15px;
+  }
+  .sponsor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+</style>

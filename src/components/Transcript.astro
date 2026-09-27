@@ -1,0 +1,504 @@
+---
+import type { Episode, Person, Segment } from '../lib/content';
+import { playable, speakerName } from '../lib/content';
+import { initials, timestamp } from '../lib/format';
+
+interface Props {
+  episode: Episode;
+  people: Person[];
+}
+const { episode, people } = Astro.props;
+const transcript = episode.transcript!;
+
+// Group lines into speaker turns: a new block every time someone else starts talking.
+// Without speaker labels, break into paragraphs on pauses instead.
+type Turn = { sp: string | null; lines: Segment[] };
+const turns: Turn[] = [];
+for (const segment of transcript.segments) {
+  const last = turns.at(-1);
+  const previous = last?.lines.at(-1);
+  const sameSpeaker = last && last.sp === segment.sp;
+  const paragraphBreak = !segment.sp && previous && (segment.s - previous.e > 1.5 || last!.lines.length >= 8);
+  if (sameSpeaker && !paragraphBreak) last!.lines.push(segment);
+  else turns.push({ sp: segment.sp, lines: [segment] });
+}
+
+const speakers = [...new Set(transcript.segments.map((s) => s.sp).filter((sp): sp is string => !!sp))];
+const PREVIEW_TURNS = 8;
+const collapsible = turns.length > PREVIEW_TURNS + 4;
+const notes = {
+  tracks: '',
+  diarized: 'Auto-generated. Speakers were detected automatically and may occasionally be mixed up.',
+  mixed: 'Auto-generated from the episode audio. Speaker names and corrections are on the way.',
+};
+---
+
+<section class="transcript" aria-labelledby="transcript-title" data-transcript data-episode={JSON.stringify(playable(episode))}>
+  <div class="transcript-head">
+    <h2 id="transcript-title">Transcript</h2>
+    {
+      speakers.length > 0 && (
+        <ul class="legend" aria-label="Speakers">
+          {speakers.map((sp) => (
+            <li class={`person person-${sp}`}>
+              <span class="dot" aria-hidden="true" />
+              {speakerName(sp, people)}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  {notes[transcript.source] && <p class="meta note">{notes[transcript.source]}</p>}
+
+  <div class="transcript-tools" data-tools>
+    <label class="find">
+      <span class="sr-only">Find in transcript</span>
+      <input class="input" type="search" placeholder="Find in transcript" data-find />
+      <span class="meta" data-find-count aria-live="polite"></span>
+    </label>
+    <label class="follow meta">
+      <input type="checkbox" data-follow checked />
+      Follow along
+    </label>
+    <a class="meta" href={`/transcripts/${episode.slug}.vtt`} download>Download</a>
+  </div>
+
+  <div class:list={['transcript-body', { 'is-collapsed': collapsible }]} data-transcript-body id="transcript-body">
+    {
+      turns.map((turn) => (
+        <div class:list={['turn', turn.sp ? `person person-${turn.sp}` : 'unlabelled']}>
+          <p class="turn-head">
+            {turn.sp && (
+              <span class="speaker">
+                <span class="avatar" aria-hidden="true">
+                  {initials(people.find((p) => p.id === turn.sp)?.data.name ?? speakerName(turn.sp, people))}
+                </span>
+                {speakerName(turn.sp, people)}
+              </span>
+            )}
+            <button type="button" class="stamp" data-play={turn.lines[0].s}>
+              <span class="sr-only">Play from </span>
+              {timestamp(turn.lines[0].s)}
+            </button>
+          </p>
+          <p class="turn-text">
+            {turn.lines.map((line) => (
+              <span class="line" data-play={line.s} data-s={line.s}>
+                {line.t}{' '}
+              </span>
+            ))}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+  {
+    collapsible && (
+      <div class="expand-row" data-expand-row>
+        <button type="button" class="btn" data-expand aria-controls="transcript-body" aria-expanded="false">
+          Show full transcript
+        </button>
+      </div>
+    )
+  }
+  <button type="button" class="back-to-now" data-back-to-now hidden>
+    <span class="arrow" aria-hidden="true"></span> Back to current line
+  </button>
+</section>
+
+<script>
+  import { effect } from '@preact/signals';
+  import { current, time, playing, cue } from '../lib/player';
+
+  let dispose: (() => void) | undefined;
+
+  function setup() {
+    dispose?.();
+    dispose = undefined;
+    const root = document.querySelector<HTMLElement>('[data-transcript]');
+    if (!root) return;
+    const body = root.querySelector<HTMLElement>('[data-transcript-body]')!;
+    const tools = root.querySelector<HTMLElement>('[data-tools]')!;
+    const follow = root.querySelector<HTMLInputElement>('[data-follow]')!;
+    const find = root.querySelector<HTMLInputElement>('[data-find]')!;
+    const findCount = root.querySelector<HTMLElement>('[data-find-count]')!;
+    const expandRow = root.querySelector<HTMLElement>('[data-expand-row]');
+    const expandButton = root.querySelector<HTMLButtonElement>('[data-expand]');
+    const backButton = root.querySelector<HTMLButtonElement>('[data-back-to-now]')!;
+    const episode = JSON.parse(root.dataset.episode!);
+    const lines = [...body.querySelectorAll<HTMLElement>('.line')];
+    const starts = lines.map((line) => Number(line.dataset.s));
+
+    const expand = () => {
+      if (!body.classList.contains('is-collapsed')) return;
+      body.classList.remove('is-collapsed');
+      if (expandRow) expandRow.hidden = true;
+      expandButton?.setAttribute('aria-expanded', 'true');
+    };
+    expandButton?.addEventListener('click', expand);
+
+    const indexAt = (t: number) => {
+      let lo = 0;
+      let hi = starts.length - 1;
+      let found = -1;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (starts[mid] <= t + 0.05) {
+          found = mid;
+          lo = mid + 1;
+        } else hi = mid - 1;
+      }
+      return found;
+    };
+
+    // ---- Follow along: keep the current line in the upper part of the screen, like synced lyrics.
+    // The page itself scrolls. If the reader scrolls away, following pauses and a
+    // "Back to current line" button appears; it resumes from there, from clicking a line, or
+    // when they scroll back to the current line themselves.
+    let pausedByReader = false;
+    let lastScrollAt = 0;
+
+    const visibleArea = () => {
+      const player = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--player-h')) || 0;
+      // The toolbar is pinned to the top of the screen while reading the transcript.
+      const top = tools.offsetHeight + 12;
+      const bottom = window.innerHeight - player - 12;
+      return { top, bottom, height: bottom - top };
+    };
+
+    /** Is the line comfortably on screen (not hidden under the toolbar or the player)? */
+    const inView = (line: HTMLElement) => {
+      const rect = line.getBoundingClientRect();
+      const area = visibleArea();
+      return rect.top >= area.top && rect.bottom <= area.top + area.height * 0.75;
+    };
+
+    const targetFor = (line: HTMLElement) => {
+      const area = visibleArea();
+      return window.scrollY + line.getBoundingClientRect().top - (area.top + area.height * 0.3);
+    };
+    const isFar = (line: HTMLElement) => Math.abs(targetFor(line) - window.scrollY) > window.innerHeight * 1.5;
+
+    const scrollToLine = (line: HTMLElement) => {
+      const target = targetFor(line);
+      const far = isFar(line);
+      // Remember smooth scrolls so they aren't restarted mid-way or mistaken for the reader.
+      lastScrollAt = far ? 0 : Date.now();
+      window.scrollTo({ top: Math.max(0, target), behavior: far ? 'auto' : 'smooth' });
+    };
+
+    const following = () => follow.checked && !pausedByReader;
+
+    const updateBackButton = (line: HTMLElement | undefined) => {
+      const show = !!line && follow.checked && pausedByReader && playing.value && !inView(line);
+      backButton.hidden = !show;
+      if (show) backButton.dataset.direction = line!.getBoundingClientRect().top < 0 ? 'up' : 'down';
+    };
+
+    let active: HTMLElement | undefined;
+    const stop = effect(() => {
+      const t = time.value;
+      const isPlaying = playing.value;
+      const mine = current.value?.slug === episode.slug;
+      const line = mine ? lines[indexAt(t)] : undefined;
+      if (line !== active) {
+        active?.classList.remove('is-current');
+        line?.classList.add('is-current');
+        active = line;
+      }
+      if (!line || !isPlaying) return updateBackButton(undefined);
+      if (pausedByReader && inView(line)) pausedByReader = false; // they scrolled back to it
+      if (following()) {
+        expand();
+        // Don't restart a smooth scroll that's still under way (big jumps always go through).
+        if (!inView(line) && (Date.now() - lastScrollAt > 700 || isFar(line))) scrollToLine(line);
+      }
+      updateBackButton(line);
+    });
+
+    // Anything the reader does to scroll pauses following (only while it's actually following).
+    const readerScrolled = () => {
+      if (!follow.checked || !playing.value || current.value?.slug !== episode.slug) return;
+      if (Date.now() - lastScrollAt < 150) return;
+      pausedByReader = true;
+      updateBackButton(active);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.target as HTMLElement).closest('input, textarea, select')) return;
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)) readerScrolled();
+    };
+    window.addEventListener('wheel', readerScrolled, { passive: true });
+    window.addEventListener('touchmove', readerScrolled, { passive: true });
+    window.addEventListener('keydown', onKey);
+
+    const resume = () => {
+      pausedByReader = false;
+      if (active && playing.value) {
+        expand();
+        scrollToLine(active);
+      }
+      updateBackButton(active);
+    };
+    backButton.addEventListener('click', resume);
+    follow.addEventListener('change', () => (follow.checked ? resume() : updateBackButton(undefined)));
+    // Clicking a line to play from it means "follow from here".
+    body.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('[data-play]')) pausedByReader = false;
+    });
+
+    // ---- Find in transcript: highlight matches, Enter jumps to the next one.
+    let matches: HTMLElement[] = [];
+    let matchIndex = -1;
+    const showMatch = (line: HTMLElement) => {
+      follow.checked = false;
+      updateBackButton(undefined);
+      scrollToLine(line);
+    };
+    const onFind = () => {
+      const query = find.value.trim().toLowerCase();
+      matches.forEach((line) => line.classList.remove('is-match'));
+      matches = query.length > 1 ? lines.filter((line) => line.textContent!.toLowerCase().includes(query)) : [];
+      matches.forEach((line) => line.classList.add('is-match'));
+      matchIndex = -1;
+      findCount.textContent = query.length > 1 ? `${matches.length} found` : '';
+      if (matches.length) {
+        expand();
+        matchIndex = 0;
+        showMatch(matches[0]);
+      }
+    };
+    const onFindKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' || !matches.length) return;
+      event.preventDefault();
+      matchIndex = (matchIndex + (event.shiftKey ? -1 : 1) + matches.length) % matches.length;
+      showMatch(matches[matchIndex]);
+      findCount.textContent = `${matchIndex + 1} of ${matches.length}`;
+    };
+    find.addEventListener('input', onFind);
+    find.addEventListener('keydown', onFindKey);
+
+    // ---- Deep link: /episodes/<slug>/?t=612 cues the player and shows the line.
+    const t = Number(new URL(location.href).searchParams.get('t'));
+    if (t > 0) {
+      if (current.value?.slug !== episode.slug) cue(episode, t);
+      const line = lines[indexAt(t)];
+      if (line) {
+        expand();
+        line.classList.add('is-flash');
+        requestAnimationFrame(() => {
+          lastScrollAt = 0;
+          const rect = line.getBoundingClientRect();
+          const area = visibleArea();
+          window.scrollTo({ top: window.scrollY + rect.top - (area.top + area.height * 0.3), behavior: 'auto' });
+        });
+      }
+    }
+
+    dispose = () => {
+      stop();
+      window.removeEventListener('wheel', readerScrolled);
+      window.removeEventListener('touchmove', readerScrolled);
+      window.removeEventListener('keydown', onKey);
+    };
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>
+
+<style>
+  .transcript-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 20px;
+    margin-bottom: 8px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink);
+  }
+  .legend .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .note {
+    margin-bottom: 12px;
+  }
+  /* Pinned under the top of the screen while reading the transcript. */
+  .transcript-tools {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    padding: 10px 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  .find {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .find .input {
+    min-height: 38px;
+    width: 220px;
+    padding: 6px 12px;
+    font-size: 15px;
+  }
+  .follow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .transcript-body {
+    padding-top: 8px;
+  }
+  .transcript-body.is-collapsed {
+    max-height: 560px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+  .expand-row {
+    display: flex;
+    justify-content: center;
+    margin-top: -24px;
+    position: relative;
+  }
+  .turn {
+    margin-top: 12px;
+    padding: 12px 16px 14px;
+    border-radius: 10px;
+    color: var(--ink);
+  }
+  .turn.person {
+    background: color-mix(in oklab, var(--c) 7%, transparent);
+    border-left: 3px solid var(--c);
+  }
+  .turn.unlabelled {
+    padding-inline: 0;
+  }
+  .turn-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 4px;
+  }
+  .speaker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--c);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--c);
+    color: var(--bg);
+    font-size: 9px;
+    font-weight: 700;
+  }
+  .stamp {
+    border: 0;
+    background: none;
+    padding: 2px 4px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .stamp:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+  .turn-text {
+    margin: 0;
+    line-height: 1.75;
+  }
+  .line {
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.2s;
+  }
+  .line:hover {
+    background: color-mix(in oklab, var(--c, var(--ink)) 12%, transparent);
+  }
+  .line:global(.is-current) {
+    background: color-mix(in oklab, var(--c, var(--ink)) 24%, transparent);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--c, var(--ink)) 24%, transparent);
+  }
+  .line:global(.is-match) {
+    background: color-mix(in oklab, #f2c14e 45%, transparent);
+  }
+  .line:global(.is-flash) {
+    animation: flash 2.4s ease-out;
+  }
+  @keyframes flash {
+    0%,
+    40% {
+      background: color-mix(in oklab, #f2c14e 55%, transparent);
+    }
+  }
+  .back-to-now {
+    position: fixed;
+    left: 50%;
+    bottom: calc(var(--player-h) + 16px);
+    transform: translateX(-50%);
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+  }
+  .back-to-now .arrow::before {
+    content: '↓';
+  }
+  .back-to-now[data-direction='up'] .arrow::before {
+    content: '↑';
+  }
+  @media (max-width: 640px) {
+    .find .input {
+      width: 100%;
+    }
+    .find {
+      flex: 1 1 100%;
+    }
+    .turn {
+      padding: 10px 12px 12px;
+    }
+  }
+</style>

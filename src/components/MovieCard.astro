@@ -1,0 +1,96 @@
+---
+import type { Mention, Movie, Person } from '../lib/content';
+import Poster from './Poster.astro';
+import MentionQuote from './MentionQuote.astro';
+
+interface Props {
+  movie: Movie;
+  episodeNumbers?: number[];
+  /** Shown under the title for movies that were mentioned rather than discussed. */
+  mention?: Mention;
+  mentionCount?: number;
+  people?: Person[];
+}
+const { movie, episodeNumbers = [], mention, mentionCount = 0, people = [] } = Astro.props;
+const verdicts = Object.entries(movie.data.verdicts).filter(([, v]) => v.rating !== undefined);
+---
+
+<div class="movie-card" data-movie-slug={movie.id}>
+  <a class="movie-link" href={`/movies/${movie.id}/`}>
+    <Poster movie={movie} width={240} />
+    <span class="title">{movie.data.title}</span>
+    <span class="meta">
+      {movie.data.year}
+      {episodeNumbers.length > 0 && ` · Ep ${episodeNumbers.join(', ')}`}
+      {episodeNumbers.length === 0 && mentionCount > 0 && ` · mentioned ${mentionCount === 1 ? 'once' : `${mentionCount}×`}`}
+    </span>
+    {
+      verdicts.length > 0 && (
+        <span class="verdicts">
+          {verdicts.map(([id, verdict]) => (
+            <span class={`person person-${id}`} title={`${id}: ${verdict.rating}/10`}>
+              <span class="sr-only">{id} rated it</span>
+              {verdict.rating}
+            </span>
+          ))}
+        </span>
+      )
+    }
+  </a>
+  {mention && <MentionQuote movie={movie} mention={mention} people={people} compact />}
+  <span class="removed-badge badge badge-warn">Removed from list</span>
+  <div data-movie-admin></div>
+</div>
+
+<script>
+  import '../lib/movie-visibility';
+</script>
+
+<style>
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .movie-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+  }
+  .movie-link :global(.poster) {
+    margin-bottom: 8px;
+    transition: transform 0.2s;
+  }
+  .movie-link:hover :global(.poster) {
+    transform: translateY(-3px);
+  }
+  .title {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .movie-link:hover .title {
+    text-decoration: underline;
+  }
+  .verdicts {
+    display: flex;
+    gap: 6px;
+  }
+  .verdicts .person {
+    font-weight: 700;
+    font-size: 13px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--c) 14%, transparent);
+  }
+  .removed-badge {
+    display: none;
+    align-self: start;
+  }
+  .movie-card:global(.is-removed) {
+    opacity: 0.55;
+  }
+  .movie-card:global(.is-removed) .removed-badge {
+    display: inline-block;
+  }
+</style>

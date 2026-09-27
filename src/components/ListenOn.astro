@@ -1,0 +1,39 @@
+---
+import { listenOn } from '../site.config';
+
+interface Props {
+  episodeLink?: string;
+  youtube?: string;
+}
+const { episodeLink, youtube } = Astro.props;
+const links = listenOn
+  .filter((link) => link.url)
+  .map((link) => {
+    if (link.label === 'Spotify' && episodeLink) return { ...link, url: episodeLink };
+    if (link.label === 'YouTube' && youtube) return { ...link, url: youtube };
+    return link;
+  });
+---
+
+<ul class="listen-on" aria-label="Listen on">
+  {
+    links.map((link) => (
+      <li>
+        <a class="btn btn-small" href={link.url} target="_blank" rel="noopener">
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .listen-on {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+</style>

@@ -1,0 +1,44 @@
+{
+  "name": "sinkalike",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && astro preview",
+    "check": "astro check",
+    "deploy": "astro build && wrangler deploy",
+    "sync": "node scripts/sync-rss.mjs",
+    "transcribe": ".venv/bin/python scripts/transcribe.py",
+    "add-movie": "node scripts/add-movie.mjs",
+    "db:migrate:local": "wrangler d1 migrations apply sinkalike --local",
+    "db:migrate": "wrangler d1 migrations apply sinkalike --remote",
+    "cf-types": "wrangler types --include-runtime=false",
+    "astro": "astro",
+    "find-movies": "node scripts/find-movies.mjs"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.3",
+    "@astrojs/preact": "^6.0.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "@preact/signals": "^2.11.2",
+    "astro": "^7.3.5",
+    "better-auth": "^1.7.6",
+    "minisearch": "^7.2.0",
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260926.1",
+    "fast-xml-parser": "^5.11.1",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.141.0"
+  }
+}

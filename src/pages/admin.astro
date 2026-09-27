@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import { getAuth, isAdmin } from '../lib/server/auth';
+import { db } from '../lib/server/community';
+import { relative } from '../lib/format';
+
+export const prerender = false;
+
+const session = await getAuth().api.getSession({ headers: Astro.request.headers });
+if (!session) return Astro.redirect('/login/?next=/admin/');
+if (!isAdmin(session.user)) return new Response('Not allowed', { status: 403 });
+
+const filter = Astro.url.searchParams.get('show') === 'all' ? 'all' : 'pending';
+const { results } = await db()
+  .prepare(
+    `select c.id, c.thread, c.body, c.status, c.createdAt, c.anonName, u.name as userName
+       from comment c left join user u on u.id = c.userId
+      where ?1 = 'all' or c.status != 'visible'
+      order by c.createdAt desc limit 200`,
+  )
+  .bind(filter)
+  .all<{ id: string; thread: string; body: string; status: string; createdAt: number; anonName: string | null; userName: string | null }>();
+
+const threadLink = (thread: string) => {
+  const [kind, slug] = thread.split(':');
+  return `/${kind === 'movie' ? 'movies' : 'episodes'}/${slug}/#comments`;
+};
+---
+
+<Base title="Moderation" noindex>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Moderation</h1>
+      <p>
+        {filter === 'pending' ? 'Comments waiting for approval or hidden.' : 'The latest 200 comments.'}
+        <a href={filter === 'pending' ? '?show=all' : '?'}>{filter === 'pending' ? 'Show all recent' : 'Show queue only'}</a>
+      </p>
+    </header>
+    {results.length === 0 && <p class="muted">Nothing here. 🎉</p>}
+    <ul class="mod-list">
+      {
+        results.map((c) => (
+          <li class="card" data-id={c.id}>
+            <p class="meta">
+              <strong>{c.userName || c.anonName || 'Anonymous'}</strong> · {relative(c.createdAt)} · <a href={threadLink(c.thread)}>{c.thread}</a> ·{' '}
+              <span class="badge badge-warn">{c.status}</span>
+            </p>
+            <p class="comment-body">{c.body}</p>
+            <div class="account-actions">
+              {c.status !== 'visible' && <button class="btn btn-small" data-action="visible">Approve</button>}
+              {c.status !== 'hidden' && <button class="btn btn-small" data-action="hidden">Hide</button>}
+              <button class="btn btn-small" data-action="delete">Delete</button>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLButtonElement>('.mod-list [data-action]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const item = button.closest<HTMLElement>('[data-id]')!;
+        const action = button.dataset.action!;
+        button.disabled = true;
+        const response = await fetch(`/api/comments/${item.dataset.id}`, {
+          method: action === 'delete' ? 'DELETE' : 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: action === 'delete' ? undefined : JSON.stringify({ status: action }),
+        });
+        if (response.ok) item.remove();
+        else button.disabled = false;
+      });
+    });
+  });
+</script>
+
+<style>
+  .mod-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+</style>

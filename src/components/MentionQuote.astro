@@ -1,0 +1,71 @@
+---
+import type { Mention, Movie, Person } from '../lib/content';
+import { mentionSnippet, playable, speakerName } from '../lib/content';
+import { timestamp } from '../lib/format';
+
+interface Props {
+  movie: Movie;
+  mention: Mention;
+  people: Person[];
+  /** Short form for cards: no play button, smaller text. */
+  compact?: boolean;
+}
+const { movie, mention, people, compact = false } = Astro.props;
+const { episode, segment } = mention;
+const quote = mentionSnippet(movie, segment.t, compact ? 9 : 14);
+const link = `/episodes/${episode.slug}/?t=${Math.floor(segment.s)}`;
+---
+
+<figure class:list={['mention', { compact }, segment.sp && `person person-${segment.sp}`]} data-episode={JSON.stringify(playable(episode))}>
+  <blockquote>“{quote.before}{quote.match && <mark>{quote.match}</mark>}{quote.after}”</blockquote>
+  <figcaption>
+    {segment.sp && <strong class="who">{speakerName(segment.sp, people)}</strong>}
+    <a class="meta" href={link}>Ep {episode.number} · {timestamp(segment.s)}</a>
+    {
+      !compact && (
+        <button type="button" class="btn btn-small" data-play={segment.s}>
+          ▶ Hear it
+        </button>
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .mention {
+    margin: 0;
+    color: var(--ink);
+  }
+  blockquote {
+    margin: 0 0 6px;
+    line-height: 1.55;
+  }
+  mark {
+    background: color-mix(in oklab, var(--c, #f2c14e) 28%, transparent);
+    color: inherit;
+    border-radius: 3px;
+    padding-inline: 2px;
+    font-weight: 600;
+  }
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+  }
+  .who {
+    color: var(--c);
+    font-size: 14px;
+  }
+  .compact blockquote {
+    font-size: 14px;
+    color: var(--ink-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .compact .who {
+    font-size: 13px;
+  }
+</style>

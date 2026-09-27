@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import SponsorCard from '../components/SponsorCard.astro';
+import { sponsor, site } from '../site.config';
+---
+
+<Base title={`Sponsor: ${sponsor.name}`} description={`${site.name} is supported by ${sponsor.name}. ${sponsor.short}`}>
+  <div class="wrap narrow">
+    <header class="page-head">
+      <p class="kicker">Our sponsor</p>
+      <h1>{sponsor.name}</h1>
+      <p>{site.name} is supported by {sponsor.name}. Using the link below is the best way to support the show.</p>
+    </header>
+    <SponsorCard />
+    <section class="section">
+      <h2>Want to sponsor Sink Alike?</h2>
+      <p class="muted">We read every email: <a href={`mailto:${site.email}?subject=Sponsorship`}>{site.email}</a></p>
+    </section>
+  </div>
+</Base>

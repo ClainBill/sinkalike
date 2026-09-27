@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { Movie } from '../lib/content';
+
+interface Props {
+  movie: Movie;
+  width?: number;
+  eager?: boolean;
+}
+const { movie, width = 300, eager = false } = Astro.props;
+const alt = `${movie.data.title}${movie.data.year ? ` (${movie.data.year})` : ''} poster`;
+---
+
+{
+  movie.data.poster ? (
+    <Image
+      src={movie.data.poster}
+      alt={alt}
+      width={width}
+      height={Math.round(width * 1.5)}
+      widths={[width, width * 2]}
+      sizes={`${width}px`}
+      class="poster"
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  ) : (
+    <div class="poster poster-fallback" role="img" aria-label={alt}>
+      {movie.data.title}
+    </div>
+  )
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sinkalike",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "routes": [
+    { "pattern": "sink-alike.wcgill.com", "custom_domain": true }
+    // When sinkalike.com is bought, add it here too and update BETTER_AUTH_URL + `site` in astro.config.mjs:
+    // { "pattern": "sinkalike.com", "custom_domain": true }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sinkalike",
+      "database_id": "d1e5eebc-093b-4cf4-8f2d-6e93ab450b15",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "BETTER_AUTH_URL": "https://sink-alike.wcgill.com",
+    // Comma-separated emails/phone numbers that can moderate comments.
+    "ADMINS": "willcharlesgill@gmail.com",
+    "EMAIL_FROM": "Sink Alike <login@sinkalike.com>"
+  }
+  // Secrets (set with `npx wrangler secret put NAME`):
+  //   BETTER_AUTH_SECRET, TURNSTILE_SECRET_KEY, IP_HASH_SALT,
+  //   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, RESEND_API_KEY,
+  //   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM
+}

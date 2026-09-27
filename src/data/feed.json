@@ -1,0 +1,27 @@
+{
+  "title": "Sink Alike",
+  "description": "Welcome to Sink Alike, a movie review and discussion podcast where our opinions differ but we all love to sink in to our favorite movies and fandoms. We may not think alike, but we can always sink alike!",
+  "author": "Adam Estock and William Gill",
+  "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+  "link": "https://podcasters.spotify.com/pod/show/sink-alike3",
+  "feedUrl": "https://anchor.fm/s/117c72e60/podcast/rss",
+  "episodes": [
+    {
+      "guid": "ef9fa457-4f67-4127-9097-72eed0372dc1",
+      "number": 1,
+      "slug": "1-speed-racer",
+      "title": "Speed Racer: The greatest movie you’ve never heard of",
+      "description": "<p>Adam and William talk about Speed Racer (2008). Is it really that amazing? Why hasn’t anyone heard of this movie?</p>",
+      "published": "2026-09-26T22:26:35.000Z",
+      "duration": 2581,
+      "audio": {
+        "url": "https://anchor.fm/s/117c72e60/podcast/play/126351386/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-26%2F432724705-44100-2-d732b31f891a3.m4a",
+        "type": "audio/x-m4a",
+        "bytes": 41756349
+      },
+      "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Speed-Racer-The-greatest-movie-youve-never-heard-of-e3peeiq",
+      "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+      "explicit": false
+    }
+  ]
+}

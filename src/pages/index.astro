@@ -1,0 +1,266 @@
+---
+import Base from '../layouts/Base.astro';
+import PersonChips from '../components/PersonChips.astro';
+import PlayButton from '../components/PlayButton.astro';
+import ListenOn from '../components/ListenOn.astro';
+import Poster from '../components/Poster.astro';
+import MovieCard from '../components/MovieCard.astro';
+import SponsorCard from '../components/SponsorCard.astro';
+import { getEpisodes, getMovies, getPeople, playable, speakerName } from '../lib/content';
+import { date, duration, stripHtml, timestamp } from '../lib/format';
+import { site } from '../site.config';
+
+const episodes = await getEpisodes();
+const movies = (await getMovies()).slice(0, 10);
+const people = await getPeople();
+const latest = episodes[0];
+
+// A pool of quotable lines; the page shows a random one on each visit.
+const quotes = episodes
+  .flatMap((episode) =>
+    (episode.transcript?.segments ?? [])
+      .filter((s) => s.t.length > 70 && s.t.length < 170 && /[.!?]$/.test(s.t) && s.s > 90)
+      .map((s) => ({ t: s.t, s: s.s, sp: s.sp, slug: episode.slug, number: episode.number, title: episode.title })),
+  )
+  .filter((_, index, all) => index % Math.max(1, Math.floor(all.length / 40)) === 0)
+  .slice(0, 40)
+  .map((q) => ({ ...q, name: speakerName(q.sp, people), time: timestamp(q.s) }));
+const first = quotes[0];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'PodcastSeries',
+  name: site.name,
+  description: site.summary,
+  url: site.url,
+  webFeed: site.feedUrl,
+  author: people.map((person) => ({ '@type': 'Person', name: person.data.name })),
+};
+---
+
+<Base jsonLd={jsonLd}>
+  <section class="wrap hero">
+    <p class="kicker">A movie review & discussion podcast</p>
+    <h1>We may not think alike, but we can always <em>sink alike.</em></h1>
+    <p class="lede">
+      A movie review and discussion podcast with Adam Estock and William Gill, where our opinions differ but we all love to
+      sink in to our favorite movies and fandoms.
+    </p>
+    <ListenOn />
+  </section>
+
+  {
+    latest && (
+      <section class="section latest-wrap" aria-labelledby="latest-title">
+        <div class="wrap latest">
+          {latest.movies[0] && (
+            <a class="latest-poster" href={`/movies/${latest.movies[0].id}/`} tabindex="-1" aria-hidden="true">
+              <Poster movie={latest.movies[0]} width={280} eager />
+            </a>
+          )}
+          <div class="latest-body">
+            <p class="kicker">Latest episode</p>
+            <h2 id="latest-title">
+              <a href={`/episodes/${latest.slug}/`}>{latest.title}</a>
+            </h2>
+            <p class="meta">
+              Episode {latest.number} · {date(latest.published)} · {duration(latest.duration)}
+            </p>
+            <p class="muted">{stripHtml(latest.description)}</p>
+            <PersonChips people={latest.participants} guests={latest.guests} />
+            <div class="latest-actions">
+              <PlayButton episode={playable(latest)} />
+              <a class="btn" href={`/episodes/${latest.slug}/`}>
+                Transcript & comments
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    first && (
+      <section class="section" aria-label="Overheard on the show">
+        <div class="wrap">
+          <figure class="overheard" data-quotes={JSON.stringify(quotes)}>
+            <p class="kicker">Overheard</p>
+            <blockquote>
+              <p data-q-text>“{first.t}”</p>
+            </blockquote>
+            <figcaption class="meta">
+              <span data-q-who>{first.name && `${first.name}, `}</span>
+              <a data-q-link href={`/episodes/${first.slug}/?t=${Math.floor(first.s)}`}>
+                Ep {first.number} at {first.time}
+              </a>
+              · <a href="/quotes/">Search every quote →</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    movies.length > 0 && (
+      <section class="section" aria-labelledby="movies-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="movies-title">Movies we’ve sunk into</h2>
+            <a href="/movies/">All movies →</a>
+          </div>
+          <div class="poster-row">
+            {movies.map(({ movie, episodes, mentions }) => (
+              <MovieCard movie={movie} episodeNumbers={episodes.map((e) => e.number)} mentionCount={mentions.length} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    episodes.length > 1 && (
+      <section class="section" aria-labelledby="recent-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="recent-title">Recent episodes</h2>
+            <a href="/episodes/">All episodes →</a>
+          </div>
+          <ol class="recent">
+            {episodes.slice(1, 6).map((episode) => (
+              <li>
+                <span class="meta">Ep {episode.number}</span>
+                <a href={`/episodes/${episode.slug}/`}>{episode.title}</a>
+                <span class="meta">{date(episode.published, 'short')}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section" aria-label="Sponsor">
+    <div class="wrap">
+      <SponsorCard />
+    </div>
+  </section>
+</Base>
+
+<script>
+  function setup() {
+    const figure = document.querySelector<HTMLElement>('[data-quotes]');
+    if (!figure) return;
+    const quotes = JSON.parse(figure.dataset.quotes!);
+    const q = quotes[Math.floor(Math.random() * quotes.length)];
+    figure.querySelector('[data-q-text]')!.textContent = `“${q.t}”`;
+    figure.querySelector('[data-q-who]')!.textContent = q.name ? `${q.name}, ` : '';
+    const link = figure.querySelector<HTMLAnchorElement>('[data-q-link]')!;
+    link.href = `/episodes/${q.slug}/?t=${Math.floor(q.s)}`;
+    link.textContent = `Ep ${q.number} at ${q.time}`;
+  }
+  document.addEventListener('astro:page-load', setup);
+</script>
+
+<style>
+  .hero {
+    padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px);
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 9vw, 112px);
+    line-height: 0.95;
+    max-width: 13ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+  }
+  .lede {
+    font-size: clamp(18px, 2vw, 21px);
+    color: var(--ink-2);
+    max-width: 52ch;
+    margin-bottom: 4px;
+  }
+  .latest-wrap {
+    border-top: 1px solid var(--rule);
+  }
+  .latest {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+  .latest-body {
+    display: grid;
+    gap: 12px;
+    justify-items: start;
+  }
+  .latest-body h2 {
+    font-size: clamp(32px, 4.5vw, 52px);
+  }
+  .latest-body h2 a {
+    text-decoration: none;
+  }
+  .latest-body h2 a:hover {
+    text-decoration: underline;
+  }
+  .latest-body .muted {
+    max-width: 56ch;
+    font-size: 17px;
+  }
+  .latest-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .overheard {
+    margin: 0;
+    max-width: 900px;
+  }
+  .overheard blockquote {
+    margin: 12px 0 16px;
+  }
+  .overheard blockquote p {
+    font-family: var(--display);
+    font-size: clamp(28px, 4.2vw, 48px);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .poster-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 24px;
+  }
+  .recent {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .recent li {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 16px;
+    padding-block: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  @media (max-width: 720px) {
+    .latest {
+      grid-template-columns: 1fr;
+    }
+    .latest-poster {
+      width: 160px;
+    }
+    .poster-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .recent li {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

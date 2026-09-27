@@ -1,0 +1,160 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import SponsorCard from '../components/SponsorCard.astro';
+import ListenOn from '../components/ListenOn.astro';
+import { getPeople } from '../lib/content';
+import { initials } from '../lib/format';
+import { site } from '../site.config';
+import feed from '../data/feed.json';
+
+const people = await getPeople();
+const hosts = await Promise.all(
+  people.map(async (person) => ({
+    person,
+    Content: (await render(person)).Content,
+    hasBio: !!person.body?.trim(),
+  })),
+);
+---
+
+<Base title="About us" description={feed.description}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">About</p>
+      <h1>Two hosts, one movie, <em>different</em> opinions.</h1>
+    </header>
+
+    <section class="about-intro">
+      <p class="about-lede">{feed.description}</p>
+      <ListenOn />
+    </section>
+
+    <section class="section hosts" aria-labelledby="hosts-title">
+      <h2 id="hosts-title" class="sr-only">The hosts</h2>
+      {
+        hosts.map(({ person, Content, hasBio }) => (
+          <article id={person.id} class={`host person person-${person.id}`}>
+            {person.data.photo ? (
+              <Image src={person.data.photo} alt={person.data.name} width={240} height={240} class="host-photo" />
+            ) : (
+              <div class="host-photo host-initials" aria-hidden="true">
+                {initials(person.data.name)}
+              </div>
+            )}
+            <div class="host-body">
+              <p class="kicker">{person.data.role}</p>
+              <h3>{person.data.name}</h3>
+              {hasBio ? (
+                <div class="prose">
+                  <Content />
+                </div>
+              ) : (
+                <p class="muted">Bio coming soon.</p>
+              )}
+              {person.data.favorites.length > 0 && (
+                <p class="meta">
+                  <strong>Favorites:</strong> {person.data.favorites.join(' · ')}
+                </p>
+              )}
+              {person.data.links.length > 0 && (
+                <ul class="host-links">
+                  {person.data.links.map((link) => (
+                    <li>
+                      <a href={link.url} target="_blank" rel="noopener">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section contact">
+      <h2>Say hi</h2>
+      <p class="muted">Suggest a movie, tell us who was right, or just say hello: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </section>
+
+    <section class="section">
+      <SponsorCard />
+    </section>
+  </div>
+</Base>
+
+<style>
+  .contact h2 {
+    margin-bottom: 12px;
+  }
+  .page-head h1 em {
+    font-style: italic;
+  }
+  .about-intro {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+    padding-bottom: 24px;
+  }
+  .about-lede {
+    font-family: var(--display);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.25;
+    max-width: 34ch;
+    margin: 0;
+  }
+  .hosts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 48px;
+  }
+  .host {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: start;
+    color: var(--ink);
+    scroll-margin-top: 24px;
+  }
+  .host-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--c) 35%, transparent);
+  }
+  .host-initials {
+    display: grid;
+    place-items: center;
+    background: var(--c);
+    color: var(--bg);
+    font-family: var(--display);
+    font-size: 48px;
+  }
+  .host-body h3 {
+    font-size: 36px;
+    margin: 4px 0 12px;
+  }
+  .host-body .kicker {
+    color: var(--c);
+  }
+  .host-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+  }
+  @media (max-width: 520px) {
+    .host {
+      grid-template-columns: 1fr;
+    }
+    .hosts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

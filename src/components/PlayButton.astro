@@ -1,0 +1,25 @@
+---
+import type { PlayableEpisode } from '../lib/content';
+
+interface Props {
+  episode: PlayableEpisode;
+  label?: string;
+  class?: string;
+}
+const { episode, label = 'Play episode', class: className } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={['play-btn', className]}
+  data-play=""
+  data-label-play={label}
+  data-episode={JSON.stringify(episode)}
+  aria-pressed="false"
+>
+  <span class="icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14Z"></path></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"></path></svg>
+  </span>
+  <span class="label">{label}</span>
+</button>

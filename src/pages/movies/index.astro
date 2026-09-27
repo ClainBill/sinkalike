@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import MovieCard from '../../components/MovieCard.astro';
+import { getMovies, getPeople } from '../../lib/content';
+
+const listings = await getMovies();
+const people = await getPeople();
+const discussed = listings.filter((l) => l.episodes.length > 0);
+const mentioned = listings.filter((l) => l.episodes.length === 0);
+---
+
+<Base title="Movies" description="Every movie we’ve discussed on Sink Alike, and every one we’ve so much as mentioned.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Movies</h1>
+      <p>
+        Every film we’ve done an episode on, with our own write-up and both verdicts. Below that, every other movie that’s come
+        up on the show, with the moment we said it.
+      </p>
+    </header>
+
+    <div class="sort" data-movie-sort>
+      <label for="movie-sort" class="meta">Sort by</label>
+      <select id="movie-sort" class="input">
+        <option value="recent">Most recent</option>
+        <option value="title">Title</option>
+        <option value="year">Release year</option>
+      </select>
+    </div>
+
+    {
+      discussed.length > 0 && (
+        <section class="movie-section" data-movie-section aria-labelledby="discussed-title">
+          <h2 id="discussed-title">Full episodes</h2>
+          <div class="movie-grid" data-movie-grid>
+            {discussed.map(({ movie, episodes }, index) => (
+              <div data-recent={index} data-title={movie.data.title.toLowerCase()} data-year={movie.data.year ?? 0}>
+                <MovieCard movie={movie} episodeNumbers={episodes.map((e) => e.number)} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      mentioned.length > 0 && (
+        <section class="movie-section" data-movie-section aria-labelledby="mentioned-title">
+          <h2 id="mentioned-title">Mentioned on the show</h2>
+          <p class="muted section-lede">Anything we’ve name-dropped, compared to, or promised to talk about one day.</p>
+          <div class="movie-grid mentioned" data-movie-grid>
+            {mentioned.map(({ movie, mentions }, index) => (
+              <div data-recent={index} data-title={movie.data.title.toLowerCase()} data-year={movie.data.year ?? 0}>
+                <MovieCard movie={movie} mention={mentions[0]} mentionCount={mentions.length} people={people} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<script>
+  function setup() {
+    const select = document.querySelector<HTMLSelectElement>('[data-movie-sort] select');
+    if (!select) return;
+    select.addEventListener('change', () => {
+      const key = select.value;
+      for (const grid of document.querySelectorAll<HTMLElement>('[data-movie-grid]')) {
+        const items = [...grid.children] as HTMLElement[];
+        items.sort((a, b) => {
+          if (key === 'title') return a.dataset.title!.localeCompare(b.dataset.title!);
+          if (key === 'year') return Number(b.dataset.year) - Number(a.dataset.year);
+          return Number(a.dataset.recent) - Number(b.dataset.recent);
+        });
+        grid.append(...items);
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', setup);
+</script>
+
+<style>
+  .sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .sort .input {
+    width: auto;
+    min-height: 38px;
+    padding: 6px 12px;
+    font-size: 15px;
+  }
+  .movie-section {
+    padding-block: 32px 16px;
+  }
+  .movie-section h2 {
+    margin-bottom: 20px;
+  }
+  .section-lede {
+    margin: -8px 0 24px;
+  }
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 32px 24px;
+  }
+  .movie-grid.mentioned {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  @media (max-width: 520px) {
+    .movie-grid,
+    .movie-grid.mentioned {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 16px;
+    }
+  }
+</style>

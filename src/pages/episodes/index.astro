@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import EpisodeRow from '../../components/EpisodeRow.astro';
+import { getEpisodes, getPeople } from '../../lib/content';
+
+const episodes = await getEpisodes();
+const people = await getPeople();
+const hasGuests = episodes.some((episode) => episode.guests.length);
+---
+
+<Base title="Episodes" description="Every Sink Alike episode, in order, with who was on it.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Episodes</h1>
+      <p>{episodes.length} episode{episodes.length === 1 ? '' : 's'} so far. Every one has a full, searchable transcript.</p>
+    </header>
+
+    <div class="list-tools" data-list-tools>
+      <div class="filters" role="group" aria-label="Filter by who's on it">
+        <button type="button" class="btn btn-small" aria-pressed="true" data-filter="">Everyone</button>
+        {
+          people.map((person) => (
+            <button type="button" class={`btn btn-small person-${person.id}`} aria-pressed="false" data-filter={person.id}>
+              With {person.data.short}
+            </button>
+          ))
+        }
+        {hasGuests && <button type="button" class="btn btn-small" aria-pressed="false" data-filter="guest">With guests</button>}
+      </div>
+      <button type="button" class="btn btn-small" data-sort aria-label="Change sort order">Newest first</button>
+    </div>
+
+    <div class="episode-list" data-episode-list>
+      {episodes.map((episode) => <EpisodeRow episode={episode} />)}
+    </div>
+    <p class="muted" data-empty hidden>No episodes match that filter yet.</p>
+  </div>
+</Base>
+
+<script>
+  function setup() {
+    const tools = document.querySelector<HTMLElement>('[data-list-tools]');
+    const list = document.querySelector<HTMLElement>('[data-episode-list]');
+    const empty = document.querySelector<HTMLElement>('[data-empty]');
+    if (!tools || !list || !empty) return;
+    const filters = [...tools.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const sort = tools.querySelector<HTMLButtonElement>('[data-sort]')!;
+
+    filters.forEach((button) =>
+      button.addEventListener('click', () => {
+        filters.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        const who = button.dataset.filter;
+        let shown = 0;
+        list.querySelectorAll<HTMLElement>('.episode-row').forEach((row) => {
+          const match = !who || row.dataset.people!.split(' ').includes(who);
+          row.hidden = !match;
+          if (match) shown++;
+        });
+        empty.hidden = shown > 0;
+      }),
+    );
+
+    sort.addEventListener('click', () => {
+      const rows = [...list.children].reverse();
+      list.append(...rows);
+      sort.textContent = sort.textContent === 'Newest first' ? 'Oldest first' : 'Newest first';
+    });
+  }
+  document.addEventListener('astro:page-load', setup);
+</script>
+
+<style>
+  .list-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filters [aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+</style>

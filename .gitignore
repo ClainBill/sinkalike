@@ -1,0 +1,21 @@
+# build output
+dist/
+.astro/
+.wrangler/
+
+# dependencies
+node_modules/
+.venv/
+
+# local data
+.cache/
+.dev.vars
+.env
+.env.*
+!.dev.vars.example
+
+# logs
+npm-debug.log*
+
+# macOS
+.DS_Store

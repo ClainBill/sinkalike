@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import AccountForm from '../components/islands/AccountForm';
+import { getAuth, isAdmin } from '../lib/server/auth';
+
+export const prerender = false;
+
+const session = await getAuth().api.getSession({ headers: Astro.request.headers });
+if (!session) return Astro.redirect('/login/?next=/account/');
+
+const user = session.user as typeof session.user & { phoneNumber?: string | null };
+const phoneOnly = user.email.endsWith('@phone.sinkalike.invalid');
+const signInWith = phoneOnly && user.phoneNumber ? `your phone (…${user.phoneNumber.slice(-4)})` : user.email;
+---
+
+<Base title="Your account" noindex>
+  <div class="wrap narrow">
+    <header class="page-head">
+      <h1>Hi{user.name ? `, ${user.name}` : ''}</h1>
+      {!user.name && <p>Pick a display name so people know who’s commenting.</p>}
+    </header>
+    <AccountForm client:load name={user.name} signInWith={signInWith} isAdmin={isAdmin(user)} />
+  </div>
+</Base>
+
+<style is:global>
+  .account {
+    display: grid;
+    gap: 20px;
+  }
+  .account-card h2 {
+    font-size: 30px;
+    margin-bottom: 6px;
+  }
+  .account-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn.danger {
+    color: #b3261e;
+    border-color: color-mix(in oklab, #b3261e 40%, transparent);
+  }
+</style>
