@@ -1,0 +1,116 @@
+/* "Edit page" mode (hosts only; loaded on first use). */
+
+.is-editing [data-edit] {
+  outline: 1.5px dashed color-mix(in oklab, var(--ink) 35%, transparent);
+  outline-offset: 3px;
+  border-radius: 3px;
+  cursor: text;
+  transition: background 0.15s;
+}
+.is-editing [data-edit]:hover {
+  outline-color: var(--ink);
+  background: color-mix(in oklab, #f2c14e 18%, transparent);
+}
+
+/* Empty fields only show while editing, so they can be filled in. */
+.is-editing [data-edit-empty] {
+  display: revert !important;
+  min-width: 4em;
+  min-height: 1.2em;
+}
+.is-editing [data-edit-empty]::before {
+  content: attr(data-edit-placeholder);
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.page-editor {
+  width: min(640px, calc(100vw - 32px));
+  max-width: none;
+  padding: 20px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius, 12px);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.page-editor::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+.page-editor h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.page-editor .kicker {
+  margin: 0 0 2px;
+}
+.page-editor textarea {
+  width: 100%;
+  min-height: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.page-editor .meta {
+  margin: 6px 0 0;
+}
+.pe-note {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  font-size: 14px;
+}
+.pe-status {
+  min-height: 1.2em;
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+.pe-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pe-buttons .linkish {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.pe-spacer {
+  flex: 1;
+}
+
+.edit-banner {
+  position: fixed;
+  left: 16px;
+  bottom: calc(var(--player-h, 0px) + 16px);
+  max-width: calc(100vw - 32px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 6px 6px 16px;
+  border-radius: 999px;
+  background: #f2c14e;
+  color: #17161a;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+}
+.edit-banner .btn {
+  border-color: #17161a;
+  color: #17161a;
+}
+.edit-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--player-h, 0px) + 16px);
+  transform: translateX(-50%);
+  z-index: 60;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 14px;
+  box-shadow: var(--shadow);
+}

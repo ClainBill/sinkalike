@@ -1,13 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
 ---
 
 <Base title="Not found" noindex>
   <div class="wrap narrow">
     <header class="page-head">
       <p class="kicker">404</p>
-      <h1>This scene was cut.</h1>
-      <p>The page you’re after doesn’t exist. Try the <a href="/episodes/">episodes</a> or <a href="/quotes/">search a quote</a>.</p>
+      <h1><Copy k="404.title" text="This scene was cut." /></h1>
+      <p><Copy k="404.text" text="The page you’re after doesn’t exist. Try the [episodes](/episodes/) or [search a quote](/quotes/)." /></p>
     </header>
   </div>
 </Base>

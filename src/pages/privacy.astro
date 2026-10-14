@@ -1,4 +1,5 @@
 ---
+import Copy from '../components/Copy.astro';
 import Base from '../layouts/Base.astro';
 import { site } from '../site.config';
 ---
@@ -6,32 +7,26 @@ import { site } from '../site.config';
 <Base title="Privacy" description="What Sink Alike stores and why.">
   <div class="wrap narrow">
     <header class="page-head">
-      <h1>Privacy</h1>
-      <p>The short version: we store as little as possible and never sell or share it.</p>
+      <h1><Copy k="privacy.title" text="Privacy" /></h1>
+      <p><Copy k="privacy.intro" text="The short version: we store as little as possible and never sell or share it." /></p>
     </header>
     <div class="prose">
-      <h2>What we store</h2>
-      <p>
-        <strong>If you comment or vote without an account</strong>, we store your comment, the name you typed (if any), and a
-        one-way hash of your IP address so we can stop spam and double-voting. We can’t turn that hash back into your IP address.
-      </p>
-      <p>
-        <strong>If you sign in</strong> (Google, email or phone), we store your name, your email address or phone number, your
-        profile picture if Google provides one, and a login session. Your email and phone number are never shown publicly.
-      </p>
-      <p>
-        <strong>On your device</strong>, the site remembers your theme choice and where you got to in each episode. That data
-        never leaves your browser.
-      </p>
-      <h2>Analytics</h2>
-      <p>We use Cloudflare Web Analytics, which counts page views without cookies or tracking you across sites.</p>
-      <h2>Audio</h2>
-      <p>Episodes stream from our podcast host (Spotify for Creators), which has its own privacy policy.</p>
-      <h2>Deleting your data</h2>
-      <p>
-        You can delete your account and every comment you’ve posted from your <a href="/account/">account page</a>. For anything
-        else, email <a href={`mailto:${site.email}`}>{site.email}</a>.
-      </p>
+      <Copy
+        k="privacy.body"
+        block
+        text={[
+          '## What we store',
+          '**If you comment or vote without an account**, we store your comment, the name you typed (if any), and a one-way hash of your IP address so we can stop spam and double-voting. We can’t turn that hash back into your IP address.',
+          '**If you sign in** (Google, email or phone), we store your name, your email address or phone number, your profile picture if Google provides one, and a login session. Your email and phone number are never shown publicly.',
+          '**On your device**, the site remembers your theme choice and where you got to in each episode. That data never leaves your browser.',
+          '## Analytics',
+          'We use Cloudflare Web Analytics, which counts page views without cookies or tracking you across sites.',
+          '## Audio',
+          'Episodes stream from our podcast host (Spotify for Creators), which has its own privacy policy.',
+          '## Deleting your data',
+          `You can delete your account and every comment you’ve posted from your [account page](/account/). For anything else, email [${site.email}](mailto:${site.email}).`,
+        ].join('\n\n')}
+      />
     </div>
   </div>
 </Base>

@@ -1,0 +1,14 @@
+{
+  "name": "Sink Alike",
+  "tagline": "We may not think alike, but we can always sink alike.",
+  "summary": "A movie review and discussion podcast with Adam Estock and William Gill.",
+  "email": "hello@sinkalike.com",
+  "sponsor": {
+    "name": "Word Wizard",
+    "pitch": "An offline, ad-free English dictionary of 740,000 entries, with a spaced-repetition trainer that asks about a word on exactly the day you were about to forget it.",
+    "short": "The offline, ad-free dictionary that remembers the words you keep.",
+    "platforms": "iOS & Android",
+    "code": "",
+    "codeDetails": ""
+  }
+}

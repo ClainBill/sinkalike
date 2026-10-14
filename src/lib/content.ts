@@ -1,12 +1,16 @@
 // Build-time helpers that join the RSS feed with your hand-written content.
 import { getCollection, type CollectionEntry } from 'astro:content';
 import mentionData from '../data/mentions.json';
+import { renderBlocks } from './markdown-lite';
 
 export type Person = CollectionEntry<'people'>;
 export type Movie = CollectionEntry<'movies'>;
 export type Segment = CollectionEntry<'transcripts'>['data']['segments'][number];
 
 export type Episode = CollectionEntry<'feed'>['data'] & {
+  /** What Spotify's feed says, before any override from the site. */
+  spotifyTitle: string;
+  spotifyDescription: string;
   extras?: CollectionEntry<'episodes'>;
   participants: Person[];
   guests: { name: string; url?: string }[];
@@ -62,6 +66,11 @@ async function load(): Promise<Episode[]> {
         extra?.data.participants?.map((ref) => personById.get(ref.id)).filter((p): p is Person => !!p) ?? defaultParticipants;
       return {
         ...data,
+        // Hosts can override Spotify's wording on the site; the original stays in feed.json.
+        title: extra?.data.title ?? data.title,
+        description: extra?.data.description !== undefined ? renderBlocks(extra.data.description) : data.description,
+        spotifyTitle: data.title,
+        spotifyDescription: data.description,
         extras: extra,
         participants,
         guests: extra?.data.guests ?? [],

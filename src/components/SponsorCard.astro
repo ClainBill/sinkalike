@@ -1,4 +1,6 @@
 ---
+import Copy from './Copy.astro';
+import { editable } from '../lib/editable';
 import { sponsor } from '../site.config';
 import CopyCode from './islands/CopyCode';
 
@@ -9,17 +11,21 @@ const { compact = false } = Astro.props;
 ---
 
 <aside class:list={['sponsor-card', { compact }]} aria-label="Sponsor">
-  <p class="kicker">Supported by</p>
-  <p class="sponsor-name">{sponsor.name}</p>
-  <p class="sponsor-pitch">{compact ? sponsor.short : sponsor.pitch}</p>
-  <p class="meta">{sponsor.platforms} · No accounts, no ads</p>
+  <p class="kicker"><Copy k="sponsor.supported-by" text="Supported by" /></p>
+  <p class="sponsor-name" {...editable('site:sponsor.name', sponsor.name)}>{sponsor.name}</p>
+  <p class="sponsor-pitch" {...editable(compact ? 'site:sponsor.short' : 'site:sponsor.pitch', compact ? sponsor.short : sponsor.pitch)}>
+    {compact ? sponsor.short : sponsor.pitch}
+  </p>
+  <p class="meta">
+    <span {...editable('site:sponsor.platforms', sponsor.platforms)}>{sponsor.platforms}</span> · <Copy k="sponsor.no-ads" text="No accounts, no ads" />
+  </p>
   <div class="sponsor-actions">
     <a class="btn btn-primary" href={sponsor.url} target="_blank" rel="sponsored noopener">
-      Get {sponsor.name} <span aria-hidden="true">↗</span>
+      <Copy k="sponsor.get" text="Get" /> {sponsor.name} <span aria-hidden="true">↗</span>
     </a>
     {sponsor.code && <CopyCode code={sponsor.code} client:visible />}
   </div>
-  {sponsor.code && sponsor.codeDetails && <p class="meta">{sponsor.codeDetails}</p>}
+  {sponsor.code && sponsor.codeDetails && <p class="meta" {...editable('site:sponsor.codeDetails', sponsor.codeDetails)}>{sponsor.codeDetails}</p>}
 </aside>
 
 <style>

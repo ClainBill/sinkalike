@@ -12,6 +12,8 @@ import Poll from '../../components/islands/Poll';
 import { getEpisodes, getMovies, getPeople, playable, type Episode } from '../../lib/content';
 import { date, duration, stripHtml, timestamp } from '../../lib/format';
 import { site } from '../../site.config';
+import Copy from '../../components/Copy.astro';
+import { editable, episodeDescription, episodeTitle } from '../../lib/editable';
 
 export async function getStaticPaths() {
   const episodes = await getEpisodes();
@@ -32,6 +34,7 @@ const people = await getPeople();
 const notes = episode.extras ? await render(episode.extras) : undefined;
 const hasNotes = !!episode.extras?.body?.replace(/<!--[\s\S]*?-->/g, '').trim();
 const play = playable(episode);
+const notesText = episode.extras?.body?.replace(/<!--[\s\S]*?-->/g, '').trim() ?? '';
 
 // Other movies that came up in this episode, with the first moment each was said.
 const alsoMentioned = (await getMovies())
@@ -59,8 +62,8 @@ const jsonLd = {
   <article>
     <header class="wrap episode-head">
       <div class="episode-head-text">
-      <p class="kicker">Episode {episode.number}</p>
-      <h1>{episode.title}</h1>
+      <p class="kicker"><Copy k="episode.kicker" text="Episode" /> {episode.number}</p>
+      <h1 {...episodeTitle(episode)}>{episode.title}</h1>
       <p class="meta">
         <time datetime={episode.published.toISOString()}>{date(episode.published)}</time> · {duration(episode.duration)}
       </p>
@@ -82,14 +85,18 @@ const jsonLd = {
     <div class="wrap episode-grid">
       <div class="episode-main">
         <section class="prose description" aria-label="Episode description">
-          <Fragment set:html={episode.description} />
-          {hasNotes && notes && <notes.Content />}
+          <div {...episodeDescription(episode)}><Fragment set:html={episode.description} /></div>
+          {episode.extras && (
+            <div {...editable(`episode:${episode.slug}:body`, notesText, 'markdown', { placeholder: 'Add show notes (Markdown)' })}>
+              {hasNotes && notes && <notes.Content />}
+            </div>
+          )}
         </section>
 
         {
           episode.chapters.length > 0 && (
             <section class="chapters" aria-labelledby="chapters-title" data-episode={JSON.stringify(play)}>
-              <h2 id="chapters-title">Chapters</h2>
+              <h2 id="chapters-title"><Copy k="episode.chapters" text="Chapters" /></h2>
               <ol>
                 {episode.chapters.map((chapter) => (
                   <li>
@@ -105,8 +112,8 @@ const jsonLd = {
 
         {episode.transcript ? <Transcript episode={episode} people={people} /> : (
           <section class="card empty">
-            <h2>Transcript</h2>
-            <p class="muted">The transcript for this episode is on its way.</p>
+            <h2><Copy k="transcript.title" text="Transcript" /></h2>
+            <p class="muted"><Copy k="episode.no-transcript" text="The transcript for this episode is on its way." /></p>
           </section>
         )}
 
@@ -117,16 +124,16 @@ const jsonLd = {
         {
           episode.movies.length > 0 && (
             <section aria-labelledby="movies-title">
-              <h2 id="movies-title" class="kicker">Movies discussed</h2>
+              <h2 id="movies-title" class="kicker"><Copy k="episode.movies" text="Movies discussed" /></h2>
               <ul class="aside-movies">
                 {episode.movies.map((movie) => (
                   <li>
                     <a href={`/movies/${movie.id}/`}>
                       <Poster movie={movie} width={88} />
                       <span>
-                        <strong>{movie.data.title}</strong>
+                        <strong {...editable(`movie:${movie.id}:title`, movie.data.title)}>{movie.data.title}</strong>
                         <span class="meta">{movie.data.year}</span>
-                        <span class="meta">Our take & pull quotes →</span>
+                        <span class="meta"><Copy k="episode.movie-link" text="Our take & pull quotes →" /></span>
                       </span>
                     </a>
                   </li>
@@ -138,11 +145,11 @@ const jsonLd = {
         {
           alsoMentioned.length > 0 && (
             <section aria-labelledby="mentioned-title" data-episode={JSON.stringify(play)}>
-              <h2 id="mentioned-title" class="kicker">Also mentioned</h2>
+              <h2 id="mentioned-title" class="kicker"><Copy k="episode.mentioned" text="Also mentioned" /></h2>
               <ul class="also-mentioned">
                 {alsoMentioned.map(({ movie, here }) => (
                   <li data-movie-slug={movie.id}>
-                    <a href={`/movies/${movie.id}/`}>{movie.data.title}</a>
+                    <a href={`/movies/${movie.id}/`} {...editable(`movie:${movie.id}:title`, movie.data.title)}>{movie.data.title}</a>
                     {movie.data.year && <span class="meta"> ({movie.data.year})</span>}
                     <button type="button" class="stamp" data-play={here[0].segment.s} aria-label={`Play where ${movie.data.title} comes up`}>
                       ▶ {timestamp(here[0].segment.s)}
@@ -153,7 +160,20 @@ const jsonLd = {
             </section>
           )
         }
-        {episode.poll && <Poll pollKey={`episode:${episode.slug}`} question={episode.poll.question} options={episode.poll.options} client:visible />}
+        {
+          episode.poll && (
+            <Poll
+              pollKey={`episode:${episode.slug}`}
+              question={episode.poll.question}
+              options={episode.poll.options}
+              edit={{
+                question: editable(`episode:${episode.slug}:poll.question`, episode.poll.question),
+                options: editable(`episode:${episode.slug}:poll.options`, episode.poll.options, 'lines', { static: true }),
+              }}
+              client:visible
+            />
+          )
+        }
         <SponsorCard compact />
       </aside>
     </div>

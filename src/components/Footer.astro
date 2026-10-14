@@ -1,4 +1,6 @@
 ---
+import Copy from './Copy.astro';
+import { editable } from '../lib/editable';
 import { site, listenOn, sponsor } from '../site.config';
 const year = new Date().getFullYear();
 const links = listenOn.filter((link) => link.url);
@@ -7,37 +9,39 @@ const links = listenOn.filter((link) => link.url);
 <footer class="site-footer">
   <div class="wrap">
     <a class="sponsor-strip" href={sponsor.url} target="_blank" rel="sponsored noopener">
-      <span class="kicker">Supported by</span>
-      <span><strong>{sponsor.name}</strong>: {sponsor.short}</span>
-      {sponsor.code && <span class="code">Code <b>{sponsor.code}</b></span>}
+      <span class="kicker"><Copy k="sponsor.supported-by" text="Supported by" /></span>
+      <span><strong {...editable('site:sponsor.name', sponsor.name)}>{sponsor.name}</strong>: <span {...editable('site:sponsor.short', sponsor.short)}>{sponsor.short}</span></span>
+      {sponsor.code && <span class="code"><Copy k="footer.code" text="Code" /> <b {...editable('site:sponsor.code', sponsor.code)}>{sponsor.code}</b></span>}
       <span aria-hidden="true">↗</span>
     </a>
     <div class="footer-grid">
       <div>
-        <p class="footer-mark">Sink <em>Alike</em></p>
-        <p class="muted">{site.tagline}</p>
+        <p class="footer-mark"><Copy k="wordmark" text="Sink *Alike*" /></p>
+        <p class="muted" {...editable('site:tagline', site.tagline)}>{site.tagline}</p>
       </div>
       <nav aria-label="Footer">
-        <p class="kicker">Explore</p>
-        <a href="/episodes/">Episodes</a>
-        <a href="/movies/">Movies</a>
-        <a href="/quotes/">Quote search</a>
-        <a href="/about/">About us</a>
-        <a href="/sponsor/">Sponsor</a>
+        <p class="kicker"><Copy k="footer.explore" text="Explore" /></p>
+        <a href="/episodes/"><Copy k="nav.episodes" text="Episodes" /></a>
+        <a href="/movies/"><Copy k="nav.movies" text="Movies" /></a>
+        <a href="/quotes/"><Copy k="footer.quotes" text="Quote search" /></a>
+        <a href="/about/"><Copy k="footer.about" text="About us" /></a>
+        <a href="/sponsor/"><Copy k="footer.sponsor" text="Sponsor" /></a>
       </nav>
       <nav aria-label="Listen">
-        <p class="kicker">Listen</p>
+        <p class="kicker"><Copy k="footer.listen" text="Listen" /></p>
         {links.map((link) => <a href={link.url} target="_blank" rel="noopener">{link.label}</a>)}
       </nav>
       <nav aria-label="Contact">
-        <p class="kicker">Say hi</p>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <p class="kicker"><Copy k="footer.say-hi" text="Say hi" /></p>
+        <a href={`mailto:${site.email}`} {...editable('site:email', site.email)}>{site.email}</a>
       </nav>
     </div>
     <p class="fine">
-      © {year} Adam Estock &amp; William Gill. Movie data and posters from{' '}
-      <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>. This site uses TMDB but is not endorsed or
-      certified by TMDB. <a href="/privacy/">Privacy</a>
+      © {year}{' '}
+      <Copy
+        k="footer.fine-print"
+        text="Adam Estock & William Gill. Movie data and posters from [TMDB](https://www.themoviedb.org/). This site uses TMDB but is not endorsed or certified by TMDB. [Privacy](/privacy/)"
+      />
     </p>
   </div>
 </footer>
