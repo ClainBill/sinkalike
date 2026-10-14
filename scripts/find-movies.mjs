@@ -24,6 +24,8 @@ const CACHE = new URL('.cache/tmdb/', ROOT);
 const TRANSCRIPTS = new URL('src/content/transcripts/', ROOT);
 const MOVIES = new URL('src/content/movies/', ROOT);
 const IGNORE_FILE = new URL('scripts/movie-ignore.txt', ROOT);
+// Mentions hosts tagged or removed on the site (kept when mentions.json is rebuilt).
+const EDITS_FILE = new URL('src/data/mention-edits.json', ROOT);
 
 const MIN_POPULARITY = 1.5;
 const NUMBER_WORDS = new Map(Object.entries({
@@ -377,11 +379,19 @@ async function main() {
     if (slug) console.log(`Added src/content/movies/${slug}.md`);
   }
   // Exact lines per movie, read by the site (keyed by TMDB id, sorted by time).
+  const lists = new Map([...found.values()].map((entry) => [entry.movie.id, entry.mentions.map(({ episode, s }) => ({ episode, s }))]));
+  // Hosts' tags and removals from the site win over what was found here.
+  const edits = existsSync(EDITS_FILE) ? JSON.parse(await readFile(EDITS_FILE, 'utf8')) : { added: [], removed: [] };
+  const same = (a, b) => a.episode === b.episode && Math.abs(a.s - b.s) < 0.005;
+  for (const ref of edits.removed) lists.set(ref.tmdbId, (lists.get(ref.tmdbId) ?? []).filter((m) => !same(m, ref)));
+  for (const ref of edits.added) {
+    const list = lists.get(ref.tmdbId) ?? [];
+    if (!list.some((m) => same(m, ref))) list.push({ episode: ref.episode, s: ref.s });
+    lists.set(ref.tmdbId, list);
+  }
   const mentions = {};
-  for (const entry of [...found.values()].sort((a, b) => a.movie.id - b.movie.id)) {
-    mentions[entry.movie.id] = entry.mentions
-      .sort((a, b) => a.episode.localeCompare(b.episode, 'en', { numeric: true }) || a.s - b.s)
-      .map(({ episode, s }) => ({ episode, s }));
+  for (const [id, list] of [...lists].sort(([a], [b]) => a - b)) {
+    if (list.length) mentions[id] = list.sort((a, b) => a.episode.localeCompare(b.episode, 'en', { numeric: true }) || a.s - b.s);
   }
   await writeFile(new URL('src/data/mentions.json', ROOT), `${JSON.stringify(mentions, null, 1)}\n`);
   console.log('Updated src/data/mentions.json');

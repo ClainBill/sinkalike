@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Poster from '../../components/Poster.astro';
 import Comments from '../../components/islands/Comments';
 import Poll from '../../components/islands/Poll';
+import HostEdit from '../../components/islands/HostEdit';
 import { getMovies, getEpisodes, getPeople, playable, linesAt, mentionSnippet, speakerName, type MovieListing } from '../../lib/content';
 import { timestamp } from '../../lib/format';
 import { autoPollOptions } from '../../site.config';
@@ -110,7 +111,10 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
           </p>
         )
       }
-      <div data-movie-admin></div>
+      <div class="movie-admin-row">
+        <div data-movie-admin></div>
+        <HostEdit client:idle kind="movie" slug={movie.id} title={data.title} />
+      </div>
     </div>
   </div>
 
@@ -357,7 +361,14 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
     color: #17161a;
     font-weight: 500;
   }
-  [data-movie-admin]:not(:empty) {
+  .movie-admin-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Only hosts get buttons here. */
+  .movie-admin-row:has(button) {
     margin-top: 8px;
   }
   .mention-text strong {

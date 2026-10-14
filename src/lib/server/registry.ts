@@ -30,3 +30,27 @@ for (const [path, data] of Object.entries(movies)) {
 
 export const threadExists = (key: string) => threads.has(key);
 export const pollOptionCount = (key: string) => polls.get(key) ?? 0;
+
+// ---- For editing on the site.
+const people = import.meta.glob<{ name?: string }>('/src/content/people/*.md', { eager: true, import: 'frontmatter' });
+
+/** person id → full name, e.g. { adam: 'Adam Estock' }. */
+export const personNames: Record<string, string> = Object.fromEntries(
+  Object.entries(people).map(([path, data]) => [slugOf(path), data?.name ?? slugOf(path)]),
+);
+
+/** Who can be picked as a transcript line's speaker: every host, plus the episode's guests. */
+export function speakerChoices(episode: string): { id: string; name: string }[] {
+  const data = Object.entries(episodes).find(([path]) => slugOf(path) === episode)?.[1] as { guests?: { name: string }[] } | undefined;
+  const guests = (data?.guests ?? []).map((guest) => ({
+    id: guest.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+    name: guest.name,
+  }));
+  return [...Object.entries(personNames).map(([id, name]) => ({ id, name })), ...guests];
+}
+
+/** Movie slug for a TMDB id, among movies that existed at the last deploy. */
+export function movieSlugFor(tmdbId: number): string | undefined {
+  const entry = Object.entries(movies).find(([, data]) => (data as { tmdbId?: number } | undefined)?.tmdbId === tmdbId);
+  return entry && slugOf(entry[0]);
+}

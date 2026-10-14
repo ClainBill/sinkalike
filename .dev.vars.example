@@ -15,5 +15,11 @@ TWILIO_ACCOUNT_SID=
 TWILIO_AUTH_TOKEN=
 TWILIO_FROM=
 
-# For `npm run add-movie`
+# Movie details and posters: `npm run add-movie`, `find-movies`, and adding movies from the site.
 TMDB_API_KEY=
+
+# Editing from the site (hosts only). Each save is a commit to this repo and branch.
+# Locally, point GITHUB_BRANCH at a scratch branch so test edits don't go live.
+GITHUB_TOKEN=
+GITHUB_REPO=ClainBill/sinkalike
+GITHUB_BRANCH=site-edits-test

@@ -22,7 +22,10 @@
     "BETTER_AUTH_URL": "https://sink-alike.wcgill.com",
     // Comma-separated emails/phone numbers that can moderate comments.
     "ADMINS": "willcharlesgill@gmail.com",
-    "EMAIL_FROM": "Sink Alike <login@sinkalike.com>"
+    "EMAIL_FROM": "Sink Alike <login@sinkalike.com>",
+    // Where edits made on the site are committed (with the GITHUB_TOKEN secret).
+    "GITHUB_REPO": "ClainBill/sinkalike",
+    "GITHUB_BRANCH": "main"
   }
   // Secrets (set with `npx wrangler secret put NAME`):
   //   BETTER_AUTH_SECRET, TURNSTILE_SECRET_KEY, IP_HASH_SALT,

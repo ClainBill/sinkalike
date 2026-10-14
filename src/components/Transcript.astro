@@ -1,6 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import type { Episode, Person, Segment } from '../lib/content';
 import { playable, speakerName } from '../lib/content';
+import HostEdit from './islands/HostEdit';
 import { initials, timestamp } from '../lib/format';
 
 interface Props {
@@ -9,6 +11,10 @@ interface Props {
 }
 const { episode, people } = Astro.props;
 const transcript = episode.transcript!;
+// For hosts' editor: movies that can be tagged or quoted (only sent to the page as data).
+const movieOptions = (await getCollection('movies'))
+  .map(({ id, data }) => ({ slug: id, title: data.title, year: data.year, tmdbId: data.tmdbId }))
+  .sort((a, b) => a.title.localeCompare(b.title));
 
 // Group lines into speaker turns: a new block every time someone else starts talking.
 // Without speaker labels, break into paragraphs on pauses instead.
@@ -48,6 +54,7 @@ const notes = {
         </ul>
       )
     }
+    <HostEdit client:idle kind="transcript" episode={episode.slug} movies={movieOptions} about={episode.movies.map((m) => m.id)} />
   </div>
   {notes[transcript.source] && <p class="meta note">{notes[transcript.source]}</p>}
 
