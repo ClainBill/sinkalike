@@ -1,0 +1,25 @@
+---
+// A piece of page copy hosts can edit on the site. The text here is the default; edits
+// are saved as overrides in src/data/copy.json under the same key.
+//
+//   <h1><Copy k="home.title" text="We may not think alike, but we can always *sink alike.*" /></h1>
+//   <Copy k="privacy.intro" block text="First paragraph.\n\nSecond, with a [link](/account/)." />
+//
+// `text` is Markdown-lite (see lib/markdown-lite.ts). `block` renders paragraphs in a <div>,
+// so don't put a block inside a <p>.
+import overrides from '../data/copy.json';
+import { editable } from '../lib/editable';
+import { renderBlocks, renderInline } from '../lib/markdown-lite';
+
+interface Props {
+  k: string;
+  text: string;
+  block?: boolean;
+}
+const { k, text, block = false } = Astro.props;
+const source = (overrides as Record<string, string>)[k] ?? text;
+const html = block ? renderBlocks(source) : renderInline(source);
+const attrs = editable(`copy:${k}`, source, block ? 'blocks' : 'inline', { fallback: text });
+---
+
+{block ? <div class="copy-block" {...attrs} set:html={html} /> : <span {...attrs} set:html={html} />}

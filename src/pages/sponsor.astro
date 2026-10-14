@@ -1,4 +1,6 @@
 ---
+import Copy from '../components/Copy.astro';
+import { editable } from '../lib/editable';
 import Base from '../layouts/Base.astro';
 import SponsorCard from '../components/SponsorCard.astro';
 import { sponsor, site } from '../site.config';
@@ -7,14 +9,17 @@ import { sponsor, site } from '../site.config';
 <Base title={`Sponsor: ${sponsor.name}`} description={`${site.name} is supported by ${sponsor.name}. ${sponsor.short}`}>
   <div class="wrap narrow">
     <header class="page-head">
-      <p class="kicker">Our sponsor</p>
-      <h1>{sponsor.name}</h1>
-      <p>{site.name} is supported by {sponsor.name}. Using the link below is the best way to support the show.</p>
+      <p class="kicker"><Copy k="sponsor.kicker" text="Our sponsor" /></p>
+      <h1 {...editable('site:sponsor.name', sponsor.name)}>{sponsor.name}</h1>
+      <p><Copy k="sponsor.intro" text={`${site.name} is supported by ${sponsor.name}. Using the link below is the best way to support the show.`} /></p>
     </header>
     <SponsorCard />
     <section class="section">
-      <h2>Want to sponsor Sink Alike?</h2>
-      <p class="muted">We read every email: <a href={`mailto:${site.email}?subject=Sponsorship`}>{site.email}</a></p>
+      <h2><Copy k="sponsor.pitch-title" text="Want to sponsor Sink Alike?" /></h2>
+      <p class="muted">
+        <Copy k="sponsor.pitch" text="We read every email:" />{' '}
+        <a href={`mailto:${site.email}?subject=Sponsorship`} {...editable('site:email', site.email)}>{site.email}</a>
+      </p>
     </section>
   </div>
 </Base>

@@ -30,6 +30,9 @@ const episodes = defineCollection({
   loader: glob({ pattern: '*.md', base: 'src/content/episodes' }),
   schema: z.object({
     guid: z.string(),
+    /** Show this instead of Spotify's title/description (set from the site). Markdown-lite description. */
+    title: z.string().optional(),
+    description: z.string().optional(),
     /** Defaults to every host in src/content/people. */
     participants: z.array(reference('people')).optional(),
     guests: z.array(z.object({ name: z.string(), url: z.string().optional() })).default([]),

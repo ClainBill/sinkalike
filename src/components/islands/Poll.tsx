@@ -2,10 +2,11 @@ import { useEffect, useState } from 'preact/hooks';
 import { user, loadUser } from '../../lib/session';
 import { useTurnstile } from '../../lib/turnstile';
 
-type Props = { pollKey: string; question: string; options: string[] };
+/** `edit`: data-edit attributes (lib/editable.ts) for the question and options, when hosts can edit them. */
+type Props = { pollKey: string; question: string; options: string[]; edit?: { question: Record<string, string>; options: Record<string, string> } };
 type Results = { counts: number[]; total: number; mine: number | null };
 
-export default function Poll({ pollKey, question, options }: Props) {
+export default function Poll({ pollKey, question, options, edit }: Props) {
   const [results, setResults] = useState<Results | null>(null);
   const [choice, setChoice] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
@@ -51,10 +52,12 @@ export default function Poll({ pollKey, question, options }: Props) {
   return (
     <section class="poll card" aria-labelledby={`poll-${pollKey}`}>
       <p class="kicker">Poll</p>
-      <h3 id={`poll-${pollKey}`}>{question}</h3>
+      <h3 id={`poll-${pollKey}`} {...edit?.question}>
+        {question}
+      </h3>
       {showResults ? (
         <>
-          <ul class="poll-results">
+          <ul class="poll-results" {...edit?.options}>
             {options.map((option, i) => {
               const pct = results.total ? Math.round((results.counts[i] / results.total) * 100) : 0;
               return (
@@ -78,7 +81,7 @@ export default function Poll({ pollKey, question, options }: Props) {
         </>
       ) : (
         <form onSubmit={vote}>
-          <fieldset>
+          <fieldset {...edit?.options}>
             <legend class="sr-only">{question}</legend>
             {options.map((option, i) => (
               <label class="poll-option">

@@ -1,6 +1,6 @@
 # Editing the site from the site
 
-Hosts can fix transcripts, tag movies, add pull quotes and write movie pages straight from sink-alike.wcgill.com. Sign in, and you'll see **✎ Edit** buttons that nobody else sees.
+Hosts can change any text on sink-alike.wcgill.com from the site itself: page copy, movie details, episode titles, host bios, transcripts, tags and pull quotes. Sign in, and you'll see **✎ Edit** buttons that nobody else sees.
 
 Every save becomes a commit to the GitHub repo, under your name. Cloudflare rebuilds the site from that commit, and the change is live in about 2 minutes. The repo stays the one copy of everything, so the scripts (`find-movies`, `transcribe`) and quote search always see your edits, and any edit can be undone with git.
 
@@ -81,6 +81,12 @@ Tagging a movie that isn't on the site yet (like a film you just mentioned) need
 
 Sign in, then:
 
+- **✎ Edit page** (top right, on every page) turns on edit mode. Every piece of text you can change gets a dashed outline; click one, change it, press **Save** (or Enter for one-line text). It stays on as you move between pages until you click **Done editing**.
+  - **Formatting:** headings and page copy take `**bold**`, `*italic*` and `[link text](https://…)`; longer text takes blank lines for paragraphs, `- ` for lists and `## ` for headings. The editor shows which applies.
+  - **Empty fields** (a movie with no runtime, a host with no bio) show a grey “Add …” placeholder in edit mode only.
+  - **Page copy** (headings, intros, buttons, footer, Privacy page): clear it, or use **Back to the original**, to go back to the built-in wording.
+  - **Episode titles and descriptions** come from Spotify. Changing them here changes the site only; **Use Spotify’s** puts Spotify’s back.
+  - **Show settings** (tagline, contact email, sponsor name, pitch and code) change everywhere they appear. They're plain text, because they're also used in page titles and search results.
 - **Episode page → ✎ Edit transcript.** Every line, with its time (click to hear it), speaker and text.
   - Fix wording or the speaker, or **Delete** a line. Changed lines turn yellow. **Save** commits them all at once.
   - **Tag movie:** search for a title. Pick one already on the site, or (with the TMDB key) any film; its page and poster are created for you. It appears under "Also mentioned" with that line. The **×** on a tag removes it.
@@ -88,6 +94,10 @@ Sign in, then:
   - The search box finds lines by words or by time (`12:34`).
 - **Movie page → ✎ Edit movie page.** Each host's rating and one-line take, **Our take** (Markdown), and removing pull quotes.
 - **Remove from list** (already there) still hides a wrong movie instantly.
+
+**Not editable on the page:** text inside the interactive parts (comment box, sign-in form, quote search, audio player), numbers and dates the site works out (episode counts, durations), link addresses and images, and the hidden page descriptions search engines show. Change those in the code.
+
+**Where edits are saved:** page copy in `src/data/copy.json` (only what you've changed), show settings in `src/data/site.json`, and everything else in the movie, episode or host file it belongs to.
 
 The editor always loads the latest version from GitHub, so it includes edits that aren't live yet. Wording you fix shows on the page straight away; everything else appears after the rebuild.
 

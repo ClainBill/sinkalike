@@ -82,7 +82,38 @@ export function splitMarkdown(text: string): { doc: Document; body: string } {
 
 export function joinMarkdown(doc: Document, body: string): string {
   // No line wrapping or list padding, so untouched lines come out exactly as they went in.
-  return `---\n${doc.toString({ lineWidth: 0, flowCollectionPadding: false }).trimEnd()}\n---\n${body}`;
+  // New strings get double quotes, like the rest of the files.
+  const yaml = doc.toString({ lineWidth: 0, flowCollectionPadding: false, defaultStringType: 'QUOTE_DOUBLE', defaultKeyType: 'PLAIN' });
+  return `---\n${yaml.trimEnd()}\n---\n${body}`;
+}
+
+/** Sets (or, with undefined, removes) one frontmatter field. Lists are written inline: ["a", "b"]. */
+export function setField(text: string, path: string[], value: string | number | string[] | undefined): string {
+  const { doc, body } = splitMarkdown(text);
+  if (value === undefined) doc.deleteIn(path);
+  else doc.setIn(path, Array.isArray(value) ? flow(doc, value) : value);
+  return joinMarkdown(doc, body);
+}
+
+/** Replaces the Markdown body; an empty body becomes `placeholder` (e.g. a hint comment). */
+export function setBody(text: string, body: string, placeholder = ''): string {
+  const { doc } = splitMarkdown(text);
+  const trimmed = body.trim();
+  return joinMarkdown(doc, trimmed ? `\n${trimmed}\n` : placeholder ? `\n${placeholder}\n` : '');
+}
+
+/** Sets or removes a dotted key in a JSON settings object (copy.json, site.json). */
+export function setJsonPath(data: Record<string, unknown>, path: string[], value: string | undefined): Record<string, unknown> {
+  const copy = structuredClone(data);
+  let node = copy as Record<string, unknown>;
+  for (const key of path.slice(0, -1)) {
+    if (typeof node[key] !== 'object' || node[key] === null) node[key] = {};
+    node = node[key] as Record<string, unknown>;
+  }
+  const last = path[path.length - 1];
+  if (value === undefined) delete node[last];
+  else node[last] = value;
+  return copy;
 }
 
 /** The written take, without the placeholder comment. */

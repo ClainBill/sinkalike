@@ -8,6 +8,8 @@ import { getPeople } from '../lib/content';
 import { initials } from '../lib/format';
 import { site } from '../site.config';
 import feed from '../data/feed.json';
+import Copy from '../components/Copy.astro';
+import { editable } from '../lib/editable';
 
 const people = await getPeople();
 const hosts = await Promise.all(
@@ -22,12 +24,12 @@ const hosts = await Promise.all(
 <Base title="About us" description={feed.description}>
   <div class="wrap">
     <header class="page-head">
-      <p class="kicker">About</p>
-      <h1>Two hosts, one movie, <em>different</em> opinions.</h1>
+      <p class="kicker"><Copy k="about.kicker" text="About" /></p>
+      <h1><Copy k="about.title" text="Two hosts, one movie, *different* opinions." /></h1>
     </header>
 
     <section class="about-intro">
-      <p class="about-lede">{feed.description}</p>
+      <p class="about-lede"><Copy k="about.lede" text={feed.description} /></p>
       <ListenOn />
     </section>
 
@@ -44,19 +46,26 @@ const hosts = await Promise.all(
               </div>
             )}
             <div class="host-body">
-              <p class="kicker">{person.data.role}</p>
-              <h3>{person.data.name}</h3>
+              <p class="kicker" {...editable(`person:${person.id}:role`, person.data.role)}>{person.data.role}</p>
+              <h3 {...editable(`person:${person.id}:name`, person.data.name)}>{person.data.name}</h3>
               {hasBio ? (
-                <div class="prose">
+                <div class="prose" {...editable(`person:${person.id}:body`, person.body, 'markdown')}>
                   <Content />
                 </div>
               ) : (
-                <p class="muted">Bio coming soon.</p>
+                <div class="muted" {...editable(`person:${person.id}:body`, '', 'markdown')}>
+                  <p>Bio coming soon.</p>
+                </div>
               )}
-              {person.data.favorites.length > 0 && (
+              {person.data.favorites.length > 0 ? (
                 <p class="meta">
-                  <strong>Favorites:</strong> {person.data.favorites.join(' · ')}
+                  <strong><Copy k="about.favorites" text="Favorites:" /></strong>{' '}
+                  <span {...editable(`person:${person.id}:favorites`, person.data.favorites, 'lines', { join: ' · ' })}>
+                    {person.data.favorites.join(' · ')}
+                  </span>
                 </p>
+              ) : (
+                <p class="meta" {...editable(`person:${person.id}:favorites`, [], 'lines', { join: ' · ', placeholder: 'Add favorite films (one per line)' })} />
               )}
               {person.data.links.length > 0 && (
                 <ul class="host-links">
@@ -76,8 +85,11 @@ const hosts = await Promise.all(
     </section>
 
     <section class="section contact">
-      <h2>Say hi</h2>
-      <p class="muted">Suggest a movie, tell us who was right, or just say hello: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <h2><Copy k="about.contact-title" text="Say hi" /></h2>
+      <p class="muted">
+        <Copy k="about.contact" text="Suggest a movie, tell us who was right, or just say hello:" />{' '}
+        <a href={`mailto:${site.email}`} {...editable('site:email', site.email)}>{site.email}</a>
+      </p>
     </section>
 
     <section class="section">
@@ -90,7 +102,7 @@ const hosts = await Promise.all(
   .contact h2 {
     margin-bottom: 12px;
   }
-  .page-head h1 em {
+  .page-head h1 :global(em) {
     font-style: italic;
   }
   .about-intro {

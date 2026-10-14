@@ -48,7 +48,11 @@ export const POST: APIRoute = (context) =>
       const line = transcript && (JSON.parse(transcript) as TranscriptDoc).segments.find((s) => Math.abs(s.s - Number(input!.s)) < 0.005);
       if (!line) throw new EditError('That line is no longer in the transcript. Reload the editor.', 409);
 
-      const ensured = add ? await ensureMovie(repo, tmdbId) : { slug: movieSlugFor(tmdbId) ?? '', title: `TMDB ${tmdbId}`, files: [] };
+      const known = movieSlugFor(tmdbId);
+      const knownText = !add && known ? await repo.read(paths.movie(known)) : null;
+      const ensured = add
+        ? await ensureMovie(repo, tmdbId)
+        : { slug: known ?? '', title: knownText ? readMovie(knownText).title : `TMDB ${tmdbId}`, files: [] };
       movie = { slug: ensured.slug, title: ensured.title };
       const [mentionsText, editsText] = await Promise.all([repo.read(paths.mentions), repo.read(paths.mentionEdits)]);
       const edits: MentionEdits = editsText ? JSON.parse(editsText) : { added: [], removed: [] };

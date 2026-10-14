@@ -943,3 +943,8 @@ textarea.input {
 .fine-print {
   margin: 0;
 }
+
+/* Empty editable fields only appear in "Edit page" mode (hosts). */
+[data-edit-empty] {
+  display: none !important;
+}

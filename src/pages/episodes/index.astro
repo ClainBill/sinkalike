@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import EpisodeRow from '../../components/EpisodeRow.astro';
 import { getEpisodes, getPeople } from '../../lib/content';
+import Copy from '../../components/Copy.astro';
 
 const episodes = await getEpisodes();
 const people = await getPeople();
@@ -11,13 +12,16 @@ const hasGuests = episodes.some((episode) => episode.guests.length);
 <Base title="Episodes" description="Every Sink Alike episode, in order, with who was on it.">
   <div class="wrap">
     <header class="page-head">
-      <h1>Episodes</h1>
-      <p>{episodes.length} episode{episodes.length === 1 ? '' : 's'} so far. Every one has a full, searchable transcript.</p>
+      <h1><Copy k="episodes.title" text="Episodes" /></h1>
+      <p>
+        {episodes.length} episode{episodes.length === 1 ? '' : 's'} so far.{' '}
+        <Copy k="episodes.intro" text="Every one has a full, searchable transcript." />
+      </p>
     </header>
 
     <div class="list-tools" data-list-tools>
       <div class="filters" role="group" aria-label="Filter by who's on it">
-        <button type="button" class="btn btn-small" aria-pressed="true" data-filter="">Everyone</button>
+        <button type="button" class="btn btn-small" aria-pressed="true" data-filter=""><Copy k="episodes.filter-all" text="Everyone" /></button>
         {
           people.map((person) => (
             <button type="button" class={`btn btn-small person-${person.id}`} aria-pressed="false" data-filter={person.id}>
@@ -25,7 +29,7 @@ const hasGuests = episodes.some((episode) => episode.guests.length);
             </button>
           ))
         }
-        {hasGuests && <button type="button" class="btn btn-small" aria-pressed="false" data-filter="guest">With guests</button>}
+        {hasGuests && <button type="button" class="btn btn-small" aria-pressed="false" data-filter="guest"><Copy k="episodes.filter-guests" text="With guests" /></button>}
       </div>
       <button type="button" class="btn btn-small" data-sort aria-label="Change sort order">Newest first</button>
     </div>
@@ -33,7 +37,7 @@ const hasGuests = episodes.some((episode) => episode.guests.length);
     <div class="episode-list" data-episode-list>
       {episodes.map((episode) => <EpisodeRow episode={episode} />)}
     </div>
-    <p class="muted" data-empty hidden>No episodes match that filter yet.</p>
+    <p class="muted" data-empty hidden><Copy k="episodes.none" text="No episodes match that filter yet." /></p>
   </div>
 </Base>
 

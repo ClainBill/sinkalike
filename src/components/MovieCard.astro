@@ -1,4 +1,6 @@
 ---
+import Copy from './Copy.astro';
+import { editable } from '../lib/editable';
 import type { Mention, Movie, Person } from '../lib/content';
 import Poster from './Poster.astro';
 import MentionQuote from './MentionQuote.astro';
@@ -18,7 +20,7 @@ const verdicts = Object.entries(movie.data.verdicts).filter(([, v]) => v.rating 
 <div class="movie-card" data-movie-slug={movie.id}>
   <a class="movie-link" href={`/movies/${movie.id}/`}>
     <Poster movie={movie} width={240} />
-    <span class="title">{movie.data.title}</span>
+    <span class="title" {...editable(`movie:${movie.id}:title`, movie.data.title)}>{movie.data.title}</span>
     <span class="meta">
       {movie.data.year}
       {episodeNumbers.length > 0 && ` · Ep ${episodeNumbers.join(', ')}`}
@@ -38,7 +40,7 @@ const verdicts = Object.entries(movie.data.verdicts).filter(([, v]) => v.rating 
     }
   </a>
   {mention && <MentionQuote movie={movie} mention={mention} people={people} compact />}
-  <span class="removed-badge badge badge-warn">Removed from list</span>
+  <span class="removed-badge badge badge-warn"><Copy k="movies.removed" text="Removed from list" /></span>
   <div data-movie-admin></div>
 </div>
 
