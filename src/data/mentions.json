@@ -2,17 +2,17 @@
  "11": [
   {
    "episode": "2-interstellar",
-   "s": 2682.36
+   "s": 2612
   },
   {
    "episode": "2-interstellar",
-   "s": 2691.42
+   "s": 2623.44
   }
  ],
  "389": [
   {
    "episode": "2-interstellar",
-   "s": 232.34
+   "s": 165.3
   }
  ],
  "603": [
@@ -29,6 +29,16 @@
   {
    "episode": "1-speed-racer",
    "s": 412.66
+  }
+ ],
+ "920": [
+  {
+   "episode": "1-speed-racer",
+   "s": 325.36
+  },
+  {
+   "episode": "1-speed-racer",
+   "s": 338.28
   }
  ],
  "7459": [
@@ -226,13 +236,17 @@
   },
   {
    "episode": "2-interstellar",
-   "s": 826.42
+   "s": 759.08
   }
  ],
  "8587": [
   {
    "episode": "2-interstellar",
-   "s": 635.32
+   "s": 531.74
+  },
+  {
+   "episode": "2-interstellar",
+   "s": 565.66
   }
  ],
  "9297": [
@@ -252,21 +266,21 @@
   },
   {
    "episode": "2-interstellar",
-   "s": 2960.38
+   "s": 2892.2
   },
   {
    "episode": "2-interstellar",
-   "s": 2973.64
+   "s": 2905.4
   }
  ],
  "24428": [
   {
    "episode": "2-interstellar",
-   "s": 481.98
+   "s": 414
   },
   {
    "episode": "2-interstellar",
-   "s": 1967.68
+   "s": 1894.96
   }
  ],
  "49013": [
@@ -275,10 +289,22 @@
    "s": 338.28
   }
  ],
+ "49521": [
+  {
+   "episode": "2-interstellar",
+   "s": 362.48
+  }
+ ],
  "70160": [
   {
    "episode": "2-interstellar",
-   "s": 2095.6
+   "s": 2027.34
+  }
+ ],
+ "141052": [
+  {
+   "episode": "2-interstellar",
+   "s": 341.64
   }
  ],
  "157336": [
@@ -322,7 +348,7 @@
  "299534": [
   {
    "episode": "2-interstellar",
-   "s": 481.98
+   "s": 414
   }
  ],
  "330457": [
@@ -350,15 +376,11 @@
  "1375441": [
   {
    "episode": "2-interstellar",
-   "s": 305.9
+   "s": 254.28
   },
   {
    "episode": "2-interstellar",
-   "s": 309.58
-  },
-  {
-   "episode": "2-interstellar",
-   "s": 350.48
+   "s": 280.74
   }
  ]
 }
