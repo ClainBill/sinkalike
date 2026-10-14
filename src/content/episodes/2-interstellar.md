@@ -1,5 +1,5 @@
 ---
-guid: pending # not on RSS yet; `npm run sync` fills this in once episode 2 is published
+guid: 00f8eaf9-35a0-42f3-bf1d-a87245116172
 participants: [adam, william]
 guests: []
 movies: [interstellar]

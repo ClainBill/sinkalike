@@ -4,7 +4,7 @@
   "author": "Adam Estock and William Gill",
   "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
   "link": "https://podcasters.spotify.com/pod/show/sink-alike3",
-  "feedUrl": "https://anchor.fm/s/117c72e60/podcast/rss",
+  "feedUrl": "https://anchor.fm/s/117c72e60/podcast/rss?nocache=1791972592",
   "episodes": [
     {
       "guid": "ef9fa457-4f67-4127-9097-72eed0372dc1",
@@ -20,6 +20,23 @@
         "bytes": 41756349
       },
       "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Speed-Racer-The-greatest-movie-youve-never-heard-of-e3peeiq",
+      "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+      "explicit": false
+    },
+    {
+      "guid": "00f8eaf9-35a0-42f3-bf1d-a87245116172",
+      "number": 2,
+      "slug": "2-interstellar",
+      "title": "Interstellar: Overrated or Masterpiece?",
+      "description": "<p>After our rewatch in preparation for this review and discussion, William’s controversial take on this movie has softened. But we still argue! This movie is so good.</p>",
+      "published": "2026-10-14T00:43:13.000Z",
+      "duration": 2953,
+      "audio": {
+        "url": "https://anchor.fm/s/117c72e60/podcast/play/127436175/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-14%2F3f9f6d6d-956d-3e0f-8c98-7e1f1aed1832.mp3",
+        "type": "audio/mpeg",
+        "bytes": 59066656
+      },
+      "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Interstellar-Overrated-or-Masterpiece-e3qfhuf",
       "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
       "explicit": false
     }
