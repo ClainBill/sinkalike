@@ -1,0 +1,329 @@
+/* Hosts' editors (transcript and movie page). Loaded only when a host opens one. */
+
+.editor {
+  width: min(1100px, calc(100vw - 32px));
+  max-width: none;
+  height: calc(100dvh - 32px);
+  max-height: none;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius, 14px);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  overflow: auto;
+}
+.editor-narrow {
+  width: min(760px, calc(100vw - 32px));
+}
+.editor::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.editor-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  padding: 16px 20px 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.editor-title h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.editor-title p {
+  margin: 2px 0 0;
+}
+.editor-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.editor-tools {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.editor-tools .input {
+  width: 260px;
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 15px;
+}
+.editor-tools label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.editor-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.editor-lines {
+  list-style: none;
+  margin: 0;
+  padding: 8px 20px 24px;
+}
+.editor-line {
+  display: grid;
+  grid-template-columns: 56px 140px 1fr;
+  gap: 4px 10px;
+  align-items: start;
+  padding: 8px 0 8px 10px;
+  border-left: 3px solid var(--c, var(--rule));
+  border-bottom: 1px solid var(--rule);
+}
+.editor-line.is-changed {
+  background: color-mix(in oklab, #f2c14e 14%, transparent);
+}
+.editor-line.is-deleted .editor-text {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+.editor-time {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  cursor: pointer;
+  text-align: left;
+}
+.editor-time:hover {
+  color: var(--ink);
+}
+.editor-speaker {
+  min-height: 34px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  color: var(--c, var(--ink));
+  font-weight: 600;
+  font-size: 14px;
+}
+.editor-text {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.editor-text:focus,
+.editor-speaker:focus {
+  outline: 2px solid var(--focus);
+  border-color: transparent;
+}
+.editor-actions,
+.editor-tags,
+.editor-panel {
+  grid-column: 3;
+}
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.editor-actions .is-on {
+  color: var(--ink);
+  font-weight: 600;
+}
+.editor-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.editor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 0;
+}
+.editor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 13px;
+}
+.editor-chip button {
+  border: 0;
+  background: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.editor-chip button:hover {
+  background: var(--rule);
+}
+.editor-panel {
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+.editor-more {
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.tag-panel .input,
+.quote-panel .input {
+  min-height: 38px;
+  padding: 6px 12px;
+  font-size: 15px;
+}
+.tag-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.tag-results button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+}
+.tag-results button:hover {
+  background: var(--surface-2);
+}
+.tag-thumb {
+  width: 23px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  object-fit: cover;
+  background: var(--surface-2);
+  font-size: 12px;
+}
+.quote-panel {
+  display: grid;
+  gap: 8px;
+}
+.quote-panel label {
+  display: grid;
+  gap: 4px;
+}
+.quote-preview {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--rule-strong);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.quote-panel .btn {
+  justify-self: start;
+}
+
+.movie-form {
+  padding: 8px 20px 28px;
+}
+.movie-form h3 {
+  margin: 20px 0 4px;
+  font-size: 17px;
+}
+.verdict-row {
+  display: grid;
+  grid-template-columns: 120px 80px auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.verdict-name {
+  color: var(--c);
+  font-weight: 700;
+}
+.verdict-row .input {
+  min-height: 38px;
+  padding: 6px 10px;
+  font-size: 15px;
+}
+.take-text {
+  margin-top: 8px;
+  font-size: 15px;
+}
+.quote-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.quote-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.quote-list .is-deleted a {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+
+.host-edit-button {
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .editor {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+  .editor-head {
+    grid-template-columns: 1fr;
+    padding: 12px 16px;
+  }
+  .editor-buttons {
+    justify-content: flex-start;
+  }
+  .editor-lines,
+  .movie-form {
+    padding-inline: 16px;
+  }
+  .editor-line {
+    grid-template-columns: 48px 1fr;
+  }
+  .editor-text,
+  .editor-actions,
+  .editor-tags,
+  .editor-panel {
+    grid-column: 1 / -1;
+  }
+  .verdict-row {
+    grid-template-columns: 70px 70px auto;
+  }
+  .verdict-take {
+    grid-column: 1 / -1;
+  }
+}
