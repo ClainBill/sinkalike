@@ -13,6 +13,13 @@ Otherwise: transcribe the published mix from the RSS feed and detect speakers au
 
     npm run transcribe -- 2 --mixed
 
+Not on RSS yet? Pass the final mix with --audio and name the episode by the slug it will get
+(<number>-<first words of the title>), then create its episode file with `guid: pending`:
+
+    npm run transcribe -- 2-interstellar --mixed --audio ~/Desktop/interstellar.mp3
+
+Tracks work the same way before publishing: name the episode by its slug.
+
 Voices are clustered with a speaker-recognition model, then named from cues in the
 conversation ("I'm your host, Adam…", "William, what did you think?"). Check the summary it
 prints; if names are swapped or unclear, pin one down with --anchor adam=12.5 (a time in
@@ -61,6 +68,11 @@ def load_episode(ref: str) -> dict:
     for episode in feed["episodes"]:
         if ref in (str(episode["number"]), episode["slug"]):
             return episode
+    match = re.fullmatch(r"(\d+)-[a-z0-9-]+", ref)
+    if match and (EPISODES / f"{ref}.md").exists():
+        print(f"{ref} isn't in the RSS feed yet, so transcribing it ahead of publishing.")
+        title = ref.split("-", 1)[1].replace("-", " ").title()
+        return {"slug": ref, "number": int(match.group(1)), "title": title, "duration": 0}
     sys.exit(f"No episode matching {ref!r} in {FEED.relative_to(ROOT)}. Run `npm run sync` first?")
 
 
@@ -391,6 +403,7 @@ def main() -> None:
     parser.add_argument("episode", help="episode number or slug")
     parser.add_argument("--track", action="append", default=[], metavar="PERSON=FILE", help="one per speaker")
     parser.add_argument("--mixed", action="store_true", help="use the published mix and detect speakers automatically")
+    parser.add_argument("--audio", metavar="FILE", help="with --mixed: a local copy of the final mix (e.g. before it's on RSS)")
     parser.add_argument("--no-speakers", action="store_true", help="with --mixed: skip speaker detection")
     parser.add_argument("--anchor", action="append", default=[], metavar="PERSON=SECONDS", help="a moment where PERSON is talking")
     parser.add_argument("--fresh", action="store_true", help="re-run Whisper even if cached")
@@ -399,8 +412,17 @@ def main() -> None:
 
     if bool(args.track) == args.mixed:
         parser.error("pass either --track PERSON=FILE (one per speaker) or --mixed")
+    audio_file = Path(args.audio).expanduser() if args.audio else None
+    if audio_file and not args.mixed:
+        parser.error("--audio goes with --mixed")
+    if audio_file and not audio_file.exists():
+        parser.error(f"no such file: {audio_file}")
 
-    from mlx_whisper.audio import load_audio
+    from mlx_whisper.audio import load_audio as load_mlx
+
+    def load_audio(path: str) -> np.ndarray:
+        # Newer mlx-whisper returns an mx.array; the silence check and speaker detection need numpy.
+        return np.asarray(load_mlx(path), dtype=np.float32)
 
     episode = load_episode(args.episode)
     prompt = vocabulary(episode)
@@ -409,8 +431,12 @@ def main() -> None:
 
     if args.mixed:
         source = "mixed"
-        audio = load_audio(str(download(episode)))
-        print(f"Transcribing published mix ({len(audio) / SAMPLE_RATE / 60:.1f} min)…")
+        if not (audio_file or episode.get("audio")):
+            parser.error(f"{episode['slug']} isn't on RSS yet, so pass the mix with --audio")
+        audio = load_audio(str(audio_file or download(episode)))
+        print(f"Transcribing {'mix' if audio_file else 'published mix'} ({len(audio) / SAMPLE_RATE / 60:.1f} min)…")
+        if audio_file and episode["duration"] and abs(len(audio) / SAMPLE_RATE - episode["duration"]) > 3:
+            print(f"  ⚠ {audio_file.name} isn't the same length as the published episode, so timestamps won't line up.")
         words = whisper_words(audio, args.model, prompt, False, CACHE / "whisper" / f"{episode['slug']}.json", args.fresh)
         ids = speakers_for(episode)
         if not args.no_speakers and len(ids) > 1:

@@ -3,12 +3,13 @@
 // src/content/episodes/<slug>.md for any episode that doesn't have one yet.
 //
 // feed.json is fully owned by this script (safe to regenerate). The episode .md
-// files are yours: this script never edits one after creating it.
+// files are yours: this script never edits one after creating it, except to fill in
+// `guid: pending` on a file made before the episode was on RSS (see below).
 //
 //   node scripts/sync-rss.mjs            # sync
 //   node scripts/sync-rss.mjs --check    # exit 1 if feed.json would change (CI)
 
-import { readFile, writeFile, access } from 'node:fs/promises';
+import { readFile, writeFile, access, readdir } from 'node:fs/promises';
 import { XMLParser } from 'fast-xml-parser';
 
 const FEED_URL = process.env.FEED_URL ?? 'https://anchor.fm/s/117c72e60/podcast/rss';
@@ -55,6 +56,16 @@ async function main() {
   const known = new Map(previous.episodes.map((episode) => [episode.guid, episode]));
   let nextNumber = Math.max(0, ...previous.episodes.map((episode) => episode.number)) + 1;
 
+  // Episode files written ahead of publishing (<number>-<slug>.md with `guid: pending`) claim
+  // the new episode with that number, so its transcript and extras keep their slug.
+  const pending = new Map();
+  for (const name of await readdir(EPISODES_DIR)) {
+    const number = Number(name.match(/^(\d+)-.+\.md$/)?.[1]);
+    if (number && /^guid:\s*pending\b.*$/m.test(await readFile(new URL(name, EPISODES_DIR), 'utf8'))) {
+      pending.set(number, name.slice(0, -3));
+    }
+  }
+
   // Oldest first so new episodes get increasing numbers.
   const sorted = items
     .map((item) => ({ item, date: new Date(item.pubDate) }))
@@ -68,7 +79,7 @@ async function main() {
     return {
       guid,
       number,
-      slug: prior?.slug ?? slugify(title, number),
+      slug: prior?.slug ?? pending.get(number) ?? slugify(title, number),
       title,
       description: text(item.description).trim(),
       published: date.toISOString(),
@@ -108,8 +119,15 @@ async function main() {
   if (current !== output) await writeFile(FEED_JSON, output);
 
   const created = [];
+  const claimed = [];
   for (const episode of episodes) {
     const file = new URL(`${episode.slug}.md`, EPISODES_DIR);
+    if (pending.get(episode.number) === episode.slug) {
+      const text = await readFile(file, 'utf8');
+      await writeFile(file, text.replace(/^guid:\s*pending\b.*$/m, `guid: ${episode.guid}`));
+      claimed.push(episode.slug);
+      continue;
+    }
     if (await exists(file)) continue;
     await writeFile(
       file,
@@ -137,6 +155,7 @@ async function main() {
   console.log(`Synced ${episodes.length} episode(s) from ${FEED_URL}`);
   if (current !== output) console.log('Updated src/data/feed.json');
   for (const slug of created) console.log(`Created src/content/episodes/${slug}.md`);
+  for (const slug of claimed) console.log(`Filled in the guid in src/content/episodes/${slug}.md`);
 }
 
 main().catch((error) => {
