@@ -1,12 +1,15 @@
 // Show-wide settings. Most day-to-day content lives in src/content/ instead.
+// The wording (tagline, summary, email, sponsor copy) is in src/data/site.json, so hosts can
+// edit it on the site; links and technical settings stay here.
+import settings from './data/site.json';
 
 export const site = {
-  name: 'Sink Alike',
+  name: settings.name,
   url: import.meta.env.SITE ?? 'https://sink-alike.wcgill.com',
-  tagline: 'We may not think alike, but we can always sink alike.',
-  summary: 'A movie review and discussion podcast with Adam Estock and William Gill.',
+  tagline: settings.tagline,
+  summary: settings.summary,
   feedUrl: 'https://anchor.fm/s/117c72e60/podcast/rss',
-  email: 'hello@sinkalike.com',
+  email: settings.email,
 };
 
 /** "Listen on" buttons. Leave a url empty to hide that button. */
@@ -20,15 +23,10 @@ export const listenOn: { label: string; url: string }[] = [
 /** Hosts' accent colors are defined in src/styles/global.css as --person-<id>. */
 export const hosts = ['adam', 'william'] as const;
 
+/** Wording in src/data/site.json. Set `code` once there's a discount code: it shows a copy button everywhere. */
 export const sponsor = {
-  name: 'Word Wizard',
+  ...settings.sponsor,
   url: 'https://wordwizard.wcgill.com/?utm_source=sinkalike&utm_medium=podcast_site&utm_campaign=sponsor',
-  pitch: 'An offline, ad-free English dictionary of 740,000 entries, with a spaced-repetition trainer that asks about a word on exactly the day you were about to forget it.',
-  short: 'The offline, ad-free dictionary that remembers the words you keep.',
-  platforms: 'iOS & Android',
-  /** Set once there's a discount code and it shows a copy button everywhere. */
-  code: '' as string,
-  codeDetails: '',
 };
 
 /**

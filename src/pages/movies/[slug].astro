@@ -9,6 +9,9 @@ import { getMovies, getEpisodes, getPeople, playable, linesAt, mentionSnippet, s
 import { timestamp } from '../../lib/format';
 import { autoPollOptions } from '../../site.config';
 import { getImage } from 'astro:assets';
+import Copy from '../../components/Copy.astro';
+import { editable } from '../../lib/editable';
+import { takeText } from '../../lib/edit/content';
 
 export async function getStaticPaths() {
   const movies = await getMovies();
@@ -52,18 +55,26 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
 
 <Base title={heading} description={data.synopsis ?? `What Sink Alike thinks about ${heading}.`} image={ogImage} type="video.movie">
   <div data-movie-slug={movie.id} data-movie-page>
-  <p class="wrap removed-notice" data-removed-notice hidden>A host has taken this movie off the list.</p>
+  <p class="wrap removed-notice" data-removed-notice hidden><Copy k="movie.removed" text="A host has taken this movie off the list." /></p>
   <div class="wrap movie-head">
     <div class="movie-poster">
       <Poster movie={movie} width={320} eager />
     </div>
     <div class="movie-info">
-      <p class="kicker">Movie</p>
-      <h1>{data.title}</h1>
-      <p class="meta">
-        {[data.year, data.director && `Directed by ${data.director}`, data.runtime && `${data.runtime} min`].filter(Boolean).join(' · ')}
+      <p class="kicker"><Copy k="movie.kicker" text="Movie" /></p>
+      <h1 {...editable(`movie:${movie.id}:title`, data.title)}>{data.title}</h1>
+      <p class="meta movie-facts">
+        <span {...editable(`movie:${movie.id}:year`, data.year, 'number', { placeholder: 'Add year' })}>{data.year}</span>
+        <span {...editable(`movie:${movie.id}:director`, data.director, 'plain', { prefix: 'Directed by ', placeholder: 'Add director' })}>
+          {data.director && `Directed by ${data.director}`}
+        </span>
+        <span {...editable(`movie:${movie.id}:runtime`, data.runtime, 'number', { suffix: ' min', placeholder: 'Add runtime (minutes)' })}>
+          {data.runtime && `${data.runtime} min`}
+        </span>
       </p>
-      {data.genres.length > 0 && <p class="meta">{data.genres.join(', ')}</p>}
+      <p class="meta" {...editable(`movie:${movie.id}:genres`, data.genres, 'lines', { join: ', ', placeholder: 'Add genres (one per line)' })}>
+        {data.genres.join(', ')}
+      </p>
 
       {
         verdicts.length > 0 && (
@@ -73,11 +84,13 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
                 <p class="verdict-who">{person?.data.short ?? id}</p>
                 {verdict.rating !== undefined && (
                   <p class="verdict-score">
-                    {verdict.rating}
+                    <span {...editable(`movie:${movie.id}:verdicts.${id}.rating`, verdict.rating, 'number')}>{verdict.rating}</span>
                     <span>/10</span>
                   </p>
                 )}
-                {verdict.take && <p class="verdict-take">{verdict.take}</p>}
+                <p class="verdict-take" {...editable(`movie:${movie.id}:verdicts.${id}.take`, verdict.take, 'plain', { placeholder: 'Add a one-line take' })}>
+                  {verdict.take}
+                </p>
               </div>
             ))}
           </div>
@@ -87,7 +100,7 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
       {
         episodes.length > 0 && (
           <p class="discussed">
-            Discussed in{' '}
+            <Copy k="movie.discussed-in" text="Discussed in" />{' '}
             {episodes.map((episode, index) => (
               <>
                 {index > 0 && ', '}
@@ -107,7 +120,7 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
                 <a href={`/episodes/${episode.slug}/`}>Episode {episode.number}: {episode.title}</a>
               </>
             ))}
-            . We haven’t done a full episode on it (yet).
+            . <Copy k="movie.no-episode-yet" text="We haven’t done a full episode on it (yet)." />
           </p>
         )
       }
@@ -122,26 +135,28 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
     {mentionedOnly && !hasTake ? (
       data.synopsis && (
         <section aria-labelledby="about-title">
-          <h2 id="about-title">About the movie</h2>
-          <p class="muted synopsis-text">{data.synopsis}</p>
+          <h2 id="about-title"><Copy k="movie.about" text="About the movie" /></h2>
+          <div class="muted synopsis-text" {...editable(`movie:${movie.id}:synopsis`, data.synopsis, 'blocks')}>{data.synopsis}</div>
         </section>
       )
     ) : (
     <section aria-labelledby="take-title">
-      <h2 id="take-title">Our take</h2>
+      <h2 id="take-title"><Copy k="movie.take" text="Our take" /></h2>
       {
         hasTake ? (
-          <div class="prose">
+          <div class="prose" {...editable(`movie:${movie.id}:body`, takeText(movie.body ?? ''), 'markdown')}>
             <Content />
           </div>
         ) : (
-          <p class="muted">We’re still writing this one up. In the meantime, hear what we said below.</p>
+          <div class="muted" {...editable(`movie:${movie.id}:body`, '', 'markdown')}>
+            <p>We’re still writing this one up. In the meantime, hear what we said below.</p>
+          </div>
         )
       }
       {data.synopsis && (
         <details class="synopsis">
-          <summary class="meta">Official synopsis</summary>
-          <p class="muted">{data.synopsis}</p>
+          <summary class="meta"><Copy k="movie.synopsis" text="Official synopsis" /></summary>
+          <div class="muted" {...editable(`movie:${movie.id}:synopsis`, data.synopsis, 'blocks')}>{data.synopsis}</div>
         </details>
       )}
     </section>
@@ -150,7 +165,7 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
     {
       pulls.length > 0 && (
         <section aria-labelledby="pulls-title">
-          <h2 id="pulls-title">In our words</h2>
+          <h2 id="pulls-title"><Copy k="movie.pulls" text="In our words" /></h2>
           <div class="pulls">
             {pulls.map(({ episode, lines }) => {
               const sp = lines[0].sp;
@@ -163,7 +178,7 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
                       Ep {episode.number} · {timestamp(lines[0].s)}
                     </a>
                     <button type="button" class="btn btn-small" data-play={lines[0].s}>
-                      ▶ Hear it
+                      ▶ <Copy k="movie.hear-it" text="Hear it" />
                     </button>
                   </figcaption>
                 </figure>
@@ -177,7 +192,15 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
     {
       mentions.length > 0 && (
         <section aria-labelledby="mentions-title">
-          <h2 id="mentions-title">{mentionedOnly ? 'Where it came up' : `Every time we said “${data.title}”`}</h2>
+          <h2 id="mentions-title">
+            {mentionedOnly ? (
+              <Copy k="movie.mentions-only" text="Where it came up" />
+            ) : (
+              <>
+                <Copy k="movie.mentions" text="Every time we said" /> “{data.title}”
+              </>
+            )}
+          </h2>
           <ul class="mentions">
             {mentions.map(({ episode, segment }, index) => {
               const quote = mentionSnippet(movie, segment.t, 18);
@@ -203,17 +226,36 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
           </ul>
           {mentions.length > MENTIONS_SHOWN && (
             <button type="button" class="btn btn-small" data-show-mentions>
-              Show all {mentions.length}
+              <Copy k="movie.show-all" text="Show all" /> {mentions.length}
             </button>
           )}
           <p class="meta">
-            <a href={`/quotes/?q=${encodeURIComponent(data.title)}`}>Search all quotes for “{data.title}” →</a>
+            <a href={`/quotes/?q=${encodeURIComponent(data.title)}`}>
+              <Copy k="movie.search-quotes" text="Search all quotes for" /> “{data.title}” →
+            </a>
           </p>
         </section>
       )
     }
 
-    {poll && <Poll pollKey={`movie:${movie.id}`} question={poll.question} options={poll.options} client:visible />}
+    {
+      poll && (
+        <Poll
+          pollKey={`movie:${movie.id}`}
+          question={poll.question}
+          options={poll.options}
+          edit={
+            data.poll
+              ? {
+                  question: editable(`movie:${movie.id}:poll.question`, poll.question),
+                  options: editable(`movie:${movie.id}:poll.options`, poll.options, 'lines', { static: true }),
+                }
+              : undefined
+          }
+          client:visible
+        />
+      )
+    }
 
     <Comments thread={`movie:${movie.id}`} client:visible />
   </div>
@@ -360,6 +402,9 @@ const poll = data.poll ?? (pollOptions && { question: `${data.title}: who got it
     background: #f2c14e;
     color: #17161a;
     font-weight: 500;
+  }
+  .movie-facts > span:not([data-edit-empty]) ~ span:not([data-edit-empty])::before {
+    content: ' · ';
   }
   .movie-admin-row {
     display: flex;

@@ -1,4 +1,5 @@
 ---
+import Copy from '../../components/Copy.astro';
 import Base from '../../layouts/Base.astro';
 import MovieCard from '../../components/MovieCard.astro';
 import { getMovies, getPeople } from '../../lib/content';
@@ -12,15 +13,17 @@ const mentioned = listings.filter((l) => l.episodes.length === 0);
 <Base title="Movies" description="Every movie we’ve discussed on Sink Alike, and every one we’ve so much as mentioned.">
   <div class="wrap">
     <header class="page-head">
-      <h1>Movies</h1>
+      <h1><Copy k="movies.title" text="Movies" /></h1>
       <p>
-        Every film we’ve done an episode on, with our own write-up and both verdicts. Below that, every other movie that’s come
-        up on the show, with the moment we said it.
+        <Copy
+          k="movies.intro"
+          text="Every film we’ve done an episode on, with our own write-up and both verdicts. Below that, every other movie that’s come up on the show, with the moment we said it."
+        />
       </p>
     </header>
 
     <div class="sort" data-movie-sort>
-      <label for="movie-sort" class="meta">Sort by</label>
+      <label for="movie-sort" class="meta"><Copy k="movies.sort" text="Sort by" /></label>
       <select id="movie-sort" class="input">
         <option value="recent">Most recent</option>
         <option value="title">Title</option>
@@ -31,7 +34,7 @@ const mentioned = listings.filter((l) => l.episodes.length === 0);
     {
       discussed.length > 0 && (
         <section class="movie-section" data-movie-section aria-labelledby="discussed-title">
-          <h2 id="discussed-title">Full episodes</h2>
+          <h2 id="discussed-title"><Copy k="movies.discussed" text="Full episodes" /></h2>
           <div class="movie-grid" data-movie-grid>
             {discussed.map(({ movie, episodes }, index) => (
               <div data-recent={index} data-title={movie.data.title.toLowerCase()} data-year={movie.data.year ?? 0}>
@@ -46,8 +49,10 @@ const mentioned = listings.filter((l) => l.episodes.length === 0);
     {
       mentioned.length > 0 && (
         <section class="movie-section" data-movie-section aria-labelledby="mentioned-title">
-          <h2 id="mentioned-title">Mentioned on the show</h2>
-          <p class="muted section-lede">Anything we’ve name-dropped, compared to, or promised to talk about one day.</p>
+          <h2 id="mentioned-title"><Copy k="movies.mentioned" text="Mentioned on the show" /></h2>
+          <p class="muted section-lede">
+            <Copy k="movies.mentioned-intro" text="Anything we’ve name-dropped, compared to, or promised to talk about one day." />
+          </p>
           <div class="movie-grid mentioned" data-movie-grid>
             {mentioned.map(({ movie, mentions }, index) => (
               <div data-recent={index} data-title={movie.data.title.toLowerCase()} data-year={movie.data.year ?? 0}>

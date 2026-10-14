@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import LoginForm from '../components/islands/LoginForm';
+import Copy from '../components/Copy.astro';
 import { getAuth } from '../lib/server/auth';
 import { loginMethods } from '../lib/server/senders';
 
@@ -14,8 +15,8 @@ if (session) return Astro.redirect(next?.startsWith('/') && !next.startsWith('//
 <Base title="Sign in" noindex>
   <div class="wrap login-wrap">
     <header class="page-head">
-      <h1>Sign in</h1>
-      <p>Keep your name on your comments, edit them later, and vote from any device.</p>
+      <h1><Copy k="login.title" text="Sign in" /></h1>
+      <p><Copy k="login.intro" text="Keep your name on your comments, edit them later, and vote from any device." /></p>
     </header>
     <LoginForm client:load methods={loginMethods()} next={next} dev={import.meta.env.DEV} />
   </div>

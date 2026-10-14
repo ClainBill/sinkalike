@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import type { Episode, Person, Segment } from '../lib/content';
 import { playable, speakerName } from '../lib/content';
 import HostEdit from './islands/HostEdit';
+import Copy from './Copy.astro';
 import { initials, timestamp } from '../lib/format';
 
 interface Props {
@@ -41,7 +42,7 @@ const notes = {
 
 <section class="transcript" aria-labelledby="transcript-title" data-transcript data-episode={JSON.stringify(playable(episode))}>
   <div class="transcript-head">
-    <h2 id="transcript-title">Transcript</h2>
+    <h2 id="transcript-title"><Copy k="transcript.title" text="Transcript" /></h2>
     {
       speakers.length > 0 && (
         <ul class="legend" aria-label="Speakers">
@@ -56,7 +57,7 @@ const notes = {
     }
     <HostEdit client:idle kind="transcript" episode={episode.slug} movies={movieOptions} about={episode.movies.map((m) => m.id)} />
   </div>
-  {notes[transcript.source] && <p class="meta note">{notes[transcript.source]}</p>}
+  {notes[transcript.source] && <p class="meta note"><Copy k={`transcript.note-${transcript.source}`} text={notes[transcript.source]} /></p>}
 
   <div class="transcript-tools" data-tools>
     <label class="find">
@@ -66,9 +67,9 @@ const notes = {
     </label>
     <label class="follow meta">
       <input type="checkbox" data-follow checked />
-      Follow along
+      <Copy k="transcript.follow" text="Follow along" />
     </label>
-    <a class="meta" href={`/transcripts/${episode.slug}.vtt`} download>Download</a>
+    <a class="meta" href={`/transcripts/${episode.slug}.vtt`} download><Copy k="transcript.download" text="Download" /></a>
   </div>
 
   <div class:list={['transcript-body', { 'is-collapsed': collapsible }]} data-transcript-body id="transcript-body">
@@ -110,7 +111,7 @@ const notes = {
     )
   }
   <button type="button" class="back-to-now" data-back-to-now hidden>
-    <span class="arrow" aria-hidden="true"></span> Back to current line
+    <span class="arrow" aria-hidden="true"></span> <Copy k="transcript.back" text="Back to current line" />
   </button>
 </section>
 

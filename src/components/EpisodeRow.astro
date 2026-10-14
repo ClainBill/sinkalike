@@ -1,4 +1,5 @@
 ---
+import { episodeDescription, episodeTitle } from '../lib/editable';
 import type { Episode } from '../lib/content';
 import { playable } from '../lib/content';
 import { date, duration, stripHtml } from '../lib/format';
@@ -20,8 +21,8 @@ const people = [...episode.participants.map((p) => p.id), ...episode.guests.map(
       Episode {episode.number} · <time datetime={episode.published.toISOString()}>{date(episode.published)}</time> · {duration(episode.duration)}
       {episode.transcript && ' · Transcript'}
     </p>
-    <h3><a href={`/episodes/${episode.slug}/`}>{episode.title}</a></h3>
-    <p class="desc">{stripHtml(episode.description)}</p>
+    <h3><a href={`/episodes/${episode.slug}/`} {...episodeTitle(episode)}>{episode.title}</a></h3>
+    <div class="desc" {...episodeDescription(episode)}>{stripHtml(episode.description)}</div>
     <div class="foot">
       <PlayButton episode={playable(episode)} label="Play" />
       <PersonChips people={episode.participants} guests={episode.guests} />

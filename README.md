@@ -48,7 +48,8 @@ Nothing shows on the site until the episode is on RSS. When the sync picks up ep
 
 | What | File |
 | --- | --- |
-| Show name, links, sponsor copy and **discount code** | `src/site.config.ts` |
+| Show name, tagline, email, sponsor copy and **discount code** | `src/data/site.json` (editable on the site); links in `src/site.config.ts` |
+| Page copy changed on the site (headings, intros, footer…) | `src/data/copy.json`, overriding the defaults in the templates |
 | Host bios, photos, favourite films and links | `src/content/people/adam.md`, `william.md` (put photos in `src/content/people/photos/` and set `photo: ./photos/adam.jpg`) |
 | Episode extras (participants, guests, movies, chapters, poll) | `src/content/episodes/*.md` |
 | Episode title, description, date, audio | `src/data/feed.json`. **Don't edit it:** it's regenerated from RSS, so change these on Spotify for Creators. |

@@ -9,6 +9,8 @@ import SponsorCard from '../components/SponsorCard.astro';
 import { getEpisodes, getMovies, getPeople, playable, speakerName } from '../lib/content';
 import { date, duration, stripHtml, timestamp } from '../lib/format';
 import { site } from '../site.config';
+import Copy from '../components/Copy.astro';
+import { episodeDescription, episodeTitle } from '../lib/editable';
 
 const episodes = await getEpisodes();
 const movies = (await getMovies()).slice(0, 10);
@@ -40,11 +42,13 @@ const jsonLd = {
 
 <Base jsonLd={jsonLd}>
   <section class="wrap hero">
-    <p class="kicker">A movie review & discussion podcast</p>
-    <h1>We may not think alike, but we can always <em>sink alike.</em></h1>
+    <p class="kicker"><Copy k="home.kicker" text="A movie review & discussion podcast" /></p>
+    <h1><Copy k="home.title" text="We may not think alike, but we can always *sink alike.*" /></h1>
     <p class="lede">
-      A movie review and discussion podcast with Adam Estock and William Gill, where our opinions differ but we all love to
-      sink in to our favorite movies and fandoms.
+      <Copy
+        k="home.lede"
+        text="A movie review and discussion podcast with Adam Estock and William Gill, where our opinions differ but we all love to sink in to our favorite movies and fandoms."
+      />
     </p>
     <ListenOn />
   </section>
@@ -59,19 +63,19 @@ const jsonLd = {
             </a>
           )}
           <div class="latest-body">
-            <p class="kicker">Latest episode</p>
+            <p class="kicker"><Copy k="home.latest" text="Latest episode" /></p>
             <h2 id="latest-title">
-              <a href={`/episodes/${latest.slug}/`}>{latest.title}</a>
+              <a href={`/episodes/${latest.slug}/`} {...episodeTitle(latest)}>{latest.title}</a>
             </h2>
             <p class="meta">
               Episode {latest.number} · {date(latest.published)} · {duration(latest.duration)}
             </p>
-            <p class="muted">{stripHtml(latest.description)}</p>
+            <div class="muted latest-description" {...episodeDescription(latest)}>{stripHtml(latest.description)}</div>
             <PersonChips people={latest.participants} guests={latest.guests} />
             <div class="latest-actions">
               <PlayButton episode={playable(latest)} />
               <a class="btn" href={`/episodes/${latest.slug}/`}>
-                Transcript & comments
+                <Copy k="home.latest-button" text="Transcript & comments" />
               </a>
             </div>
           </div>
@@ -85,7 +89,7 @@ const jsonLd = {
       <section class="section" aria-label="Overheard on the show">
         <div class="wrap">
           <figure class="overheard" data-quotes={JSON.stringify(quotes)}>
-            <p class="kicker">Overheard</p>
+            <p class="kicker"><Copy k="home.overheard" text="Overheard" /></p>
             <blockquote>
               <p data-q-text>“{first.t}”</p>
             </blockquote>
@@ -94,7 +98,7 @@ const jsonLd = {
               <a data-q-link href={`/episodes/${first.slug}/?t=${Math.floor(first.s)}`}>
                 Ep {first.number} at {first.time}
               </a>
-              · <a href="/quotes/">Search every quote →</a>
+              · <a href="/quotes/"><Copy k="home.overheard-link" text="Search every quote →" /></a>
             </figcaption>
           </figure>
         </div>
@@ -107,8 +111,8 @@ const jsonLd = {
       <section class="section" aria-labelledby="movies-title">
         <div class="wrap">
           <div class="section-head">
-            <h2 id="movies-title">Movies we’ve sunk into</h2>
-            <a href="/movies/">All movies →</a>
+            <h2 id="movies-title"><Copy k="home.movies" text="Movies we’ve sunk into" /></h2>
+            <a href="/movies/"><Copy k="home.movies-link" text="All movies →" /></a>
           </div>
           <div class="poster-row">
             {movies.map(({ movie, episodes, mentions }) => (
@@ -125,14 +129,14 @@ const jsonLd = {
       <section class="section" aria-labelledby="recent-title">
         <div class="wrap">
           <div class="section-head">
-            <h2 id="recent-title">Recent episodes</h2>
-            <a href="/episodes/">All episodes →</a>
+            <h2 id="recent-title"><Copy k="home.recent" text="Recent episodes" /></h2>
+            <a href="/episodes/"><Copy k="home.recent-link" text="All episodes →" /></a>
           </div>
           <ol class="recent">
             {episodes.slice(1, 6).map((episode) => (
               <li>
                 <span class="meta">Ep {episode.number}</span>
-                <a href={`/episodes/${episode.slug}/`}>{episode.title}</a>
+                <a href={`/episodes/${episode.slug}/`} {...episodeTitle(episode)}>{episode.title}</a>
                 <span class="meta">{date(episode.published, 'short')}</span>
               </li>
             ))}
@@ -176,7 +180,7 @@ const jsonLd = {
     line-height: 0.95;
     max-width: 13ch;
   }
-  .hero h1 em {
+  .hero h1 :global(em) {
     font-style: italic;
   }
   .lede {
