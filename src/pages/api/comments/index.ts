@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { isAdmin } from '../../../lib/server/auth';
 import { db, fail, json, readJson, sameOrigin, verifyTurnstile, viewer } from '../../../lib/server/community';
 import { threadExists } from '../../../lib/server/registry';
+import { record, refererPath } from '../../../lib/server/analytics';
 
 export const prerender = false;
 
@@ -125,5 +126,6 @@ export const POST: APIRoute = async (context) => {
     .bind(id, thread, parentId, me.user?.id ?? null, me.user ? null : name || null, me.voter, body, status, me.ipHash, now)
     .run();
 
+  record('comment', { path: refererPath(context.request), label: thread }, context.request);
   return json({ id, status }, 201);
 };

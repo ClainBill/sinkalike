@@ -33,6 +33,13 @@ export const sponsor = {
  * Cloudflare Turnstile site key (public). Production uses the real widget (valid on
  * sink-alike.wcgill.com and sinkalike.com); local dev uses Cloudflare's always-pass test key.
  */
+/**
+ * Cloudflare Web Analytics token (public) for the "sink-alike.wcgill.com" site in the dashboard.
+ * Visits and page views appear there; interaction events are on /admin/stats/. The token only
+ * accepts beacons from that hostname, so moving to sinkalike.com needs a new site and token.
+ */
+export const webAnalyticsToken = 'b3c64e12105d4493a9495e8d43bd1940';
+
 export const turnstileSiteKey: string = import.meta.env.PROD ? '0x4AAAAAAFE9S56ZdAMPFZit' : '1x00000000000000000000AA';
 
 /** Movie pages get an automatic "who got it right?" poll when 2+ hosts have a verdict. */

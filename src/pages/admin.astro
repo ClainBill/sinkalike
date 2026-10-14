@@ -33,7 +33,8 @@ const threadLink = (thread: string) => {
       <h1>Moderation</h1>
       <p>
         {filter === 'pending' ? 'Comments waiting for approval or hidden.' : 'The latest 200 comments.'}
-        <a href={filter === 'pending' ? '?show=all' : '?'}>{filter === 'pending' ? 'Show all recent' : 'Show queue only'}</a>
+        <a href={filter === 'pending' ? '?show=all' : '?'}>{filter === 'pending' ? 'Show all recent' : 'Show queue only'}</a> ·
+        <a href="/admin/stats/">Stats →</a>
       </p>
     </header>
     {results.length === 0 && <p class="muted">Nothing here. 🎉</p>}
