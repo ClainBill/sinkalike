@@ -32,6 +32,16 @@ The home of the Sink Alike podcast: every episode with a full transcript, a movi
    - In the episode file: `chapters`, a `poll`, and `guests`.
 7. **Publish:** `npm run deploy`. It builds and uploads in about a minute. Once the repo is connected to Cloudflare (step 5 of the first deploy), pushing to `main` does this automatically.
 
+### Before it's on Spotify
+
+You can do steps 3–6 before the episode is published:
+
+1. Create `src/content/episodes/<n>-<movie>.md` (copy an existing one) with `guid: pending`. Name it by the slug the episode will get: its number, then the first words of its title (`2-interstellar`).
+2. Transcribe using that slug in place of the number: `npm run transcribe -- 2-interstellar --track adam=… --track william=…`, or from the final mix with `--mixed --audio ~/Desktop/interstellar.mp3`.
+3. Carry on with steps 4–6 as usual.
+
+Nothing shows on the site until the episode is on RSS. When the sync picks up episode 2, it takes over the pending file, fills in the real guid and keeps the slug, so the transcript and extras line up. Transcribe from the final edit and upload that same mix. If Spotify inserts ads or an intro, the timestamps will drift; re-run with `--mixed --fresh` (no `--audio`) to transcribe the published version.
+
 ### Where things live
 
 | What | File |

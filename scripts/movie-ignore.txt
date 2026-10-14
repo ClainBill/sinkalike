@@ -1,2 +1,6 @@
 # TMDB ids that find-movies should never add, one per line (with a note).
 20379  # Grand Prix (1966): the race in Speed Racer, not the film
+414906  # The Batman (2022): said "Batman v Superman" in 2-interstellar
+1368337  # The Odyssey (2026): said "2001: A Space Odyssey"
+936075  # Michael (2026): "Michael Caine"
+85615  # The Lion: a joke, not the film
