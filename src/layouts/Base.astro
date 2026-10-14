@@ -5,7 +5,7 @@ import '../styles/player.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Player from '../components/islands/Player';
-import { site } from '../site.config';
+import { site, webAnalyticsToken } from '../site.config';
 
 interface Props {
   title?: string;
@@ -68,6 +68,19 @@ const ogImage = new URL(image, Astro.site ?? site.url);
       })();
     </script>
     <ClientRouter fallback="swap" />
+    {
+      /* Cloudflare Web Analytics, for visits and visitors. spa: false because the router's
+         history updates make it count each in-site navigation twice; per-page views come
+         from src/lib/analytics.ts instead (see /admin/stats/). */
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: webAnalyticsToken, spa: false })}
+        />
+      )
+    }
     <slot name="head" />
   </head>
   <body>
@@ -78,5 +91,9 @@ const ogImage = new URL(image, Astro.site ?? site.url);
     </main>
     <Footer />
     <Player client:load transition:persist="player" />
+    <script>
+      import { installTracking } from '../lib/analytics';
+      installTracking();
+    </script>
   </body>
 </html>

@@ -3,6 +3,8 @@
 // Env itself is generated into worker-configuration.d.ts by `npm run cf-types`.
 
 type D1Database = import('@cloudflare/workers-types').D1Database;
+type AnalyticsEngineDataset = import('@cloudflare/workers-types').AnalyticsEngineDataset;
+type AnalyticsSQLBinding = import('@cloudflare/workers-types').AnalyticsSQLBinding;
 
 declare module 'cloudflare:workers' {
   export const env: Env;

@@ -1,0 +1,260 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getAuth, isAdmin } from '../../lib/server/auth';
+import { loadStats, type Stats } from '../../lib/server/analytics';
+import { getEpisodes } from '../../lib/content';
+
+export const prerender = false;
+
+const session = await getAuth().api.getSession({ headers: Astro.request.headers });
+if (!session) return Astro.redirect('/login/?next=/admin/stats/');
+if (!isAdmin(session.user)) return new Response('Not allowed', { status: 403 });
+
+const RANGES = [7, 30, 90];
+const days = RANGES.includes(Number(Astro.url.searchParams.get('days'))) ? Number(Astro.url.searchParams.get('days')) : 30;
+
+let stats: Stats | null = null;
+let error = '';
+try {
+  stats = await loadStats(days);
+} catch (e) {
+  error = `Couldn’t load stats: ${(e as Error).message}`;
+}
+
+const episodes = new Map((await getEpisodes()).map((e) => [e.slug, e]));
+const episodeName = (slug: string) => {
+  const episode = episodes.get(slug);
+  return episode ? `Ep ${episode.number}: ${episode.title}` : slug;
+};
+
+const n = (value: number | undefined) => (value ?? 0).toLocaleString('en-GB');
+const pct = (part: number | undefined, whole: number) => (whole ? `${Math.round(((part ?? 0) / whole) * 100)}%` : '–');
+
+const tiles: [string, string][] = stats
+  ? [
+      ['Page views', n(stats.totals.view)],
+      ['Episode plays', n(stats.totals.play)],
+      ['Listened to the end', n(stats.plays.reduce((sum, p) => sum + (p.milestones[100] ?? 0), 0))],
+      ['Outbound clicks', n(stats.totals.outbound)],
+      ['Quote searches', n(stats.totals.search)],
+      ['Comments', n(stats.totals.comment)],
+      ['Poll votes', n(stats.totals.vote)],
+    ]
+  : [];
+
+const lists: { title: string; rows: [string, number][]; href?: (key: string) => string; empty: string }[] = stats
+  ? [
+      { title: 'Top pages', rows: stats.pages, href: (path) => path, empty: 'No page views yet.' },
+      { title: 'Outbound clicks', rows: stats.outbound, href: (dest) => `https://${dest}`, empty: 'No clicks to other sites yet.' },
+      { title: 'Referrers', rows: stats.referrers, empty: 'No visits from other sites yet.' },
+      { title: 'Quote searches', rows: stats.searches, empty: 'No searches yet.' },
+      { title: 'Countries', rows: stats.countries, empty: 'No data yet.' },
+      { title: 'Devices', rows: stats.devices, empty: 'No data yet.' },
+    ]
+  : [];
+---
+
+<Base title="Stats" noindex>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Stats</h1>
+      <p>
+        What people do on the site. Visits and unique visitors are in
+        <a href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">Cloudflare Web Analytics</a>.
+        <a href="/admin/">Moderation →</a>
+      </p>
+      <nav class="ranges" aria-label="Time range">
+        {
+          RANGES.map((range) => (
+            <a class:list={['btn btn-small', { 'btn-primary': range === days }]} href={`?days=${range}`} aria-current={range === days ? 'page' : undefined}>
+              Last {range} days
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+
+    {error && <p class="muted">{error}</p>}
+
+    {
+      stats && (
+        <>
+          <ul class="tiles">
+            {tiles.map(([label, value]) => (
+              <li class="card">
+                <p class="kicker">{label}</p>
+                <p class="tile-value">{value}</p>
+              </li>
+            ))}
+          </ul>
+
+          <section class="card block">
+            <h2>Episodes</h2>
+            <p class="meta">How far people got, as a share of plays started on the site.</p>
+            {stats.plays.length === 0 ? (
+              <p class="muted">No plays yet.</p>
+            ) : (
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Episode</th>
+                      <th scope="col">Plays</th>
+                      <th scope="col">25%</th>
+                      <th scope="col">50%</th>
+                      <th scope="col">75%</th>
+                      <th scope="col">End</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stats.plays.map((p) => (
+                      <tr>
+                        <th scope="row">
+                          <a href={`/episodes/${p.slug}/`}>{episodeName(p.slug)}</a>
+                        </th>
+                        <td>{n(p.plays)}</td>
+                        {[25, 50, 75, 100].map((m) => (
+                          <td title={`${n(p.milestones[m])} listeners`}>{pct(p.milestones[m], p.plays)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+
+          <div class="lists">
+            {lists.map(({ title, rows, href, empty }) => {
+              const max = rows[0]?.[1] ?? 0;
+              return (
+                <section class="card block">
+                  <h2>{title}</h2>
+                  {rows.length === 0 ? (
+                    <p class="muted">{empty}</p>
+                  ) : (
+                    <ol class="ranked">
+                      {rows.map(([key, count]) => (
+                        <li style={{ '--share': `${max ? (count / max) * 100 : 0}%` }}>
+                          <span class="ranked-key">
+                            {href ? (
+                              <a href={href(key)} target={href(key).startsWith('http') ? '_blank' : undefined} rel="noopener">
+                                {key || '/'}
+                              </a>
+                            ) : (
+                              key
+                            )}
+                          </span>
+                          <span class="ranked-n">{n(count)}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+          <p class="meta footnote">
+            Counts come from Cloudflare Analytics Engine, which samples when traffic is heavy, so treat them as close estimates.
+            Plays and listening only count audio played on this site, not Spotify or other apps.
+          </p>
+        </>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .ranges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .tiles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .tile-value {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 1.1;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .block h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .block .meta {
+    margin: -6px 0 12px;
+  }
+  .lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .table-scroll {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  th,
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+    text-align: right;
+    white-space: nowrap;
+  }
+  th:first-child {
+    text-align: left;
+    font-weight: 500;
+    white-space: normal;
+    min-width: 200px;
+  }
+  thead th {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+  .ranked {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+  /* Each row is a bar: a recessive fill sized to its share of the top row. */
+  .ranked li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    background: linear-gradient(to right, var(--surface-2) var(--share), transparent var(--share));
+  }
+  .ranked-key {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .ranked-n {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+  .footnote {
+    margin-top: 24px;
+    max-width: 70ch;
+  }
+</style>

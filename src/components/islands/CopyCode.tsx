@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks';
+import { track } from '../../lib/analytics';
 
 export default function CopyCode({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
@@ -10,6 +11,7 @@ export default function CopyCode({ code }: { code: string }) {
         try {
           await navigator.clipboard.writeText(code);
           setCopied(true);
+          track('copy_code', { label: code });
           setTimeout(() => setCopied(false), 2000);
         } catch {
           /* clipboard blocked: the code is still visible */

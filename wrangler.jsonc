@@ -18,6 +18,10 @@
       "migrations_dir": "migrations"
     }
   ],
+  // Anonymous interaction events (plays, clicks, searches…), written by /api/event.
+  "analytics_engine_datasets": [{ "binding": "EVENTS", "dataset": "sinkalike_events" }],
+  // Lets /admin/stats/ query those events without an API token. Always reads live data, even in dev.
+  "analytics": { "binding": "ANALYTICS_SQL", "remote": true },
   "vars": {
     "BETTER_AUTH_URL": "https://sink-alike.wcgill.com",
     // Comma-separated emails/phone numbers that can moderate comments.

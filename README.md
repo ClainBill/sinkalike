@@ -124,7 +124,7 @@ The site runs on Cloudflare Workers in the wcgill.com account:
    ```
 5. **Connect the repo to Cloudflare.** Go to *Workers & Pages → Create → Import a repository*, pick the repo, and set build command `npm run build` and deploy command `npx wrangler deploy`. Every push to `main` then deploys.
 6. **Attach the domain.** Uncomment the `routes` entry in `wrangler.jsonc` and push. To make `www.sinkalike.com` work too, add a Redirect Rule from `www` to the bare domain.
-7. **Analytics (optional).** In *Web Analytics*, add the site. It's cookieless and needs no code.
+7. **Analytics.** Visits and page views go to Cloudflare Web Analytics (the "sink-alike.wcgill.com" site; its public token is `webAnalyticsToken` in `src/site.config.ts`). Plays, listening depth, outbound clicks, searches, comments and votes go to Workers Analytics Engine and show on `/admin/stats/` for hosts. Both are cookieless. Moving to sinkalike.com needs a new Web Analytics site and token, since a token only works on its own domain.
 8. **Email.** *Email → Email Routing* forwards `hello@sinkalike.com` to your Gmail for free.
 
 ### Sign-in

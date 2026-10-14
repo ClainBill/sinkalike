@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import MiniSearch from 'minisearch';
 import { play, type PlayableEpisode } from '../../lib/player';
 import { timestamp } from '../../lib/format';
+import { track } from '../../lib/analytics';
 
 type Line = { id: number; e: number; s: number; sp: string | null; t: string };
 type Index = { episodes: PlayableEpisode[]; speakers: Record<string, string>; lines: Line[] };
@@ -77,16 +78,27 @@ export default function QuoteSearch({ people, episodes }: Props) {
     return mini;
   }, [index]);
 
-  // Keep the URL shareable.
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (query) params.set('q', query);
-    if (speaker) params.set('sp', speaker);
-    if (episode) params.set('ep', episode);
-    const next = `${location.pathname}${params.size ? `?${params}` : ''}`;
-    history.replaceState(history.state, '', next);
     setLimit(PAGE);
     setExpanded(null);
+  }, [query, speaker, episode]);
+
+  // Keep the URL shareable, and count the search, once typing pauses. (Cloudflare Web
+  // Analytics counts each URL change as a page view, so not on every keystroke.)
+  const lastSearch = useRef('');
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams();
+      if (query) params.set('q', query);
+      if (speaker) params.set('sp', speaker);
+      if (episode) params.set('ep', episode);
+      const next = `${location.pathname}${params.size ? `?${params}` : ''}`;
+      if (next !== `${location.pathname}${location.search}`) history.replaceState(history.state, '', next);
+      const text = query.trim().toLowerCase();
+      if (text.length >= 2 && text !== lastSearch.current) track('search', { label: text.slice(0, 80) });
+      lastSearch.current = text;
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [query, speaker, episode]);
 
   const { results, terms } = useMemo(() => {

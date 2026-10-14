@@ -11,8 +11,10 @@ import {
   saveProgress,
 } from '../../lib/player';
 import { timestamp } from '../../lib/format';
+import { track } from '../../lib/analytics';
 
 const RATES = [1, 1.25, 1.5, 1.75, 2, 0.75];
+const MILESTONES = [25, 50, 75];
 
 export default function Player() {
   const audio = useRef<HTMLAudioElement>(null);
@@ -22,6 +24,15 @@ export default function Player() {
   const [buffering, setBuffering] = useState(false);
   const [error, setError] = useState('');
   const episode = current.value;
+  // Analytics: what's been reported this visit ("slug" for plays, "slug:50" for milestones),
+  // and the last position, so milestones count only when reached by listening, not by seeking.
+  const reported = useRef(new Set<string>());
+  const lastTime = useRef(0);
+  const report = (key: string, send: () => void) => {
+    if (reported.current.has(key)) return;
+    reported.current.add(key);
+    send();
+  };
 
   useEffect(() => {
     const el = audio.current!;
@@ -129,12 +140,27 @@ export default function Player() {
           const t = e.currentTarget.currentTime;
           time.value = t;
           if (episode && Math.floor(t) % 5 === 0) saveProgress(episode.slug, t);
+          if (episode && total && t > lastTime.current && t - lastTime.current < 5) {
+            for (const pct of MILESTONES) {
+              const at = (total * pct) / 100;
+              if (lastTime.current < at && t >= at) {
+                report(`${episode.slug}:${pct}`, () => track('listen', { label: episode.slug, value: pct }));
+              }
+            }
+          }
+          lastTime.current = t;
         }}
-        onPlay={() => (playing.value = true)}
+        onPlay={() => {
+          playing.value = true;
+          if (episode) report(episode.slug, () => track('play', { label: episode.slug }));
+        }}
         onPause={() => (playing.value = false)}
         onEnded={() => {
           playing.value = false;
-          if (episode) saveProgress(episode.slug, 0);
+          if (episode) {
+            saveProgress(episode.slug, 0);
+            report(`${episode.slug}:100`, () => track('listen', { label: episode.slug, value: 100 }));
+          }
         }}
         onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
         onWaiting={() => setBuffering(true)}

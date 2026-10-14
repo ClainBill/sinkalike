@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { db, fail, json, readJson, sameOrigin, verifyTurnstile, viewer } from '../../lib/server/community';
 import { pollOptionCount } from '../../lib/server/registry';
+import { record, refererPath } from '../../lib/server/analytics';
 
 export const prerender = false;
 
@@ -50,6 +51,7 @@ export const POST: APIRoute = async (context) => {
     )
     .bind(poll, me.voter, option, me.ipHash, Date.now())
     .run();
+  if (!existing) record('vote', { path: refererPath(context.request), label: poll }, context.request);
 
   return json(await results(poll, me.voter));
 };
