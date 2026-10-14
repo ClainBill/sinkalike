@@ -4,3 +4,6 @@
 1368337  # The Odyssey (2026): said "2001: A Space Odyssey"
 936075  # Michael (2026): "Michael Caine"
 85615  # The Lion: a joke, not the film
+745078  # Prime Time: they mean Primetime (2026, tmdb 1375441)
+1061474  # Superman (2025): said "Batman v Superman"
+53928  # Adam and Eve: a figure of speech
