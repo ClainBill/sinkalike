@@ -7,6 +7,7 @@ genres: ["Adventure", "Drama", "Science Fiction"]
 poster: ./posters/interstellar.jpg
 tmdbId: 157336
 synopsis: "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage."
+
 # Each host: rating out of 10 and a one-line take. Delete a host to hide them.
 # verdicts:
 #   adam: { rating: 8, take: "…" }
@@ -16,4 +17,5 @@ synopsis: "The adventures of a group of explorers who make use of a newly discov
 #   - { episode: 2-interstellar, start: 612.4 }
 ---
 
-<!-- Our take: write your bio of the movie here. Leave empty to show "coming soon". -->
+William's take: 
+Overrated af
