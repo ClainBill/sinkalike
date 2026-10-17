@@ -17,7 +17,7 @@ const { compact = false } = Astro.props;
     {compact ? sponsor.short : sponsor.pitch}
   </p>
   <p class="meta">
-    <span {...editable('site:sponsor.platforms', sponsor.platforms)}>{sponsor.platforms}</span> · <Copy k="sponsor.no-ads" text="No accounts, no ads" />
+    <span {...editable('site:sponsor.platforms', sponsor.platforms)}>{sponsor.platforms}</span>
   </p>
   <div class="sponsor-actions">
     <a class="btn btn-primary" href={sponsor.url} target="_blank" rel="sponsored noopener">
