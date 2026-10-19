@@ -39,6 +39,23 @@
       "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Interstellar-Overrated-or-Masterpiece-e3qfhuf",
       "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
       "explicit": false
+    },
+    {
+      "guid": "09edbda9-ed85-49ae-9fe6-b75f6f4d27e5",
+      "number": 3,
+      "slug": "3-talking-tron-legacy-and-the-keys",
+      "title": "Talking Tron Legacy and the keys to a good legacy sequel",
+      "description": "<p>Adam and William are joined by Ty, and the three of them review and discuss Tron: Legacy. They also talk about legacy sequels in general and what constitutes a good legacy sequel. But does that make Tron: Legacy a good movie? Find out in this episode!</p>",
+      "published": "2026-10-18T20:29:33.000Z",
+      "duration": 3148,
+      "audio": {
+        "url": "https://anchor.fm/s/117c72e60/podcast/play/127685715/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-18%2F49f86534-2e50-b745-9fa1-c4a4c6444b3a.mp3",
+        "type": "audio/mpeg",
+        "bytes": 62971456
+      },
+      "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Talking-Tron-Legacy-and-the-keys-to-a-good-legacy-sequel-e3qn5kj",
+      "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+      "explicit": false
     }
   ]
 }
