@@ -56,6 +56,23 @@
       "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Talking-Tron-Legacy-and-the-keys-to-a-good-legacy-sequel-e3qn5kj",
       "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
       "explicit": false
+    },
+    {
+      "guid": "799341a3-8090-4ec0-bb86-9be93dc189ca",
+      "number": 4,
+      "slug": "4-the-boxtrolls-review",
+      "title": "The BoxTrolls REVIEW: Ugly or underrated?",
+      "description": "<p>Adam shows William his least favorite movie and the two of them talk about how it was much better than he remembered.</p>",
+      "published": "2026-11-02T18:58:26.000Z",
+      "duration": 2559,
+      "audio": {
+        "url": "https://anchor.fm/s/117c72e60/podcast/play/128635057/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-2%2Fd4c008dc-9a81-6eb1-2dd5-a95c6a202f6d.mp3",
+        "type": "audio/mpeg",
+        "bytes": 51202336
+      },
+      "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/The-BoxTrolls-REVIEW-Ugly-or-underrated-e3rk4nh",
+      "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+      "explicit": false
     }
   ]
 }
