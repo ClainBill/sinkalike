@@ -73,6 +73,23 @@
       "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/The-BoxTrolls-REVIEW-Ugly-or-underrated-e3rk4nh",
       "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
       "explicit": false
+    },
+    {
+      "guid": "e88850c5-8de5-44c6-a558-ca0e063edfdd",
+      "number": 5,
+      "slug": "5-why-you-should-watch-wildwood",
+      "title": "Why you should watch Wildwood: Our spoiler review",
+      "description": "<p>Adam and William talk about a movie that’s actually currently in theaters: Wildwood! We discuss our non-spoiler and spoiler thoughts on the movie, some of our theater experiences, and Laika’s history at the Oscars.</p>",
+      "published": "2026-11-11T00:45:42.000Z",
+      "duration": 3593,
+      "audio": {
+        "url": "https://anchor.fm/s/117c72e60/podcast/play/129228741/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-11%2Fbac6b59c-5a26-536d-df1a-111f9d30d21a.mp3",
+        "type": "audio/mpeg",
+        "bytes": 71873536
+      },
+      "link": "https://podcasters.spotify.com/pod/show/sink-alike3/episodes/Why-you-should-watch-Wildwood-Our-spoiler-review-e3s68g5",
+      "image": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/46838968/46838968-1790454973268-ad3d86fed9007.jpg",
+      "explicit": false
     }
   ]
 }
