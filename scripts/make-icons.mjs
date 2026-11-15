@@ -13,6 +13,7 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
   <text x="80" y="440" font-family="Georgia, serif" font-size="44" fill="#55535a">We may not think alike, but we can always sink alike.</text>
   <circle cx="92" cy="535" r="14" fill="#c24e29"/><text x="118" y="545" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#17161a">Adam Estock</text>
   <circle cx="330" cy="535" r="14" fill="#26716f"/><text x="356" y="545" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#17161a">William Gill</text>
+  <circle cx="568" cy="535" r="14" fill="#8a6100"/><text x="594" y="545" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#17161a">Ty Wilkinson</text>
 </svg>`;
 
 await sharp(Buffer.from(icon(180))).png().toFile('public/icon-180.png');

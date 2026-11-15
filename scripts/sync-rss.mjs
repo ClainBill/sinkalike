@@ -15,7 +15,7 @@ import { XMLParser } from 'fast-xml-parser';
 const FEED_URL = process.env.FEED_URL ?? 'https://anchor.fm/s/117c72e60/podcast/rss';
 const FEED_JSON = new URL('../src/data/feed.json', import.meta.url);
 const EPISODES_DIR = new URL('../src/content/episodes/', import.meta.url);
-const DEFAULT_PARTICIPANTS = ['adam', 'william'];
+const DEFAULT_PARTICIPANTS = ['adam', 'william', 'ty'];
 
 const exists = (url) => access(url).then(() => true, () => false);
 

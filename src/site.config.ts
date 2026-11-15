@@ -21,7 +21,7 @@ export const listenOn: { label: string; url: string }[] = [
 ];
 
 /** Hosts' accent colors are defined in src/styles/global.css as --person-<id>. */
-export const hosts = ['adam', 'william'] as const;
+export const hosts = ['adam', 'william', 'ty'] as const;
 
 /** Wording in src/data/site.json. Set `code` once there's a discount code: it shows a copy button everywhere. */
 export const sponsor = {

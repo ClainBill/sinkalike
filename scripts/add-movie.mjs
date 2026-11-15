@@ -92,6 +92,7 @@ async function main() {
     '# verdicts:',
     '#   adam: { rating: 8, take: "…" }',
     '#   william: { rating: 6, take: "…" }',
+    '#   ty: { rating: 7, take: "…" }',
     '# Pull quotes: episode slug + the start time (seconds) of a transcript line. Add `end` to include following lines.',
     '# quotes:',
     '#   - { episode: 1-speed-racer, start: 612.4 }',

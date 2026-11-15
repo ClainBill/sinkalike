@@ -15,6 +15,7 @@
   /* One accent per person. Add --person-<id> for recurring guests. */
   --person-adam: #c24e29;
   --person-william: #26716f;
+  --person-ty: #8a6100;
   --person-guest: #6a52b3;
 
   --shadow: 0 1px 2px rgb(23 22 26 / 0.06), 0 8px 24px rgb(23 22 26 / 0.06);
@@ -44,6 +45,7 @@
     --focus: #eeece7;
     --person-adam: #f08a62;
     --person-william: #5cc0bb;
+    --person-ty: #e0b04a;
     --person-guest: #a892f0;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
     color-scheme: dark;
@@ -62,6 +64,7 @@
   --focus: #eeece7;
   --person-adam: #f08a62;
   --person-william: #5cc0bb;
+  --person-ty: #e0b04a;
   --person-guest: #a892f0;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
   color-scheme: dark;
@@ -383,6 +386,10 @@ p {
 
 .person-william {
   --c: var(--person-william);
+}
+
+.person-ty {
+  --c: var(--person-ty);
 }
 
 .chips {
